@@ -1,0 +1,71 @@
+﻿body{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cfe7fa+0,5fadcc+100 */
+    background: rgb(207,231,250); /* Old browsers */
+    background: -moz-linear-gradient(45deg,  rgb(207,231,250) 0%, rgb(95,173,204) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg,  rgb(207,231,250) 0%,rgb(95,173,204) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg,  rgb(207,231,250) 0%,rgb(95,173,204) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe7fa', endColorstr='#5fadcc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.texto_inicio
+{
+    transition-property: opacity, left, top, height;
+  transition-duration: 3s, 5s;
+  color:#045FB4;
+  font-size:120%;
+   text-align:center;
+    }
+    
+   .texto_inicio_par
+   {
+       color:#045FB4;
+  font-size:110%; 
+  text-align:center;
+   }
+       
+    .centrarTabla
+    {
+        text-align: center;
+        margin: 0 auto;
+        text-align: left;
+    }   
+     
+.content{
+    min-height: 580px;
+}
+footer{
+    position: absolute;
+    bottom: 0px;
+    margin: auto;
+}
+header{
+    min-height: 120px;
+    background-color: #04B404;
+}
+img.logo{
+    width:200px;
+}
+.contenido{
+    padding-top: 20px;
+}
+.titulo_estac
+{
+    color: #FFFFFF;
+    
+    font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
+    font-weight:bolder;
+    font-size: 350%;
+    float: inherit;
+    margin: .5em 0 0 0;
+    
+    
+ }
+    
+ .hiperlinks
+ {
+     color:#FFFFFF;
+     font-size: medium;
+     /*font-family:Helvetica,Futura,Arial,Verdana,sans-serif;*/
+     float: right;
+     width : 25%;
+        }

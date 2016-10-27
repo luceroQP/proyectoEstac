@@ -1,0 +1,113 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+    <head runat="server">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Mi Estacionamiento</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/normalize.4.1.1.css" rel="stylesheet"/>
+        <link href="/css/estiloGeneral.css" rel="stylesheet"/>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="/js/jquery.1.12.4.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <style type="text/css">
+            v\:* {
+                behavior:url(#default#VML);
+            }
+        </style>
+        <asp:ContentPlaceHolder id="head" runat="server"></asp:ContentPlaceHolder>
+    </head>
+    <body>
+        <form id="form1" runat="server">
+        <div class="container">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10 wrap container">
+                <header class="row">
+                    <div class="row">
+                        <div class="col-md-3 logo">
+                            <a href="/Default.aspx">
+                                <img alt="Logo" src="/images/estacionamiento.jpg" class="logo img-circle"/>
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="col-md-12 text-right">
+                                <%
+                                    Usuario usuario = new Usuario();
+                                    if (Session["usuario"] != null){
+                                        usuario = (Usuario)Session["usuario"];
+                                        %>
+                                            Bienvenido! <% Response.Write(usuario.nombres + " " + usuario.apellido_pat); %> |
+                                            <asp:HyperLink class="hiperlinks" ID="HyperLink7" runat="server" NavigateUrl="~/Vistas/Usuarios/CerrarSesion.aspx">Cerrar Sesión</asp:HyperLink>
+                                        <%
+                                    }else{
+                                        %>
+                                            <asp:HyperLink class ="hiperlinks" ID="HyperLink2" runat="server" NavigateUrl="~/Vistas/Usuarios/RegistroUsuario.aspx">Registrarse</asp:HyperLink>
+                                            <asp:HyperLink class ="hiperlinks" ID="HyperLink1" runat="server" NavigateUrl="~/Vistas/Usuarios/Login.aspx">Login</asp:HyperLink>
+                                        <%
+                                    }
+                                %>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <div class="titulo_estac">
+                                    Mi estacionamiento
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <%
+                                if (Session["usuario"] != null)
+                                {
+                                    %>
+                                        <asp:HyperLink class="hiperlinks" ID="HyperLink3" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">Tarjetas</asp:HyperLink>
+                                        <asp:HyperLink class="hiperlinks" ID="HyperLink4" runat="server" NavigateUrl="~/Vistas/Vehiculos/Vehiculos.aspx">Vehículos</asp:HyperLink>
+                                        <asp:HyperLink class="hiperlinks" ID="HyperLink5" runat="server" NavigateUrl="~/Vistas/Estacionamientos/Estacionamientos.aspx">Estacionamientos</asp:HyperLink>
+                                        <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arrendar.aspx">Arrendar</asp:HyperLink>
+                                    <%
+                                }
+                            %>
+                        </div>
+                    </div>
+                    <%--<div class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="collapse navbar-collapse ">--%>
+                            <div>
+                                </div>
+                            <%--</div>
+                        </div>
+                    </div>--%>
+                </header>
+                <div class="row contenido">
+                    <%
+                        if (Session["mensaje"] != null)
+                        {
+                            Dictionary<string, string> mensaje = (Dictionary<string, string>) Session["mensaje"];
+                            %>
+                                <div class="alert fade in <% Response.Write(mensaje["clase"]); %>">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    <% Response.Write(mensaje["texto"]); %>
+                                </div>
+                            <%
+                            Session["mensaje"] = null;
+                        }
+                    %>
+                    <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+        <footer>
+            2016
+        </footer>
+        </form>
+    </body>
+</html>

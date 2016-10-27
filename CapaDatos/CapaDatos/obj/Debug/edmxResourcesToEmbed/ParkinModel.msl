@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ParkinEntities">
+    <EntitySetMapping Name="ARRIENDOS">
+      <EntityTypeMapping TypeName="Model.ARRIENDOS">
+        <MappingFragment StoreEntitySet="ARRIENDOS">
+          <ScalarProperty Name="COD_ARRIENDO" ColumnName="COD_ARRIENDO" />
+          <ScalarProperty Name="INICIO_ARRIENDO" ColumnName="INICIO_ARRIENDO" />
+          <ScalarProperty Name="FIN_ARRIENDO" ColumnName="FIN_ARRIENDO" />
+          <ScalarProperty Name="HORAS_USADAS" ColumnName="HORAS_USADAS" />
+          <ScalarProperty Name="COD_ESTACIONAMIENTO" ColumnName="COD_ESTACIONAMIENTO" />
+          <ScalarProperty Name="COD_VEHICULO" ColumnName="COD_VEHICULO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BANCOS">
+      <EntityTypeMapping TypeName="Model.BANCOS">
+        <MappingFragment StoreEntitySet="BANCOS">
+          <ScalarProperty Name="COD_BANCO" ColumnName="COD_BANCO" />
+          <ScalarProperty Name="NOMBRE_BANCO" ColumnName="NOMBRE_BANCO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CALIFICACIONES">
+      <EntityTypeMapping TypeName="Model.CALIFICACIONES">
+        <MappingFragment StoreEntitySet="CALIFICACIONES">
+          <ScalarProperty Name="COD_CALIFICACION" ColumnName="COD_CALIFICACION" />
+          <ScalarProperty Name="NOTA" ColumnName="NOTA" />
+          <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
+          <ScalarProperty Name="COD_CALIFICACION_TIPO" ColumnName="COD_CALIFICACION_TIPO" />
+          <ScalarProperty Name="COD_USUARIO_CALIFICADOR" ColumnName="COD_USUARIO_CALIFICADOR" />
+          <ScalarProperty Name="COD_USUARIO_CALIFICADO" ColumnName="COD_USUARIO_CALIFICADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CALIFICACIONES_TIPOS">
+      <EntityTypeMapping TypeName="Model.CALIFICACIONES_TIPOS">
+        <MappingFragment StoreEntitySet="CALIFICACIONES_TIPOS">
+          <ScalarProperty Name="COD_CALIFICACION_TIPO" ColumnName="COD_CALIFICACION_TIPO" />
+          <ScalarProperty Name="NOMBRE_CALIFICACION_TIPO" ColumnName="NOMBRE_CALIFICACION_TIPO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMUNAS">
+      <EntityTypeMapping TypeName="Model.COMUNAS">
+        <MappingFragment StoreEntitySet="COMUNAS">
+          <ScalarProperty Name="COD_COMUNA" ColumnName="COD_COMUNA" />
+          <ScalarProperty Name="NOMBRE_COMUNA" ColumnName="NOMBRE_COMUNA" />
+          <ScalarProperty Name="COD_PROVINCIA" ColumnName="COD_PROVINCIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTACIONAMIENTO_ESTADOS">
+      <EntityTypeMapping TypeName="Model.ESTACIONAMIENTO_ESTADOS">
+        <MappingFragment StoreEntitySet="ESTACIONAMIENTO_ESTADOS">
+          <ScalarProperty Name="COD_ESTACIONAMIENTO_ESTADO" ColumnName="COD_ESTACIONAMIENTO_ESTADO" />
+          <ScalarProperty Name="NOMBRE_ESTACIONAMIENTO_ESTADO" ColumnName="NOMBRE_ESTACIONAMIENTO_ESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTACIONAMIENTOS">
+      <EntityTypeMapping TypeName="Model.ESTACIONAMIENTOS">
+        <MappingFragment StoreEntitySet="ESTACIONAMIENTOS">
+          <ScalarProperty Name="COD_ESTACIONAMIENTO" ColumnName="COD_ESTACIONAMIENTO" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="VALOR_HORA" ColumnName="VALOR_HORA" />
+          <ScalarProperty Name="COORDENADAS" ColumnName="COORDENADAS" />
+          <ScalarProperty Name="INICIO_DISPONIBILIDAD" ColumnName="INICIO_DISPONIBILIDAD" />
+          <ScalarProperty Name="FIN_DISPONIBILIDAD" ColumnName="FIN_DISPONIBILIDAD" />
+          <ScalarProperty Name="CAPACIDAD" ColumnName="CAPACIDAD" />
+          <ScalarProperty Name="EXISTENCIAS" ColumnName="EXISTENCIAS" />
+          <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
+          <ScalarProperty Name="COD_ESTACIONAMIENTO_ESTADO" ColumnName="COD_ESTACIONAMIENTO_ESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROVINCIAS">
+      <EntityTypeMapping TypeName="Model.PROVINCIAS">
+        <MappingFragment StoreEntitySet="PROVINCIAS">
+          <ScalarProperty Name="COD_PROVINCIA" ColumnName="COD_PROVINCIA" />
+          <ScalarProperty Name="NOMBRE_PROVINCIA" ColumnName="NOMBRE_PROVINCIA" />
+          <ScalarProperty Name="COD_REGION" ColumnName="COD_REGION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REGIONES">
+      <EntityTypeMapping TypeName="Model.REGIONES">
+        <MappingFragment StoreEntitySet="REGIONES">
+          <ScalarProperty Name="COD_REGION" ColumnName="COD_REGION" />
+          <ScalarProperty Name="NOMBRE_REGION" ColumnName="NOMBRE_REGION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TARJETA_TIPOS">
+      <EntityTypeMapping TypeName="Model.TARJETA_TIPOS">
+        <MappingFragment StoreEntitySet="TARJETA_TIPOS">
+          <ScalarProperty Name="COD_TARJETA_TIPO" ColumnName="COD_TARJETA_TIPO" />
+          <ScalarProperty Name="NOMBRE_TARJETA_TIPO" ColumnName="NOMBRE_TARJETA_TIPO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TARJETAS">
+      <EntityTypeMapping TypeName="Model.TARJETAS">
+        <MappingFragment StoreEntitySet="TARJETAS">
+          <ScalarProperty Name="NUMERO_TARJETA" ColumnName="NUMERO_TARJETA" />
+          <ScalarProperty Name="SALDO" ColumnName="SALDO" />
+          <ScalarProperty Name="COD_BANCO" ColumnName="COD_BANCO" />
+          <ScalarProperty Name="COD_TARJETA_TIPO" ColumnName="COD_TARJETA_TIPO" />
+          <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
+          <ScalarProperty Name="EXPIRACION" ColumnName="EXPIRACION" />
+          <ScalarProperty Name="CVV" ColumnName="CVV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRANSACCIONES">
+      <EntityTypeMapping TypeName="Model.TRANSACCIONES">
+        <MappingFragment StoreEntitySet="TRANSACCIONES">
+          <ScalarProperty Name="COD_TRANSACCION" ColumnName="COD_TRANSACCION" />
+          <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+          <ScalarProperty Name="COD_ARRIENDO" ColumnName="COD_ARRIENDO" />
+          <ScalarProperty Name="NUMERO_TARJETA_ORIGEN" ColumnName="NUMERO_TARJETA_ORIGEN" />
+          <ScalarProperty Name="NUMERO_TARJETA_DESTINO" ColumnName="NUMERO_TARJETA_DESTINO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIO_TIPOS">
+      <EntityTypeMapping TypeName="Model.USUARIO_TIPOS">
+        <MappingFragment StoreEntitySet="USUARIO_TIPOS">
+          <ScalarProperty Name="COD_USUARIO_TIPO" ColumnName="COD_USUARIO_TIPO" />
+          <ScalarProperty Name="NOMBRE_USUARIO_TIPO" ColumnName="NOMBRE_USUARIO_TIPO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOS">
+      <EntityTypeMapping TypeName="Model.USUARIOS">
+        <MappingFragment StoreEntitySet="USUARIOS">
+          <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
+          <ScalarProperty Name="RUT" ColumnName="RUT" />
+          <ScalarProperty Name="DV" ColumnName="DV" />
+          <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+          <ScalarProperty Name="APELLIDO_PAT" ColumnName="APELLIDO_PAT" />
+          <ScalarProperty Name="APELLIDO_MAT" ColumnName="APELLIDO_MAT" />
+          <ScalarProperty Name="FECHA_NACIMIENTO" ColumnName="FECHA_NACIMIENTO" />
+          <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="COD_USUARIO_TIPO" ColumnName="COD_USUARIO_TIPO" />
+          <ScalarProperty Name="COD_COMUNA" ColumnName="COD_COMUNA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VEHICULO_MARCAS">
+      <EntityTypeMapping TypeName="Model.VEHICULO_MARCAS">
+        <MappingFragment StoreEntitySet="VEHICULO_MARCAS">
+          <ScalarProperty Name="COD_VEHICULO_MARCA" ColumnName="COD_VEHICULO_MARCA" />
+          <ScalarProperty Name="NOMBRE_VEHICULO_MARCA" ColumnName="NOMBRE_VEHICULO_MARCA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VEHICULOS">
+      <EntityTypeMapping TypeName="Model.VEHICULOS">
+        <MappingFragment StoreEntitySet="VEHICULOS">
+          <ScalarProperty Name="COD_VEHICULO" ColumnName="COD_VEHICULO" />
+          <ScalarProperty Name="PATENTE" ColumnName="PATENTE" />
+          <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
+          <ScalarProperty Name="COD_VEHICULO_MARCA" ColumnName="COD_VEHICULO_MARCA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,12 @@
+﻿body {
+}
+img {
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 2s;
+    transition-delay: 0s;
+    transition-timing-function: linear;
+}
+img:hover {
+    opacity: 0;
+}

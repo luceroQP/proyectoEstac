@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ARRIENDOS">
+    <Key>
+      <PropertyRef Name="COD_ARRIENDO" />
+    </Key>
+    <Property Name="COD_ARRIENDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="INICIO_ARRIENDO" Type="DateTime" Nullable="false" />
+    <Property Name="FIN_ARRIENDO" Type="DateTime" />
+    <Property Name="HORAS_USADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="COD_ESTACIONAMIENTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_VEHICULO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="TRANSACCIONES" Relationship="Self.ARRIENDO_PAGOS" FromRole="ARRIENDOS" ToRole="TRANSACCIONES" />
+    <NavigationProperty Name="ESTACIONAMIENTOS" Relationship="Self.ESTACIONA_ARRIENDOS" FromRole="ARRIENDOS" ToRole="ESTACIONAMIENTOS" />
+    <NavigationProperty Name="VEHICULOS" Relationship="Self.VEHICULOS_ARRIENDOS" FromRole="ARRIENDOS" ToRole="VEHICULOS" />
+  </EntityType>
+  <EntityType Name="BANCOS">
+    <Key>
+      <PropertyRef Name="COD_BANCO" />
+    </Key>
+    <Property Name="COD_BANCO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_BANCO" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TARJETAS" Relationship="Self.BANCO_TARJETA" FromRole="BANCOS" ToRole="TARJETAS" />
+  </EntityType>
+  <EntityType Name="CALIFICACIONES">
+    <Key>
+      <PropertyRef Name="COD_CALIFICACION" />
+    </Key>
+    <Property Name="COD_CALIFICACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="OBSERVACION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="COD_CALIFICACION_TIPO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_USUARIO_CALIFICADOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_USUARIO_CALIFICADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="CALIFICACIONES_TIPOS" Relationship="Self.CALIF_TIPOS_CALIF" FromRole="CALIFICACIONES" ToRole="CALIFICACIONES_TIPOS" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.USU_CALIF_CALIFICA" FromRole="CALIFICACIONES" ToRole="USUARIOS" />
+    <NavigationProperty Name="USUARIOS1" Relationship="Self.USU_CALIF_CALIFICADO" FromRole="CALIFICACIONES" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="CALIFICACIONES_TIPOS">
+    <Key>
+      <PropertyRef Name="COD_CALIFICACION_TIPO" />
+    </Key>
+    <Property Name="COD_CALIFICACION_TIPO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_CALIFICACION_TIPO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CALIFICACIONES" Relationship="Self.CALIF_TIPOS_CALIF" FromRole="CALIFICACIONES_TIPOS" ToRole="CALIFICACIONES" />
+  </EntityType>
+  <EntityType Name="COMUNAS">
+    <Key>
+      <PropertyRef Name="COD_COMUNA" />
+    </Key>
+    <Property Name="COD_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_COMUNA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COD_PROVINCIA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.COMUNA_USUARIOS" FromRole="COMUNAS" ToRole="USUARIOS" />
+    <NavigationProperty Name="PROVINCIAS" Relationship="Self.PROVINCIA_COMUNAS" FromRole="COMUNAS" ToRole="PROVINCIAS" />
+  </EntityType>
+  <EntityType Name="ESTACIONAMIENTO_ESTADOS">
+    <Key>
+      <PropertyRef Name="COD_ESTACIONAMIENTO_ESTADO" />
+    </Key>
+    <Property Name="COD_ESTACIONAMIENTO_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_ESTACIONAMIENTO_ESTADO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ESTACIONAMIENTOS" Relationship="Self.ESTACIONA_EST_ESTACIONA" FromRole="ESTACIONAMIENTO_ESTADOS" ToRole="ESTACIONAMIENTOS" />
+  </EntityType>
+  <EntityType Name="ESTACIONAMIENTOS">
+    <Key>
+      <PropertyRef Name="COD_ESTACIONAMIENTO" />
+    </Key>
+    <Property Name="COD_ESTACIONAMIENTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VALOR_HORA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COORDENADAS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="INICIO_DISPONIBILIDAD" Type="DateTime" />
+    <Property Name="FIN_DISPONIBILIDAD" Type="DateTime" />
+    <Property Name="CAPACIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EXISTENCIAS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_USUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_ESTACIONAMIENTO_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="ARRIENDOS" Relationship="Self.ESTACIONA_ARRIENDOS" FromRole="ESTACIONAMIENTOS" ToRole="ARRIENDOS" />
+    <NavigationProperty Name="ESTACIONAMIENTO_ESTADOS" Relationship="Self.ESTACIONA_EST_ESTACIONA" FromRole="ESTACIONAMIENTOS" ToRole="ESTACIONAMIENTO_ESTADOS" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.USU_ESTACIONAMIENTOS" FromRole="ESTACIONAMIENTOS" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="PROVINCIAS">
+    <Key>
+      <PropertyRef Name="COD_PROVINCIA" />
+    </Key>
+    <Property Name="COD_PROVINCIA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_PROVINCIA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COD_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="COMUNAS" Relationship="Self.PROVINCIA_COMUNAS" FromRole="PROVINCIAS" ToRole="COMUNAS" />
+    <NavigationProperty Name="REGIONES" Relationship="Self.PROVINCIA_REGION" FromRole="PROVINCIAS" ToRole="REGIONES" />
+  </EntityType>
+  <EntityType Name="REGIONES">
+    <Key>
+      <PropertyRef Name="COD_REGION" />
+    </Key>
+    <Property Name="COD_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_REGION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PROVINCIAS" Relationship="Self.PROVINCIA_REGION" FromRole="REGIONES" ToRole="PROVINCIAS" />
+  </EntityType>
+  <EntityType Name="TARJETA_TIPOS">
+    <Key>
+      <PropertyRef Name="COD_TARJETA_TIPO" />
+    </Key>
+    <Property Name="COD_TARJETA_TIPO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_TARJETA_TIPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TARJETAS" Relationship="Self.TARJETA_TARJETA_TIPOS" FromRole="TARJETA_TIPOS" ToRole="TARJETAS" />
+  </EntityType>
+  <EntityType Name="TARJETAS">
+    <Key>
+      <PropertyRef Name="NUMERO_TARJETA" />
+    </Key>
+    <Property Name="NUMERO_TARJETA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SALDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_BANCO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_TARJETA_TIPO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_USUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="EXPIRACION" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CVV" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BANCOS" Relationship="Self.BANCO_TARJETA" FromRole="TARJETAS" ToRole="BANCOS" />
+    <NavigationProperty Name="TARJETA_TIPOS" Relationship="Self.TARJETA_TARJETA_TIPOS" FromRole="TARJETAS" ToRole="TARJETA_TIPOS" />
+    <NavigationProperty Name="TRANSACCIONES" Relationship="Self.TARJETA_TARJETA_DESTINO" FromRole="TARJETAS" ToRole="TRANSACCIONES" />
+    <NavigationProperty Name="TRANSACCIONES1" Relationship="Self.TARJETA_TARJETA_PAGO" FromRole="TARJETAS" ToRole="TRANSACCIONES" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.USU_TARJETAS" FromRole="TARJETAS" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="TRANSACCIONES">
+    <Key>
+      <PropertyRef Name="COD_TRANSACCION" />
+    </Key>
+    <Property Name="COD_TRANSACCION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MONTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_ARRIENDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NUMERO_TARJETA_ORIGEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NUMERO_TARJETA_DESTINO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ARRIENDOS" Relationship="Self.ARRIENDO_PAGOS" FromRole="TRANSACCIONES" ToRole="ARRIENDOS" />
+    <NavigationProperty Name="TARJETAS" Relationship="Self.TARJETA_TARJETA_DESTINO" FromRole="TRANSACCIONES" ToRole="TARJETAS" />
+    <NavigationProperty Name="TARJETAS1" Relationship="Self.TARJETA_TARJETA_PAGO" FromRole="TRANSACCIONES" ToRole="TARJETAS" />
+  </EntityType>
+  <EntityType Name="USUARIO_TIPOS">
+    <Key>
+      <PropertyRef Name="COD_USUARIO_TIPO" />
+    </Key>
+    <Property Name="COD_USUARIO_TIPO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_USUARIO_TIPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.USU_TIPOS_USUARIOS" FromRole="USUARIO_TIPOS" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="USUARIOS">
+    <Key>
+      <PropertyRef Name="COD_USUARIO" />
+    </Key>
+    <Property Name="COD_USUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="RUT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DV" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRES" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDO_PAT" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDO_MAT" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="FECHA_NACIMIENTO" Type="DateTime" Nullable="false" />
+    <Property Name="SEXO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="COD_USUARIO_TIPO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="CALIFICACIONES" Relationship="Self.USU_CALIF_CALIFICA" FromRole="USUARIOS" ToRole="CALIFICACIONES" />
+    <NavigationProperty Name="CALIFICACIONES1" Relationship="Self.USU_CALIF_CALIFICADO" FromRole="USUARIOS" ToRole="CALIFICACIONES" />
+    <NavigationProperty Name="COMUNAS" Relationship="Self.COMUNA_USUARIOS" FromRole="USUARIOS" ToRole="COMUNAS" />
+    <NavigationProperty Name="ESTACIONAMIENTOS" Relationship="Self.USU_ESTACIONAMIENTOS" FromRole="USUARIOS" ToRole="ESTACIONAMIENTOS" />
+    <NavigationProperty Name="TARJETAS" Relationship="Self.USU_TARJETAS" FromRole="USUARIOS" ToRole="TARJETAS" />
+    <NavigationProperty Name="USUARIO_TIPOS" Relationship="Self.USU_TIPOS_USUARIOS" FromRole="USUARIOS" ToRole="USUARIO_TIPOS" />
+    <NavigationProperty Name="VEHICULOS" Relationship="Self.USUARIOS_VEHICULOS" FromRole="USUARIOS" ToRole="VEHICULOS" />
+  </EntityType>
+  <EntityType Name="VEHICULO_MARCAS">
+    <Key>
+      <PropertyRef Name="COD_VEHICULO_MARCA" />
+    </Key>
+    <Property Name="COD_VEHICULO_MARCA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_VEHICULO_MARCA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="VEHICULOS" Relationship="Self.VEHICULO_MARCAS_VEHICULOS" FromRole="VEHICULO_MARCAS" ToRole="VEHICULOS" />
+  </EntityType>
+  <EntityType Name="VEHICULOS">
+    <Key>
+      <PropertyRef Name="COD_VEHICULO" />
+    </Key>
+    <Property Name="COD_VEHICULO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PATENTE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MODELO" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_USUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="COD_VEHICULO_MARCA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="ARRIENDOS" Relationship="Self.VEHICULOS_ARRIENDOS" FromRole="VEHICULOS" ToRole="ARRIENDOS" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.USUARIOS_VEHICULOS" FromRole="VEHICULOS" ToRole="USUARIOS" />
+    <NavigationProperty Name="VEHICULO_MARCAS" Relationship="Self.VEHICULO_MARCAS_VEHICULOS" FromRole="VEHICULOS" ToRole="VEHICULO_MARCAS" />
+  </EntityType>
+  <Association Name="ARRIENDO_PAGOS">
+    <End Role="ARRIENDOS" Type="Self.ARRIENDOS" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ARRIENDOS">
+        <PropertyRef Name="COD_ARRIENDO" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="COD_ARRIENDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ESTACIONA_ARRIENDOS">
+    <End Role="ESTACIONAMIENTOS" Type="Self.ESTACIONAMIENTOS" Multiplicity="1" />
+    <End Role="ARRIENDOS" Type="Self.ARRIENDOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTACIONAMIENTOS">
+        <PropertyRef Name="COD_ESTACIONAMIENTO" />
+      </Principal>
+      <Dependent Role="ARRIENDOS">
+        <PropertyRef Name="COD_ESTACIONAMIENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VEHICULOS_ARRIENDOS">
+    <End Role="VEHICULOS" Type="Self.VEHICULOS" Multiplicity="1" />
+    <End Role="ARRIENDOS" Type="Self.ARRIENDOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VEHICULOS">
+        <PropertyRef Name="COD_VEHICULO" />
+      </Principal>
+      <Dependent Role="ARRIENDOS">
+        <PropertyRef Name="COD_VEHICULO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BANCO_TARJETA">
+    <End Role="BANCOS" Type="Self.BANCOS" Multiplicity="1" />
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BANCOS">
+        <PropertyRef Name="COD_BANCO" />
+      </Principal>
+      <Dependent Role="TARJETAS">
+        <PropertyRef Name="COD_BANCO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CALIF_TIPOS_CALIF">
+    <End Role="CALIFICACIONES_TIPOS" Type="Self.CALIFICACIONES_TIPOS" Multiplicity="1" />
+    <End Role="CALIFICACIONES" Type="Self.CALIFICACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CALIFICACIONES_TIPOS">
+        <PropertyRef Name="COD_CALIFICACION_TIPO" />
+      </Principal>
+      <Dependent Role="CALIFICACIONES">
+        <PropertyRef Name="COD_CALIFICACION_TIPO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USU_CALIF_CALIFICA">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="CALIFICACIONES" Type="Self.CALIFICACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="COD_USUARIO" />
+      </Principal>
+      <Dependent Role="CALIFICACIONES">
+        <PropertyRef Name="COD_USUARIO_CALIFICADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USU_CALIF_CALIFICADO">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="CALIFICACIONES" Type="Self.CALIFICACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="COD_USUARIO" />
+      </Principal>
+      <Dependent Role="CALIFICACIONES">
+        <PropertyRef Name="COD_USUARIO_CALIFICADOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="COMUNA_USUARIOS">
+    <End Role="COMUNAS" Type="Self.COMUNAS" Multiplicity="1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMUNAS">
+        <PropertyRef Name="COD_COMUNA" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="COD_COMUNA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PROVINCIA_COMUNAS">
+    <End Role="PROVINCIAS" Type="Self.PROVINCIAS" Multiplicity="1" />
+    <End Role="COMUNAS" Type="Self.COMUNAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVINCIAS">
+        <PropertyRef Name="COD_PROVINCIA" />
+      </Principal>
+      <Dependent Role="COMUNAS">
+        <PropertyRef Name="COD_PROVINCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ESTACIONA_EST_ESTACIONA">
+    <End Role="ESTACIONAMIENTO_ESTADOS" Type="Self.ESTACIONAMIENTO_ESTADOS" Multiplicity="1" />
+    <End Role="ESTACIONAMIENTOS" Type="Self.ESTACIONAMIENTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTACIONAMIENTO_ESTADOS">
+        <PropertyRef Name="COD_ESTACIONAMIENTO_ESTADO" />
+      </Principal>
+      <Dependent Role="ESTACIONAMIENTOS">
+        <PropertyRef Name="COD_ESTACIONAMIENTO_ESTADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USU_ESTACIONAMIENTOS">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="ESTACIONAMIENTOS" Type="Self.ESTACIONAMIENTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="COD_USUARIO" />
+      </Principal>
+      <Dependent Role="ESTACIONAMIENTOS">
+        <PropertyRef Name="COD_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PROVINCIA_REGION">
+    <End Role="REGIONES" Type="Self.REGIONES" Multiplicity="1" />
+    <End Role="PROVINCIAS" Type="Self.PROVINCIAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REGIONES">
+        <PropertyRef Name="COD_REGION" />
+      </Principal>
+      <Dependent Role="PROVINCIAS">
+        <PropertyRef Name="COD_REGION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TARJETA_TARJETA_TIPOS">
+    <End Role="TARJETA_TIPOS" Type="Self.TARJETA_TIPOS" Multiplicity="1" />
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TARJETA_TIPOS">
+        <PropertyRef Name="COD_TARJETA_TIPO" />
+      </Principal>
+      <Dependent Role="TARJETAS">
+        <PropertyRef Name="COD_TARJETA_TIPO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TARJETA_TARJETA_DESTINO">
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TARJETAS">
+        <PropertyRef Name="NUMERO_TARJETA" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="NUMERO_TARJETA_ORIGEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TARJETA_TARJETA_PAGO">
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TARJETAS">
+        <PropertyRef Name="NUMERO_TARJETA" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="NUMERO_TARJETA_DESTINO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USU_TARJETAS">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="TARJETAS" Type="Self.TARJETAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="COD_USUARIO" />
+      </Principal>
+      <Dependent Role="TARJETAS">
+        <PropertyRef Name="COD_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USU_TIPOS_USUARIOS">
+    <End Role="USUARIO_TIPOS" Type="Self.USUARIO_TIPOS" Multiplicity="1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO_TIPOS">
+        <PropertyRef Name="COD_USUARIO_TIPO" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="COD_USUARIO_TIPO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USUARIOS_VEHICULOS">
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+    <End Role="VEHICULOS" Type="Self.VEHICULOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIOS">
+        <PropertyRef Name="COD_USUARIO" />
+      </Principal>
+      <Dependent Role="VEHICULOS">
+        <PropertyRef Name="COD_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VEHICULO_MARCAS_VEHICULOS">
+    <End Role="VEHICULO_MARCAS" Type="Self.VEHICULO_MARCAS" Multiplicity="1" />
+    <End Role="VEHICULOS" Type="Self.VEHICULOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VEHICULO_MARCAS">
+        <PropertyRef Name="COD_VEHICULO_MARCA" />
+      </Principal>
+      <Dependent Role="VEHICULOS">
+        <PropertyRef Name="COD_VEHICULO_MARCA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ParkinEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ARRIENDOS" EntityType="Self.ARRIENDOS" />
+    <EntitySet Name="BANCOS" EntityType="Self.BANCOS" />
+    <EntitySet Name="CALIFICACIONES" EntityType="Self.CALIFICACIONES" />
+    <EntitySet Name="CALIFICACIONES_TIPOS" EntityType="Self.CALIFICACIONES_TIPOS" />
+    <EntitySet Name="COMUNAS" EntityType="Self.COMUNAS" />
+    <EntitySet Name="ESTACIONAMIENTO_ESTADOS" EntityType="Self.ESTACIONAMIENTO_ESTADOS" />
+    <EntitySet Name="ESTACIONAMIENTOS" EntityType="Self.ESTACIONAMIENTOS" />
+    <EntitySet Name="PROVINCIAS" EntityType="Self.PROVINCIAS" />
+    <EntitySet Name="REGIONES" EntityType="Self.REGIONES" />
+    <EntitySet Name="TARJETA_TIPOS" EntityType="Self.TARJETA_TIPOS" />
+    <EntitySet Name="TARJETAS" EntityType="Self.TARJETAS" />
+    <EntitySet Name="TRANSACCIONES" EntityType="Self.TRANSACCIONES" />
+    <EntitySet Name="USUARIO_TIPOS" EntityType="Self.USUARIO_TIPOS" />
+    <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+    <EntitySet Name="VEHICULO_MARCAS" EntityType="Self.VEHICULO_MARCAS" />
+    <EntitySet Name="VEHICULOS" EntityType="Self.VEHICULOS" />
+    <AssociationSet Name="ARRIENDO_PAGOS" Association="Self.ARRIENDO_PAGOS">
+      <End Role="ARRIENDOS" EntitySet="ARRIENDOS" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="ESTACIONA_ARRIENDOS" Association="Self.ESTACIONA_ARRIENDOS">
+      <End Role="ESTACIONAMIENTOS" EntitySet="ESTACIONAMIENTOS" />
+      <End Role="ARRIENDOS" EntitySet="ARRIENDOS" />
+    </AssociationSet>
+    <AssociationSet Name="VEHICULOS_ARRIENDOS" Association="Self.VEHICULOS_ARRIENDOS">
+      <End Role="VEHICULOS" EntitySet="VEHICULOS" />
+      <End Role="ARRIENDOS" EntitySet="ARRIENDOS" />
+    </AssociationSet>
+    <AssociationSet Name="BANCO_TARJETA" Association="Self.BANCO_TARJETA">
+      <End Role="BANCOS" EntitySet="BANCOS" />
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+    </AssociationSet>
+    <AssociationSet Name="CALIF_TIPOS_CALIF" Association="Self.CALIF_TIPOS_CALIF">
+      <End Role="CALIFICACIONES_TIPOS" EntitySet="CALIFICACIONES_TIPOS" />
+      <End Role="CALIFICACIONES" EntitySet="CALIFICACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="USU_CALIF_CALIFICA" Association="Self.USU_CALIF_CALIFICA">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="CALIFICACIONES" EntitySet="CALIFICACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="USU_CALIF_CALIFICADO" Association="Self.USU_CALIF_CALIFICADO">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="CALIFICACIONES" EntitySet="CALIFICACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="COMUNA_USUARIOS" Association="Self.COMUNA_USUARIOS">
+      <End Role="COMUNAS" EntitySet="COMUNAS" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="PROVINCIA_COMUNAS" Association="Self.PROVINCIA_COMUNAS">
+      <End Role="PROVINCIAS" EntitySet="PROVINCIAS" />
+      <End Role="COMUNAS" EntitySet="COMUNAS" />
+    </AssociationSet>
+    <AssociationSet Name="ESTACIONA_EST_ESTACIONA" Association="Self.ESTACIONA_EST_ESTACIONA">
+      <End Role="ESTACIONAMIENTO_ESTADOS" EntitySet="ESTACIONAMIENTO_ESTADOS" />
+      <End Role="ESTACIONAMIENTOS" EntitySet="ESTACIONAMIENTOS" />
+    </AssociationSet>
+    <AssociationSet Name="USU_ESTACIONAMIENTOS" Association="Self.USU_ESTACIONAMIENTOS">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="ESTACIONAMIENTOS" EntitySet="ESTACIONAMIENTOS" />
+    </AssociationSet>
+    <AssociationSet Name="PROVINCIA_REGION" Association="Self.PROVINCIA_REGION">
+      <End Role="REGIONES" EntitySet="REGIONES" />
+      <End Role="PROVINCIAS" EntitySet="PROVINCIAS" />
+    </AssociationSet>
+    <AssociationSet Name="TARJETA_TARJETA_TIPOS" Association="Self.TARJETA_TARJETA_TIPOS">
+      <End Role="TARJETA_TIPOS" EntitySet="TARJETA_TIPOS" />
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+    </AssociationSet>
+    <AssociationSet Name="TARJETA_TARJETA_DESTINO" Association="Self.TARJETA_TARJETA_DESTINO">
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="TARJETA_TARJETA_PAGO" Association="Self.TARJETA_TARJETA_PAGO">
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="USU_TARJETAS" Association="Self.USU_TARJETAS">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="TARJETAS" EntitySet="TARJETAS" />
+    </AssociationSet>
+    <AssociationSet Name="USU_TIPOS_USUARIOS" Association="Self.USU_TIPOS_USUARIOS">
+      <End Role="USUARIO_TIPOS" EntitySet="USUARIO_TIPOS" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="USUARIOS_VEHICULOS" Association="Self.USUARIOS_VEHICULOS">
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+      <End Role="VEHICULOS" EntitySet="VEHICULOS" />
+    </AssociationSet>
+    <AssociationSet Name="VEHICULO_MARCAS_VEHICULOS" Association="Self.VEHICULO_MARCAS_VEHICULOS">
+      <End Role="VEHICULO_MARCAS" EntitySet="VEHICULO_MARCAS" />
+      <End Role="VEHICULOS" EntitySet="VEHICULOS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
