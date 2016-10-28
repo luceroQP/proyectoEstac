@@ -108,9 +108,13 @@ public partial class Arrendar : System.Web.UI.Page
 
         arriendo.cod_estacionamiento = Int32.Parse(dpd_estacionamiento.SelectedValue);
         arriendo.cod_vehiculo = Int32.Parse(dpd_vehiculo.SelectedValue);
-        arriendo.inicio_arriendo = estacionamiento.inicio_disponibilidad;
-        arriendo.fin_arriendo = estacionamiento.fin_disponibilidad;
         arriendo.horas_usadas = Int32.Parse(txt_horas_usadas.Text);
+
+        string hora_inicio = dpd_hora_inicio.SelectedValue + ":" + dpd_minuto_inicio.SelectedValue + ":00";
+        string hora_fin = dpd_hora_fin.SelectedValue + ":" + dpd_minuto_fin.SelectedValue + ":00";
+
+        arriendo.inicio_arriendo = Convert.ToDateTime("2000-01-01 " + hora_inicio);
+        arriendo.fin_arriendo = Convert.ToDateTime("2000-01-01 " + hora_fin);
 
         if (arriendo.guardar(arriendo) > 0)
         {

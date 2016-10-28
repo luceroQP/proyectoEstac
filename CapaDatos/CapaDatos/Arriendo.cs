@@ -28,7 +28,7 @@ namespace CapaDatos
             query += id + ",";
             if (arriendo.inicio_arriendo != default(DateTime))
             {
-                query += " DATE '" + arriendo.inicio_arriendo.Date.ToString("yyyy-MM-dd H:mm:ss") + "',";
+                query += " TO_DATE('" + arriendo.inicio_arriendo.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS'),";
             }
             else
             {
@@ -36,7 +36,7 @@ namespace CapaDatos
             }
             if (arriendo.fin_arriendo != default(DateTime))
             {
-                query += " DATE '" + arriendo.fin_arriendo.Date.ToString("yyyy-MM-dd H:mm:ss") + "',";
+                query += " TO_DATE('" + arriendo.fin_arriendo.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS'),";
             }
             else
             {

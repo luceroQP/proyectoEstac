@@ -83,7 +83,7 @@ namespace CapaDatos
             query += "'" + estacionamiento.longitud.ToString().Replace(",", ".") + "',";
             if (estacionamiento.inicio_disponibilidad != default(DateTime))
             {
-                query += " DATE '" + estacionamiento.inicio_disponibilidad.Date.ToString("yyyy-MM-dd H:mm:ss") + "',";
+                query += " TO_DATE('" + estacionamiento.inicio_disponibilidad.Date.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS'),";
             }
             else {
                 query += "'',";
@@ -91,7 +91,7 @@ namespace CapaDatos
 
             if (estacionamiento.fin_disponibilidad != default(DateTime))
             {
-                query += " DATE '" + estacionamiento.fin_disponibilidad.Date.ToString("yyyy-MM-dd H:mm:ss") + "',";
+                query += " TO_DATE('" + estacionamiento.fin_disponibilidad.Date.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS'),";
             }else{
                 query += "'',";
             }
@@ -172,8 +172,8 @@ namespace CapaDatos
             if (!estacionamiento.valor_hora.Equals(0)) { query += ",VALOR_HORA = '" + estacionamiento.valor_hora +"'"; }
             if (!estacionamiento.capacidad.Equals(0)) { query += ",CAPACIDAD = " + estacionamiento.capacidad; }
             if (!estacionamiento.existencias.Equals(0)) { query += ",EXISTENCIAS = " + estacionamiento.existencias; }
-            if (estacionamiento.inicio_disponibilidad != default(DateTime)) { query += ",INICIO_DISPONIBILIDAD = to_date('" + estacionamiento.inicio_disponibilidad.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS')"; }
-            if (estacionamiento.fin_disponibilidad != default(DateTime)) { query += ",FIN_DISPONIBILIDAD = to_date('" + estacionamiento.fin_disponibilidad.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS')"; }
+            if (estacionamiento.inicio_disponibilidad != default(DateTime)) { query += ",INICIO_DISPONIBILIDAD = TO_DATE('" + estacionamiento.inicio_disponibilidad.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS')"; }
+            if (estacionamiento.fin_disponibilidad != default(DateTime)) { query += ",FIN_DISPONIBILIDAD = TO_DATE('" + estacionamiento.fin_disponibilidad.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS')"; }
 
             query += " where COD_ESTACIONAMIENTO = '" + estacionamiento.cod_estacionamiento + "'";
 
