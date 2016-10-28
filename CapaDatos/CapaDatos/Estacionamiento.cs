@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Oracle.DataAccess.Client;
+using System.Globalization;
 
 namespace CapaDatos
 {
@@ -12,8 +13,8 @@ namespace CapaDatos
         public int cod_estacionamiento { get; set; }
         public string direccion { get; set; }
         public int valor_hora { get; set; }
-        public int latitud { get; set; }
-        public int longitud { get; set; }
+        public Double latitud { get; set; }
+        public Double longitud { get; set; }
         public DateTime inicio_disponibilidad { get; set; }
         public DateTime fin_disponibilidad { get; set; }
         public int capacidad { get; set; }
@@ -38,10 +39,10 @@ namespace CapaDatos
                 estacionamiento.direccion = dr["direccion"].ToString();
                 estacionamiento.valor_hora = int.Parse(dr["valor_hora"].ToString());
                 if (!string.IsNullOrEmpty(dr["latitud"].ToString())){
-                    estacionamiento.latitud = Int32.Parse(dr["latitud"].ToString());
+                    estacionamiento.latitud = Double.Parse(dr["latitud"].ToString().Replace(",","."),CultureInfo.InvariantCulture);
                 }
                 if (!string.IsNullOrEmpty(dr["longitud"].ToString())){
-                    estacionamiento.longitud = Int32.Parse(dr["longitud"].ToString());
+                    estacionamiento.longitud = Double.Parse(dr["longitud"].ToString().Replace(",", "."), CultureInfo.InvariantCulture);
                 }
                 if (dr["inicio_disponibilidad"].ToString().Equals("")){
                     estacionamiento.inicio_disponibilidad = new DateTime();
@@ -78,8 +79,8 @@ namespace CapaDatos
             query += id + ",";
             query += "'" + estacionamiento.direccion + "',";
             query += estacionamiento.valor_hora + ",";
-            query += estacionamiento.latitud + ",";
-            query += estacionamiento.longitud + ",";
+            query += "'" + estacionamiento.latitud.ToString().Replace(",",".") + "',";
+            query += "'" + estacionamiento.longitud.ToString().Replace(",", ".") + "',";
             if (estacionamiento.inicio_disponibilidad != default(DateTime))
             {
                 query += " DATE '" + estacionamiento.inicio_disponibilidad.Date.ToString("yyyy-MM-dd H:mm:ss") + "',";
@@ -125,10 +126,10 @@ namespace CapaDatos
                 estacionamiento.valor_hora = int.Parse(dr["valor_hora"].ToString());
 
                 if (!string.IsNullOrEmpty(dr["latitud"].ToString())){
-                    estacionamiento.latitud = Int32.Parse(dr["latitud"].ToString());
+                    estacionamiento.latitud = Double.Parse(dr["latitud"].ToString().Replace(",", "."), CultureInfo.InvariantCulture);
                 }
                 if (!string.IsNullOrEmpty(dr["longitud"].ToString())){
-                    estacionamiento.longitud = Int32.Parse(dr["longitud"].ToString());
+                    estacionamiento.longitud = Double.Parse(dr["longitud"].ToString().Replace(",", "."), CultureInfo.InvariantCulture);
                 }
 
                 if (dr["inicio_disponibilidad"].ToString().Equals("")){
@@ -165,16 +166,16 @@ namespace CapaDatos
             query += " COD_ESTACIONAMIENTO = " + estacionamiento.cod_estacionamiento;
 
             if (!estacionamiento.cod_estacionamiento_estado.Equals(0)) { query += ",COD_ESTACIONAMIENTO_ESTADO = " + estacionamiento.cod_estacionamiento_estado; }
-            if (!string.IsNullOrEmpty(estacionamiento.direccion)) { query += ",DIRECCION = " + estacionamiento.direccion; }
-            if (!estacionamiento.latitud.Equals(0)) { query += ",LATITUD = " + estacionamiento.latitud; }
-            if (!estacionamiento.longitud.Equals(0)) { query += ",LONGITUD = " + estacionamiento.longitud; }
-            if (!estacionamiento.valor_hora.Equals(0)) { query += ",VALOR_HORA = " + estacionamiento.valor_hora; }
+            if (!string.IsNullOrEmpty(estacionamiento.direccion)) { query += ",DIRECCION = '" + estacionamiento.direccion +"'"; }
+            if (!estacionamiento.latitud.Equals(0)) { query += ",LATITUD = '" + estacionamiento.latitud.ToString().Replace(",", ".") + "'"; }
+            if (!estacionamiento.longitud.Equals(0)) { query += ",LONGITUD = '" + estacionamiento.longitud.ToString().Replace(",", ".") + "'"; }
+            if (!estacionamiento.valor_hora.Equals(0)) { query += ",VALOR_HORA = '" + estacionamiento.valor_hora +"'"; }
             if (!estacionamiento.capacidad.Equals(0)) { query += ",CAPACIDAD = " + estacionamiento.capacidad; }
             if (!estacionamiento.existencias.Equals(0)) { query += ",EXISTENCIAS = " + estacionamiento.existencias; }
             if (estacionamiento.inicio_disponibilidad != default(DateTime)) { query += ",INICIO_DISPONIBILIDAD = to_date('" + estacionamiento.inicio_disponibilidad.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS')"; }
             if (estacionamiento.fin_disponibilidad != default(DateTime)) { query += ",FIN_DISPONIBILIDAD = to_date('" + estacionamiento.fin_disponibilidad.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS')"; }
 
-            query += " where COD_ESTACIONAMIENTO = " + estacionamiento.cod_estacionamiento;
+            query += " where COD_ESTACIONAMIENTO = '" + estacionamiento.cod_estacionamiento + "'";
 
             int filasActualizadas = conexion.ingresar(query);
             conexion.cerrarConexion();
@@ -198,10 +199,10 @@ namespace CapaDatos
                 estacionamiento.direccion = dr["direccion"].ToString();
                 estacionamiento.valor_hora = int.Parse(dr["valor_hora"].ToString());
                 if (!string.IsNullOrEmpty(dr["latitud"].ToString())){
-                    estacionamiento.latitud = Int32.Parse(dr["latitud"].ToString());
+                    estacionamiento.latitud = Double.Parse(dr["latitud"].ToString().Replace(",", "."), CultureInfo.InvariantCulture);
                 }
                 if (!string.IsNullOrEmpty(dr["longitud"].ToString())){
-                    estacionamiento.longitud = Int32.Parse(dr["longitud"].ToString());
+                    estacionamiento.longitud = Double.Parse(dr["longitud"].ToString().Replace(",", "."), CultureInfo.InvariantCulture);
                 }
 
                 if (dr["inicio_disponibilidad"].ToString().Equals("")){

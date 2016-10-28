@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CapaDatos;
+using System.Globalization;
 
 public partial class EstacionamientoAgregar : System.Web.UI.Page
 {
@@ -25,9 +26,9 @@ public partial class EstacionamientoAgregar : System.Web.UI.Page
         estacionamiento.capacidad = Int32.Parse(txt_capacidad.Text);
         estacionamiento.existencias = 0;
         estacionamiento.cod_estacionamiento_estado = 1;
+        estacionamiento.latitud = Double.Parse(txt_latitud.Text, CultureInfo.InvariantCulture);
+        estacionamiento.longitud = Double.Parse(txt_longitud.Text, CultureInfo.InvariantCulture);
         estacionamiento.cod_usuario = usuarioLogeado.cod_usuario;
-        estacionamiento.latitud = 0;
-        estacionamiento.longitud = 0;
 
         if (estacionamiento.guardar(estacionamiento) > 0)
         {
