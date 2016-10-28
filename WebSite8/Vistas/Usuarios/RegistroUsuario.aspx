@@ -114,20 +114,7 @@
             <div class="col-md-6">
             </div>
         </div>
-        <div class="col-md-12 row">
-            <div class="col-md-6 form-group">
-                <asp:Label ID="Label11" runat="server" Text="Contraseña"></asp:Label>
-                <asp:TextBox 
-                    ID="txt_contraseña" 
-                    runat="server" 
-                    TextMode="Password" 
-                    CssClass="form-control input-sm">
-                </asp:TextBox>                
-            </div>
-            <div class="col-md-6">
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txt_contraseña" ErrorMessage="Debe ingresar constraseña"></asp:RequiredFieldValidator>
-            </div>
-        </div>
+        
         <div class="col-md-12 row">
             <div class="col-md-6 form-group">
                 <asp:Label ID="lbl_region" runat="server" Text="Region"></asp:Label>
@@ -181,6 +168,20 @@
                 </asp:TextBox>
             </div>
             <div class="col-md-6">
+            </div>
+        </div>
+        <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+                <asp:Label ID="Label11" runat="server" Text="Contraseña"></asp:Label>
+                <asp:TextBox 
+                    ID="txt_contraseña" 
+                    runat="server" 
+                    TextMode="Password" 
+                    CssClass="form-control input-sm">
+                </asp:TextBox>                
+            </div>
+            <div class="col-md-6">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txt_contraseña" ErrorMessage="Debe ingresar constraseña"></asp:RequiredFieldValidator>
             </div>
         </div>
         <div class="col-md-6 form-group">
