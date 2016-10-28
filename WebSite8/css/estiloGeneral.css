@@ -69,3 +69,13 @@ img.logo{
      float: right;
      width : 25%;
         }
+
+.hiperlinksAcceder {
+    color: #08088A;
+    font-size: medium;
+    /*font-family:Helvetica,Futura,Arial,Verdana,sans-serif;*/
+    float: inherit;
+    width: 26%;
+    
+}
+        }
