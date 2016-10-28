@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    holaaaaa esto lo hice yo misma y no lo supe xd
     <div class="col-md-12">
        
         <table style="width:100%;">
