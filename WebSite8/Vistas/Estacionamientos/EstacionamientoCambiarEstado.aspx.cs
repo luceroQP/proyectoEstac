@@ -28,6 +28,16 @@ public partial class EstacionamientoCambiarEstado : System.Web.UI.Page
             dpd_estado.SelectedValue = estacionamiento.cod_estacionamiento_estado.ToString();
 
             llenarHorasMinutos();
+            if (estacionamiento.cod_estacionamiento_estado.Equals(2))
+            {
+                divInicioDisponibilidad.Visible = true;
+                divFinDisponibilidad.Visible = true;
+
+                dpd_hora_inicio.SelectedValue = estacionamiento.inicio_disponibilidad.Hour.ToString();
+                dpd_minuto_inicio.SelectedValue = estacionamiento.inicio_disponibilidad.Minute.ToString();
+                dpd_hora_fin.SelectedValue = estacionamiento.fin_disponibilidad.Hour.ToString();
+                dpd_minuto_fin.SelectedValue = estacionamiento.fin_disponibilidad.Minute.ToString();
+            }
         }
     }
 

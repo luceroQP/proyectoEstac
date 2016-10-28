@@ -18,6 +18,13 @@ namespace CapaDatos
         public Estacionamiento Estacionamiento {get; set;}
         public Vehiculo Vehiculo { get; set; }
 
+        public List<Arriendo> buscarTodos(int codUsuario = 0)
+        {
+            List<Arriendo> arriendos = new List<Arriendo>();
+
+            return arriendos;
+        }
+
         public int guardar(Arriendo arriendo)
         {
             Conexion conexion = new Conexion();
@@ -26,20 +33,14 @@ namespace CapaDatos
 
             string query = "insert into ARRIENDOS(COD_ARRIENDO, INICIO_ARRIENDO, FIN_ARRIENDO, HORAS_USADAS, COD_ESTACIONAMIENTO,COD_VEHICULO) values (";
             query += id + ",";
-            if (arriendo.inicio_arriendo != default(DateTime))
-            {
+            if (arriendo.inicio_arriendo != default(DateTime)){
                 query += " TO_DATE('" + arriendo.inicio_arriendo.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS'),";
-            }
-            else
-            {
+            }else{
                 query += "'',";
             }
-            if (arriendo.fin_arriendo != default(DateTime))
-            {
+            if (arriendo.fin_arriendo != default(DateTime)){
                 query += " TO_DATE('" + arriendo.fin_arriendo.ToString("yyyy-MM-dd H:mm:ss") + "', 'YYYY-MM-DD HH24:MI:SS'),";
-            }
-            else
-            {
+            }else{
                 query += "'',";
             }
             query += arriendo.horas_usadas + ",";
@@ -48,12 +49,9 @@ namespace CapaDatos
 
             int filasIngresadas = conexion.ingresar(query);
             conexion.cerrarConexion();
-            if (filasIngresadas > 0)
-            {
+            if (filasIngresadas > 0){
                 return id;
-            }
-            else
-            {
+            }else{
                 return -1;
             }
         }
