@@ -122,7 +122,7 @@ public partial class Arrendar : System.Web.UI.Page
                 {"texto", "Arriendo ingresado correctamente."},
                 {"clase","alert-success"}
             };
-            Response.Redirect("~/Vistas/Estacionamientos/Estacionamientos.aspx");
+            Response.Redirect("~/Vistas/Arriendos/Arriendos.aspx");
         }
         else
         {

@@ -195,7 +195,7 @@
         <div id="divFinArriendo" runat="server" visible="true" class="col-md-12 row form-group">
             <div class="col-md-6 row">
                 <div class="col-md-12">
-                    <asp:Label ID="Label6" runat="server" Text="Fin Disponibilidad"></asp:Label>
+                    <asp:Label ID="Label6" runat="server" Text="Fin Arriendo"></asp:Label>
                 </div>
                 <div class="col-md-6">
                     <asp:DropDownList 

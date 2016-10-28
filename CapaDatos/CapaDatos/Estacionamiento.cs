@@ -197,7 +197,7 @@ namespace CapaDatos
                 query += " Where COD_ESTACIONAMIENTO_ESTADO=2";
             }
 
-            if (!cod_estacionamiento_estado.Equals(0)){
+            if (!codUsuarioExcluir.Equals(0)){
                 if (tieneFitros) { query += " and ";}
                 else{ query += " Where "; }
                 query += "COD_USUARIO <> " + codUsuarioExcluir;

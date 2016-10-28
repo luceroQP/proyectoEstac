@@ -70,7 +70,7 @@
                                         <asp:HyperLink class="hiperlinks" ID="HyperLink3" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">Tarjetas</asp:HyperLink>
                                         <asp:HyperLink class="hiperlinks" ID="HyperLink4" runat="server" NavigateUrl="~/Vistas/Vehiculos/Vehiculos.aspx">Vehículos</asp:HyperLink>
                                         <asp:HyperLink class="hiperlinks" ID="HyperLink5" runat="server" NavigateUrl="~/Vistas/Estacionamientos/Estacionamientos.aspx">Estacionamientos</asp:HyperLink>
-                                        <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arrendar.aspx">Arrendar</asp:HyperLink>
+                                        <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arriendos.aspx">Arriendos</asp:HyperLink>
                                     <%
                                 }
                             %>
