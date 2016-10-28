@@ -36,8 +36,24 @@ public partial class VehiculoEditar : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
         Vehiculo vehiculo = new Vehiculo();
-        vehiculo.patente = txt_cod_patente.Text;
+        vehiculo.cod_vehiculo = Int32.Parse(txt_cod_patente.Text);
+        vehiculo.patente = txt_patente.Text;
         vehiculo.modelo = txt_modelo.Text;
-        
+        vehiculo.cod_vehiculo_marca = Int32.Parse(dpl_marca.SelectedValue);
+        if (vehiculo.actualizar(vehiculo))
+        {
+            Session["mensaje"] = new Dictionary<string, string>() { 
+                {"texto", "Vehiculo editado correctamente."},
+                {"clase","alert-success"}
+            };
+            Response.Redirect("~/Vistas/Vehiculos/Vehiculos.aspx");
+        }
+        else
+        {
+            Session["mensaje"] = new Dictionary<string, string>() { 
+                {"texto", "Error al editar el vehiculo."},
+                {"clase","alert-danger"}
+            };
+        }
     }
 }

@@ -118,6 +118,17 @@ namespace CapaDatos
             Conexion conexion = new Conexion();
             string query = "update VEHICULOS set";
             query += " COD_VEHICULO = " + vehiculo.cod_vehiculo;
+            if (!string.IsNullOrEmpty(vehiculo.patente)) { query += ",PATENTE = '" + vehiculo.patente + "'"; }
+            if (!string.IsNullOrEmpty(vehiculo.modelo)) { query += ",MODELO = '" + vehiculo.modelo + "'"; }
+            if (!vehiculo.cod_vehiculo_marca.Equals(0)) { query += ",COD_VEHICULO_MARCA = " + vehiculo.cod_vehiculo_marca; }
+            query += " where COD_VEHICULO = '" + vehiculo.cod_vehiculo + "'";
+
+            int filasActualizadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasActualizadas > 0)
+            {
+                guarda = true;
+            }
             return guarda;
         }
     }
