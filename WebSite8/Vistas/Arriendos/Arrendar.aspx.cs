@@ -8,6 +8,9 @@ using CapaDatos;
 
 public partial class Arrendar : System.Web.UI.Page
 {
+    private List<int> horas = new List<int>();
+    private List<int> minutos = new List<int>();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["usuario"] == null)
@@ -21,6 +24,7 @@ public partial class Arrendar : System.Web.UI.Page
             {
                 this.llenarEstacionamientos(usuario.cod_usuario);
                 this.llenarVehiculos(usuario.cod_usuario);
+                this.llenarHorasMinutos();
             }
         }
     }
@@ -40,6 +44,29 @@ public partial class Arrendar : System.Web.UI.Page
         dpd_vehiculo.DataValueField = "cod_vehiculo";
         dpd_vehiculo.DataBind();
     }
+
+    private void llenarHorasMinutos()
+    {
+        for (int i = 0; i < 24; i++)
+        {
+            this.horas.Add(i);
+        }
+        for (int i = 0; i < 60; i++)
+        {
+            this.minutos.Add(i);
+        }
+
+        dpd_hora_inicio.DataSource = this.horas;
+        dpd_hora_fin.DataSource = this.horas;
+        dpd_minuto_inicio.DataSource = this.minutos;
+        dpd_minuto_fin.DataSource = this.minutos;
+
+        dpd_hora_inicio.DataBind();
+        dpd_hora_fin.DataBind();
+        dpd_minuto_inicio.DataBind();
+        dpd_minuto_fin.DataBind();
+    }
+
     protected void dpd_tipo_disponibilidad_SelectedIndexChanged(object sender, EventArgs e)
     {
         switch (dpd_tipo_disponibilidad.SelectedValue)

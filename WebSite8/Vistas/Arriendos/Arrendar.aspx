@@ -43,11 +43,35 @@
         }
     </script>
     <script>
+        var calcularPrecio = function () {
+            var horas = $(".txtHorasUsadas").val();
+            var valor = $(".valorHora").html().trim();
+            $(".totalPagar").html((horas * valor));
+        };
         $(document).ready(function () {
-            $(".horasUsadas").on("keyup", function () {
-                var horas = $(this).val();
-                var valor = $(".valorHora").html().trim();
-                $(".totalPagar").html((horas * valor));
+          
+
+            $(".horaInicio, .minutoInicio, .horaFin, .minutoFin").change(function (e) {
+                var horaInicio = $(".horaInicio").val();
+                var minutoInicio = $(".minutoInicio").val();
+                var horaFin = $(".horaFin").val();
+                var minutoFin = $(".minutoFin").val();
+
+                var inicioArriendo = new Date("1971-1-1 " + horaInicio + ":" + minutoInicio);
+                var finArriendo = new Date("1971-1-1 " + horaFin + ":" + minutoFin);
+
+                if (finArriendo > inicioArriendo) {
+                    var minutosDiferencia = (finArriendo - inicioArriendo) / 1000 / 60;
+                    var horasUsadas = minutosDiferencia / 60;
+                    var horas = Math.floor(minutosDiferencia / 60);
+                    var minutos = minutosDiferencia % 60;
+
+                    $(".divHorasUsadas").html(horas + ":" + minutos);
+                    $(".txtHorasUsadas").val(horasUsadas);
+                    $(".txtHorasUsadas").attr("value", horasUsadas);
+
+                    calcularPrecio();
+                }
             });
         });
     </script>
@@ -146,32 +170,54 @@
             </div>
         </div>
         <div id="divInicioArriendo" runat="server" visible="true" class="col-md-12 row form-group">
-            <div class="col-md-6">
-                <asp:Label ID="Label11" runat="server" Text="Inicio Arriendo"></asp:Label>
-                <asp:TextBox 
-                    ID="txt_inicio_arriendo" 
-                    runat="server"
-                    CssClass="form-control input-sm">
-                </asp:TextBox>
+            <div class="col-md-6 row">
+                <div class="col-md-12">
+                    <asp:Label ID="Label5" runat="server" Text="Inicio Arriendo"></asp:Label>
+                </div>
+                <div class="col-md-6">
+                    <asp:DropDownList 
+                        ID="dpd_hora_inicio"
+                        CssClass="form-control input-sm horaInicio" 
+                        runat="server">
+                    </asp:DropDownList>
+                </div>
+                <div class="col-md-6">
+                    <asp:DropDownList 
+                        ID="dpd_minuto_inicio"
+                        CssClass="form-control input-sm minutoInicio" 
+                        runat="server">
+                    </asp:DropDownList>
+                </div>
             </div>
             <div class="col-md-6">
             </div>
         </div>
         <div id="divFinArriendo" runat="server" visible="true" class="col-md-12 row form-group">
-            <div class="col-md-6">
-                <asp:Label ID="Label12" runat="server" Text="Fin Arriendo"></asp:Label>
-                <asp:TextBox 
-                    ID="txt_fin_arriendo" 
-                    runat="server"
-                    CssClass="form-control input-sm">
-                </asp:TextBox>
+            <div class="col-md-6 row">
+                <div class="col-md-12">
+                    <asp:Label ID="Label6" runat="server" Text="Fin Disponibilidad"></asp:Label>
+                </div>
+                <div class="col-md-6">
+                    <asp:DropDownList 
+                        ID="dpd_hora_fin"
+                        CssClass="form-control input-sm horaFin" 
+                        runat="server">
+                    </asp:DropDownList>
+                </div>
+                <div class="col-md-6">
+                    <asp:DropDownList 
+                        ID="dpd_minuto_fin"
+                        CssClass="form-control input-sm minutoFin" 
+                        runat="server">
+                    </asp:DropDownList>
+                </div>
             </div>
             <div class="col-md-6">
             </div>
         </div>
         <div class="col-md-12 row form-group">
             <div class="col-md-12">
-                <asp:Label ID="Label3" runat="server" Text="Total a Pagar"></asp:Label>
+                <asp:Label ID="Label3" runat="server" Text="Total Horas Usadas"></asp:Label>
                 <asp:TextBox 
                     ID="txt_horas_usadas" 
                     runat="server"
