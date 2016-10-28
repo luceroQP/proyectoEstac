@@ -14,3 +14,10 @@ C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2013\Projects\Parkin\CapaDa
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2013\Projects\Parkin\CapaDatos\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2013\Projects\Parkin\CapaDatos\CapaDatos\obj\Debug\CapaDatos.dll
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2013\Projects\Parkin\CapaDatos\CapaDatos\obj\Debug\CapaDatos.pdb
+C:\Users\Sistemas-ltda\Documents\Visual Studio 2012\Projects\proyectoEstac\CapaDatos\CapaDatos\bin\Debug\CapaDatos.dll.config
+C:\Users\Sistemas-ltda\Documents\Visual Studio 2012\Projects\proyectoEstac\CapaDatos\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Users\Sistemas-ltda\Documents\Visual Studio 2012\Projects\proyectoEstac\CapaDatos\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Users\Sistemas-ltda\Documents\Visual Studio 2012\Projects\proyectoEstac\CapaDatos\CapaDatos\bin\Debug\Oracle.DataAccess.dll
+C:\Users\Sistemas-ltda\Documents\Visual Studio 2012\Projects\proyectoEstac\CapaDatos\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
+C:\Users\Sistemas-ltda\Documents\Visual Studio 2012\Projects\proyectoEstac\CapaDatos\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Users\Sistemas-ltda\Documents\Visual Studio 2012\Projects\proyectoEstac\CapaDatos\CapaDatos\obj\Debug\CapaDatos.pdb

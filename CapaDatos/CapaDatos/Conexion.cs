@@ -11,7 +11,7 @@ namespace CapaDatos
     public class Conexion
     {
         string conexionString = "Data Source=(DESCRIPTION =" +
-        "(ADDRESS = (PROTOCOL = TCP)(HOST=WIN-0N1UK7E61IA)(PORT = 1521))" +
+        "(ADDRESS = (PROTOCOL = TCP)(HOST=192.168.202.138)(PORT = 1521))" +
         "(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = XE)));USER ID=PARKIN;PASSWORD=123456;";
         private OracleConnection conexion;
 

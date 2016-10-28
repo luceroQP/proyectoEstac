@@ -92,7 +92,7 @@ public partial class RegistroUsuario : System.Web.UI.Page
                     {"clase","alert-success"}
                 };
                 //Response.Write("<script language='javascript'>window.alert('Usuario registrado correctamente.');</script>");
-                Response.Redirect("Default.aspx");
+                Response.Redirect("~/Default.aspx");
             }
             else
             {
