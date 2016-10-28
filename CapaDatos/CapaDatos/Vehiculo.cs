@@ -110,5 +110,12 @@ namespace CapaDatos
             }
             return vehiculo;
         }
+        public Boolean actualizar(Vehiculo vehiculo)
+        {
+            Boolean guarda = false;
+            Conexion conexion = new Conexion();
+            string query = "update VEHICULOS set";
+            query += " COD_VEHICULO = " + vehiculo.cod_vehiculo;
+            return guarda;
     }
 }

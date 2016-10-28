@@ -56,7 +56,7 @@
                 ID="Button1" 
                 runat="server" 
                 Text="Editar" 
-                CssClass="btn btn-sm btn-primary btn-block"/>
+                CssClass="btn btn-sm btn-primary btn-block" OnClick="Button1_Click"/>
         </div>
     </div>
 </asp:Content>

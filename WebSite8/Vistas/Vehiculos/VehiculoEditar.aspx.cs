@@ -33,4 +33,11 @@ public partial class VehiculoEditar : System.Web.UI.Page
         dpl_marca.DataValueField = "cod_vehiculo_marca";
         dpl_marca.DataBind();
     }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.patente = txt_cod_patente.Text;
+        vehiculo.modelo = txt_modelo.Text;
+        
+    }
 }
