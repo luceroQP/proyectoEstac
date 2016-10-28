@@ -17,12 +17,15 @@ public partial class VehiculoEditar : System.Web.UI.Page
         if (!IsPostBack)
         {
             this.llenarComboMarca();
+            Vehiculo vehiculo;
             int codVehiculo = (int)Session["cod_vehiculo"];
-            Vehiculo vehiculo = new Vehiculo().buscarPorPK(codVehiculo);
+            Session["vehiculo"] = vehiculo = new Vehiculo().buscarPorPK(codVehiculo);
+            //Vehiculo vehiculo = new Vehiculo().buscarPorPK(codVehiculo);
 
             txt_cod_patente.Text = vehiculo.cod_vehiculo.ToString();
             txt_modelo.Text = vehiculo.modelo;
             txt_patente.Text = vehiculo.patente;
+            dpl_marca.SelectedValue = vehiculo.cod_vehiculo_marca.ToString();
         }
     }
 
