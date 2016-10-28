@@ -42,6 +42,15 @@
                                     'Error: Your browser doesn\'t support geolocation.');
         }
     </script>
+    <script>
+        $(document).ready(function () {
+            $(".horasUsadas").on("keyup", function () {
+                var horas = $(this).val();
+                var valor = $(".valorHora").html().trim();
+                $(".totalPagar").html((horas * valor));
+            });
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="col-md-4"></div>
@@ -86,7 +95,7 @@
                             <% Response.Write(estacionamiento.direccion); %>
                         </div>
                         <div class="col-md-3">Valor Hora</div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 valorHora">
                             <% Response.Write(estacionamiento.valor_hora); %>
                         </div>
                         <div class="col-md-3">Disponibilidad</div>
@@ -120,7 +129,7 @@
             <div class="col-md-6">
             </div>
         </div>
-        <div class="col-md-12 row form-group">
+        <div class="col-md-12 row form-group hide">
             <div class="col-md-6">
                 <asp:Label ID="Label13" runat="server" Text="Tipo de Arriendo"></asp:Label>
                 <asp:DropDownList 
@@ -136,13 +145,13 @@
             <div class="col-md-6">
             </div>
         </div>
-        <div id="divArrendarPorHoras" runat="server" visible="false" class="col-md-12 row form-group">
+        <div id="divArrendarPorHoras" runat="server" visible="true" class="col-md-12 row form-group">
             <div class="col-md-6">
                 <asp:Label ID="Label9" runat="server" Text="Horas a Usar"></asp:Label>
                 <asp:TextBox 
                     ID="txt_horas_usadas" 
                     runat="server"
-                    CssClass="form-control input-sm">
+                    CssClass="form-control input-sm horasUsadas">
                 </asp:TextBox>
             </div>
             <div class="col-md-6">
@@ -171,13 +180,19 @@
             </div>
             <div class="col-md-6">
             </div>
-        </div>        
+        </div>
+        <div class="col-md-12 row form-group">
+            <div class="col-md-12">
+                <asp:Label ID="Label2" runat="server" Text="Total a Pagar"></asp:Label>
+            </div>
+            <div class="col-md-12 totalPagar">0</div>
+        </div>
         <div class="col-md-6 form-group">
             <asp:Button
                 ID="Button1" 
                 runat="server" 
                 Text="Arrendar" 
-                CssClass="btn btn-sm btn-primary btn-block"
+                CssClass="btn btn-sm btn-primary btn-block" OnClick="Button1_Click"
                 />
         </div>
     </div>

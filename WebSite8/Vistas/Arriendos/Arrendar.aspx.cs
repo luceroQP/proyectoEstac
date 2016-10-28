@@ -77,4 +77,31 @@ public partial class Arrendar : System.Web.UI.Page
             Session["estacionamiento"] = null;
         }
     }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Arriendo arriendo = new Arriendo();
+        Estacionamiento estacionamiento = (Estacionamiento)Session["estacionamiento"];
+
+        arriendo.cod_estacionamiento = Int32.Parse(dpd_estacionamiento.SelectedValue);
+        arriendo.cod_vehiculo = Int32.Parse(dpd_vehiculo.SelectedValue);
+        arriendo.inicio_arriendo = estacionamiento.inicio_disponibilidad;
+        arriendo.fin_arriendo = estacionamiento.fin_disponibilidad;
+        arriendo.horas_usadas = Int32.Parse(txt_horas_usadas.Text);
+
+        if (arriendo.guardar(arriendo) > 0)
+        {
+            Session["mensaje"] = new Dictionary<string, string>() { 
+                {"texto", "Arriendo ingresado correctamente."},
+                {"clase","alert-success"}
+            };
+            Response.Redirect("~/Vistas/Estacionamientos/Estacionamientos.aspx");
+        }
+        else
+        {
+            Session["mensaje"] = new Dictionary<string, string>() { 
+                {"texto", "Error al registrar el Arriendo."},
+                {"clase","alert-danger"}
+            };
+        }
+    }
 }

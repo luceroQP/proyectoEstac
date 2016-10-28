@@ -17,5 +17,45 @@ namespace CapaDatos
         public int cod_vehiculo { get; set; }
         public Estacionamiento Estacionamiento {get; set;}
         public Vehiculo Vehiculo { get; set; }
+
+        public int guardar(Arriendo arriendo)
+        {
+            Conexion conexion = new Conexion();
+            int id = conexion.getSequenceValor("ARRIENDOS_SEQ", 1);
+            conexion.cerrarConexion();
+
+            string query = "insert into ARRIENDOS(COD_ARRIENDO, INICIO_ARRIENDO, FIN_ARRIENDO, HORAS_USADAS, COD_ESTACIONAMIENTO,COD_VEHICULO) values (";
+            query += id + ",";
+            if (arriendo.inicio_arriendo != default(DateTime))
+            {
+                query += " DATE '" + arriendo.inicio_arriendo.Date.ToString("yyyy-MM-dd H:mm:ss") + "',";
+            }
+            else
+            {
+                query += "'',";
+            }
+            if (arriendo.fin_arriendo != default(DateTime))
+            {
+                query += " DATE '" + arriendo.fin_arriendo.Date.ToString("yyyy-MM-dd H:mm:ss") + "',";
+            }
+            else
+            {
+                query += "'',";
+            }
+            query += arriendo.horas_usadas + ",";
+            query += arriendo.cod_estacionamiento + ",";
+            query += arriendo.cod_vehiculo + ")";
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                return id;
+            }
+            else
+            {
+                return -1;
+            }
+        }
     }
 }
