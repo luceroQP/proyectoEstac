@@ -48,10 +48,11 @@ namespace CapaDatos
             List<Vehiculo> vehiculos = new List<Vehiculo>();
             Conexion conexion = new Conexion();
             string query = "select * from VEHICULOS";
-            if (!codUsuario.Equals(0)) { query += "where COD_USUARIO="+codUsuario; }
+            if (!codUsuario.Equals(0)) { query += "where COD_USUARIO=" + codUsuario; }
 
             OracleDataReader dr = conexion.consultar(query);
-            while(dr.Read()){
+            while (dr.Read())
+            {
                 Vehiculo vehiculo = new Vehiculo();
                 vehiculo.cod_vehiculo = Int32.Parse(dr["cod_vehiculo"].ToString());
                 vehiculo.patente = dr["patente"].ToString();
@@ -73,7 +74,8 @@ namespace CapaDatos
             string query = "select * from VEHICULOS where COD_USUARIO = " + codUsuario;
 
             OracleDataReader dr = conexion.consultar(query);
-            while(dr.Read()){
+            while (dr.Read())
+            {
                 Vehiculo vehiculo = new Vehiculo();
                 vehiculo.cod_vehiculo = Int32.Parse(dr["cod_vehiculo"].ToString());
                 vehiculo.patente = dr["patente"].ToString();
@@ -87,7 +89,7 @@ namespace CapaDatos
 
             if (llenaCombo)
             {
-                vehiculos.Insert(0, new Vehiculo { cod_vehiculo = 0, patente = "Seleccione"});
+                vehiculos.Insert(0, new Vehiculo { cod_vehiculo = 0, patente = "Seleccione" });
             }
             return vehiculos;
         }
@@ -117,5 +119,6 @@ namespace CapaDatos
             string query = "update VEHICULOS set";
             query += " COD_VEHICULO = " + vehiculo.cod_vehiculo;
             return guarda;
+        }
     }
 }
