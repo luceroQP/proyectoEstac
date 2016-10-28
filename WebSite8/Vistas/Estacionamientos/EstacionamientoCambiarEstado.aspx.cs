@@ -61,8 +61,8 @@ public partial class EstacionamientoCambiarEstado : System.Web.UI.Page
     {
         int estadoSeleccionado = Int32.Parse(dpd_estado.SelectedValue);
 
-        //Habilitado según horario
-        if (estadoSeleccionado.Equals(4))
+        //Habilitado según horario(4), ahora estan solo los habilitados 
+        if (estadoSeleccionado.Equals(2))
         {
             divInicioDisponibilidad.Visible = true;
             divFinDisponibilidad.Visible = true;
@@ -82,7 +82,7 @@ public partial class EstacionamientoCambiarEstado : System.Web.UI.Page
         estacionamiento.cod_estacionamiento_estado = estadoSeleccionado;
 
         //Habilitado según horario
-        if (estadoSeleccionado.Equals(4))
+        if (estadoSeleccionado.Equals(2))
         {
             string hora_inicio = dpd_hora_inicio.SelectedValue + ":" + dpd_minuto_inicio.SelectedValue + ":00";
             string hora_fin = dpd_hora_fin.SelectedValue + ":" + dpd_minuto_fin.SelectedValue + ":00";

@@ -52,36 +52,48 @@
             <div class="col-md-6">
             </div>
         </div>
-        <div id="divInicioDisponibilidad" runat="server" visible="false" class="col-md-12 row">
-            <div class="col-md-6 form-group">
-                <asp:Label ID="Label5" runat="server" Text="Inicio Disponibilidad"></asp:Label>
-                <asp:DropDownList 
-                    ID="dpd_hora_inicio"
-                    CssClass="form-control input-sm" 
-                    runat="server">
-                </asp:DropDownList>
-                <asp:DropDownList 
-                    ID="dpd_minuto_inicio"
-                    CssClass="form-control input-sm" 
-                    runat="server">
-                </asp:DropDownList>
+        <div id="divInicioDisponibilidad" runat="server" visible="false" class="col-md-12 form-group row">
+            <div class="col-md-6 row">
+                <div class="col-md-12">
+                    <asp:Label ID="Label5" runat="server" Text="Inicio Disponibilidad"></asp:Label>
+                </div>
+                <div class="col-md-6">
+                    <asp:DropDownList 
+                        ID="dpd_hora_inicio"
+                        CssClass="form-control input-sm" 
+                        runat="server">
+                    </asp:DropDownList>
+                </div>
+                <div class="col-md-6">
+                    <asp:DropDownList 
+                        ID="dpd_minuto_inicio"
+                        CssClass="form-control input-sm" 
+                        runat="server">
+                    </asp:DropDownList>
+                </div>
             </div>
             <div class="col-md-6">
             </div>
         </div>
-        <div id="divFinDisponibilidad" runat="server" visible="false" class="col-md-12 row">
-            <div class="col-md-6 form-group">
-                <asp:Label ID="Label6" runat="server" Text="Fin Disponibilidad"></asp:Label>
-                <asp:DropDownList 
-                    ID="dpd_hora_fin"
-                    CssClass="form-control input-sm" 
-                    runat="server">
-                </asp:DropDownList>
-                <asp:DropDownList 
-                    ID="dpd_minuto_fin"
-                    CssClass="form-control input-sm" 
-                    runat="server">
-                </asp:DropDownList>
+        <div id="divFinDisponibilidad" runat="server" visible="false" class="col-md-12 form-group row">
+            <div class="col-md-6 row">
+                <div class="col-md-12">
+                    <asp:Label ID="Label6" runat="server" Text="Fin Disponibilidad"></asp:Label>
+                </div>
+                <div class="col-md-6">
+                    <asp:DropDownList 
+                        ID="dpd_hora_fin"
+                        CssClass="form-control input-sm" 
+                        runat="server">
+                    </asp:DropDownList>
+                </div>
+                <div class="col-md-6">
+                    <asp:DropDownList 
+                        ID="dpd_minuto_fin"
+                        CssClass="form-control input-sm" 
+                        runat="server">
+                    </asp:DropDownList>
+                </div>
             </div>
             <div class="col-md-6">
             </div>
