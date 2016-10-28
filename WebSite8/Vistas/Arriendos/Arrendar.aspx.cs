@@ -45,17 +45,14 @@ public partial class Arrendar : System.Web.UI.Page
         switch (dpd_tipo_disponibilidad.SelectedValue)
         {
             case "0":
-                divArrendarPorHoras.Visible = false;
                 divInicioArriendo.Visible = false;
                 divFinArriendo.Visible = false;
                 break;
             case "1":
-                divArrendarPorHoras.Visible = true;
                 divInicioArriendo.Visible = false;
                 divFinArriendo.Visible = false;
                 break;
             case "2":
-                divArrendarPorHoras.Visible = false;
                 divInicioArriendo.Visible = true;
                 divFinArriendo.Visible = true;
                 break;

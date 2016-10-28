@@ -19,11 +19,14 @@ public partial class EstacionamientoCambiarEstado : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            Estacionamiento estacionamiento;
             int codEstacionamiento = (int)Session["cod_estacionamiento"];
-            Session["estacionamiento"] = new Estacionamiento().buscarPorPk(codEstacionamiento);
+            Session["estacionamiento"] = estacionamiento = new Estacionamiento().buscarPorPk(codEstacionamiento);
 
             txt_cod_estacionamiento.Text = codEstacionamiento.ToString();
             llenarComboEstados();
+            dpd_estado.SelectedValue = estacionamiento.cod_estacionamiento_estado.ToString();
+
             llenarHorasMinutos();
         }
     }

@@ -145,19 +145,7 @@
             <div class="col-md-6">
             </div>
         </div>
-        <div id="divArrendarPorHoras" runat="server" visible="true" class="col-md-12 row form-group">
-            <div class="col-md-6">
-                <asp:Label ID="Label9" runat="server" Text="Horas a Usar"></asp:Label>
-                <asp:TextBox 
-                    ID="txt_horas_usadas" 
-                    runat="server"
-                    CssClass="form-control input-sm horasUsadas">
-                </asp:TextBox>
-            </div>
-            <div class="col-md-6">
-            </div>
-        </div>
-        <div id="divInicioArriendo" runat="server" visible="false" class="col-md-12 row form-group">
+        <div id="divInicioArriendo" runat="server" visible="true" class="col-md-12 row form-group">
             <div class="col-md-6">
                 <asp:Label ID="Label11" runat="server" Text="Inicio Arriendo"></asp:Label>
                 <asp:TextBox 
@@ -169,7 +157,7 @@
             <div class="col-md-6">
             </div>
         </div>
-        <div id="divFinArriendo" runat="server" visible="false" class="col-md-12 row form-group">
+        <div id="divFinArriendo" runat="server" visible="true" class="col-md-12 row form-group">
             <div class="col-md-6">
                 <asp:Label ID="Label12" runat="server" Text="Fin Arriendo"></asp:Label>
                 <asp:TextBox 
@@ -180,6 +168,17 @@
             </div>
             <div class="col-md-6">
             </div>
+        </div>
+        <div class="col-md-12 row form-group">
+            <div class="col-md-12">
+                <asp:Label ID="Label3" runat="server" Text="Total a Pagar"></asp:Label>
+                <asp:TextBox 
+                    ID="txt_horas_usadas" 
+                    runat="server"
+                    CssClass="form-control input-sm txtHorasUsadas hide">
+                </asp:TextBox>
+            </div>
+            <div class="col-md-12 divHorasUsadas">0</div>
         </div>
         <div class="col-md-12 row form-group">
             <div class="col-md-12">
