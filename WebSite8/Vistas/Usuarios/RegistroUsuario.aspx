@@ -64,6 +64,19 @@
         </div>
         <div class="col-md-12 row">
             <div class="col-md-6 form-group">
+                <asp:Label ID="Label1" runat="server" Text="Tipo Usuario"></asp:Label>
+                <asp:DropDownList 
+                    ID="dpd_tipo_usuario" 
+                    runat="server" 
+                    CssClass="form-control input-sm">
+                </asp:DropDownList>                
+            </div>
+            <div class="col-md-6">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="dpl_sexo" ErrorMessage="Debe seleccionar sexo"></asp:RequiredFieldValidator>
+            </div>
+        </div>
+        <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
                 <asp:Label ID="Label6" runat="server" Text="Fecha Nacimiento"></asp:Label>
                 <asp:Calendar 
                     ID="cal_fec_nac" 

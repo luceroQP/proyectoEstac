@@ -13,7 +13,16 @@ public partial class RegistroUsuario : System.Web.UI.Page
         if (!IsPostBack)
         {
             llenarRegiones();
+            llenarTipoUsuarios();
         }
+    }
+
+    private void llenarTipoUsuarios()
+    {
+        dpd_tipo_usuario.DataSource = new UsuarioTipo().buscarTodos(true);
+        dpd_tipo_usuario.DataTextField = "nombre_usuario_tipo";
+        dpd_tipo_usuario.DataValueField = "cod_usuario_tipo";
+        dpd_tipo_usuario.DataBind();
     }
 
     private void llenarRegiones()
@@ -83,7 +92,7 @@ public partial class RegistroUsuario : System.Web.UI.Page
             usuario.direccion = txt_direccion.Text;
             usuario.estado = 1;
             usuario.cod_comuna = Int32.Parse(dpd_comuna.SelectedValue);
-            usuario.cod_usuario_tipo = 1;
+            usuario.cod_usuario_tipo = Int32.Parse(dpd_tipo_usuario.SelectedValue);
 
             if (usuario.guardar(usuario) > 0)
             {
