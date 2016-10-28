@@ -48,7 +48,7 @@ namespace CapaDatos
             List<Vehiculo> vehiculos = new List<Vehiculo>();
             Conexion conexion = new Conexion();
             string query = "select * from VEHICULOS";
-            if (!codUsuario.Equals(0)) { query += "where COD_USUARIO=" + codUsuario; }
+            if (!codUsuario.Equals(0)) { query += " where COD_USUARIO=" + codUsuario; }
 
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())

@@ -29,7 +29,7 @@ namespace CapaDatos
             List<Estacionamiento> estacionamientos = new List<Estacionamiento>();
             Conexion conexion = new Conexion();
             string query = "select * from ESTACIONAMIENTOS";
-            if (!codUsuario.Equals(0)) { query += "where COD_USUARIO=" + codUsuario; }
+            if (!codUsuario.Equals(0)) { query += " where COD_USUARIO=" + codUsuario; }
 
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
@@ -185,11 +185,23 @@ namespace CapaDatos
             return guarda;
         }
 
-        public List<Estacionamiento> estacionamientosDisponibles(int codUsuario, Boolean llenaCombo = false)
+        public List<Estacionamiento> estacionamientosDisponibles(int codUsuarioExcluir = 0, Boolean soloActivos = false, Boolean llenaCombo = false)
         {
             List<Estacionamiento> estacionamientos = new List<Estacionamiento>();
             Conexion conexion = new Conexion();
             string query = "select * from ESTACIONAMIENTOS";
+            Boolean tieneFitros = false;
+
+            if (soloActivos){
+                tieneFitros = true;
+                query += " Where COD_ESTACIONAMIENTO_ESTADO=2";
+            }
+
+            if (!cod_estacionamiento_estado.Equals(0)){
+                if (tieneFitros) { query += " and ";}
+                else{ query += " Where "; }
+                query += "COD_USUARIO <> " + codUsuarioExcluir;
+            }
 
             OracleDataReader dr = conexion.consultar(query);
             while(dr.Read()){

@@ -31,7 +31,7 @@ public partial class Arrendar : System.Web.UI.Page
 
     private void llenarEstacionamientos(int codUsuario = 0)
     {
-        dpd_estacionamiento.DataSource = new Estacionamiento().estacionamientosDisponibles(codUsuario, true);
+        dpd_estacionamiento.DataSource = new Estacionamiento().estacionamientosDisponibles(codUsuario, true, true);
         dpd_estacionamiento.DataTextField = "direccion";
         dpd_estacionamiento.DataValueField = "cod_estacionamiento";
         dpd_estacionamiento.DataBind();

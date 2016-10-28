@@ -10,14 +10,14 @@ public partial class Tarjetas : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["usuario"] == null)
-        {
+        if (Session["usuario"] == null){
             Response.Redirect("~/Vistas/Usuarios/Login.aspx");
         }
 
         if (!IsPostBack)
         {
-            gv_tarjetas.DataSource = new Tarjeta().buscarTodos();
+            Usuario usuario = (Usuario)Session["usuario"];
+            gv_tarjetas.DataSource = new Tarjeta().buscarTodos(usuario.cod_usuario);
             gv_tarjetas.DataBind();
         }
     }

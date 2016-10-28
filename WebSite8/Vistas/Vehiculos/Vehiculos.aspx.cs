@@ -17,7 +17,8 @@ public partial class Vehiculos : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            gv_vehiculos.DataSource = new Vehiculo().buscarTodos();
+            Usuario usuario = (Usuario)Session["usuario"];
+            gv_vehiculos.DataSource = new Vehiculo().buscarTodos(usuario.cod_usuario);
             gv_vehiculos.DataBind();
         }
     }

@@ -16,7 +16,8 @@ public partial class Estacionamientos : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            gv_estacionamientos.DataSource = new Estacionamiento().buscarTodos(0, true);
+            Usuario usuario = (Usuario)Session["usuario"];
+            gv_estacionamientos.DataSource = new Estacionamiento().buscarTodos(usuario.cod_usuario, true);
             gv_estacionamientos.DataBind();
         }
     }
