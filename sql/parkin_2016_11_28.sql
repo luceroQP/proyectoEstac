@@ -1,0 +1,1278 @@
+/*
+Navicat Oracle Data Transfer
+Oracle Client Version : 12.1.0.2.0
+
+Source Server         : MVWare
+Source Server Version : 110200
+Source Host           : WIN-0N1UK7E61IA:1521
+Source Schema         : PARKIN
+
+Target Server Type    : ORACLE
+Target Server Version : 110100
+File Encoding         : 65001
+
+Date: 2016-11-28 17:21:55
+*/
+
+
+-- ----------------------------
+-- Table structure for "ARRIENDOS"
+-- ----------------------------
+DROP TABLE "ARRIENDOS";
+CREATE TABLE "ARRIENDOS" (
+"COD_ARRIENDO" NUMBER NOT NULL ,
+"INICIO_ARRIENDO" DATE NOT NULL ,
+"FIN_ARRIENDO" DATE NULL ,
+"HORAS_USADAS" NUMBER NULL ,
+"COD_ESTACIONAMIENTO" NUMBER NOT NULL ,
+"COD_VEHICULO" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of ARRIENDOS
+-- ----------------------------
+INSERT INTO "ARRIENDOS" VALUES ('58', TO_DATE('2016-11-27 03:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2016-11-27 05:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '32', '93');
+
+-- ----------------------------
+-- Table structure for "AUDITORIA"
+-- ----------------------------
+DROP TABLE "AUDITORIA";
+CREATE TABLE "AUDITORIA" (
+"ID" NUMBER NOT NULL ,
+"RUT" NUMBER NULL ,
+"RUT_VIEJO" NUMBER NULL ,
+"NOMBRE" VARCHAR2(50 BYTE) NULL ,
+"NOMBRE_VIEJO" VARCHAR2(50 BYTE) NULL ,
+"IP" VARCHAR2(50 BYTE) NULL ,
+"FECHA" DATE NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of AUDITORIA
+-- ----------------------------
+INSERT INTO "AUDITORIA" VALUES ('10', '12393346', '12393346', 'Andres', 'Andres', '127.0.0.1', TO_DATE('2016-10-28 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('30', '12393346', '12393346', 'Andres', 'Andres', '127.0.0.1', TO_DATE('2016-10-28 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('50', '23599579', '23599579', 'a', 'a', '192.168.1.35', TO_DATE('2016-11-22 03:07:07', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('70', '18610420', '18610420', 'Cesar', 'Cesar', '192.168.1.34', TO_DATE('2016-11-27 20:28:57', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('90', '18610420', '18610420', 'Cesar', 'Cesar', '192.168.1.34', TO_DATE('2016-11-27 20:29:19', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('110', '555', '555', 'a', 'Bruno', '192.168.1.34', TO_DATE('2016-11-27 20:50:28', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('130', '555', '555', 'a', 'ASAS', '192.168.1.34', TO_DATE('2016-11-27 20:53:48', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('150', '18610420', '18610420', 'Cesar', 'Cesar', '192.168.1.34', TO_DATE('2016-11-27 21:55:57', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('170', '18610420', '18610420', 'Cesarrrr', 'Cesar', '192.168.1.34', TO_DATE('2016-11-27 21:57:30', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO "AUDITORIA" VALUES ('190', '18610420', '18610420', 'Cesar', 'Cesarrrr', '192.168.1.34', TO_DATE('2016-11-27 21:57:37', 'YYYY-MM-DD HH24:MI:SS'));
+
+-- ----------------------------
+-- Table structure for "BANCOS"
+-- ----------------------------
+DROP TABLE "BANCOS";
+CREATE TABLE "BANCOS" (
+"COD_BANCO" NUMBER NOT NULL ,
+"NOMBRE_BANCO" VARCHAR2(80 BYTE) NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of BANCOS
+-- ----------------------------
+INSERT INTO "BANCOS" VALUES ('1', 'Santander');
+INSERT INTO "BANCOS" VALUES ('2', 'BBVA');
+INSERT INTO "BANCOS" VALUES ('3', 'BancoEstado');
+INSERT INTO "BANCOS" VALUES ('4', 'Itau');
+INSERT INTO "BANCOS" VALUES ('5', 'Scotiabank');
+INSERT INTO "BANCOS" VALUES ('6', 'Banco de Chile');
+INSERT INTO "BANCOS" VALUES ('7', 'Corpbanca');
+
+-- ----------------------------
+-- Table structure for "CALIFICACIONES"
+-- ----------------------------
+DROP TABLE "CALIFICACIONES";
+CREATE TABLE "CALIFICACIONES" (
+"COD_CALIFICACION" NUMBER NOT NULL ,
+"NOTA" NUMBER NOT NULL ,
+"OBSERVACION" VARCHAR2(500 BYTE) NULL ,
+"COD_CALIFICACION_TIPO" NUMBER NOT NULL ,
+"COD_USUARIO_CALIFICADOR" NUMBER NOT NULL ,
+"COD_USUARIO_CALIFICADO" NUMBER NOT NULL ,
+"COD_ARRIENDO" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of CALIFICACIONES
+-- ----------------------------
+INSERT INTO "CALIFICACIONES" VALUES ('34', '1', 'wena un 5', '2', '31', '30', '58');
+
+-- ----------------------------
+-- Table structure for "CALIFICACIONES_TIPOS"
+-- ----------------------------
+DROP TABLE "CALIFICACIONES_TIPOS";
+CREATE TABLE "CALIFICACIONES_TIPOS" (
+"COD_CALIFICACION_TIPO" NUMBER NOT NULL ,
+"NOMBRE_CALIFICACION_TIPO" VARCHAR2(255 BYTE) NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of CALIFICACIONES_TIPOS
+-- ----------------------------
+INSERT INTO "CALIFICACIONES_TIPOS" VALUES ('1', 'Muy Bien');
+INSERT INTO "CALIFICACIONES_TIPOS" VALUES ('2', 'Bien');
+INSERT INTO "CALIFICACIONES_TIPOS" VALUES ('3', 'Neutral');
+INSERT INTO "CALIFICACIONES_TIPOS" VALUES ('4', 'Mal');
+INSERT INTO "CALIFICACIONES_TIPOS" VALUES ('5', 'Muy Mal');
+
+-- ----------------------------
+-- Table structure for "COMUNAS"
+-- ----------------------------
+DROP TABLE "COMUNAS";
+CREATE TABLE "COMUNAS" (
+"COD_COMUNA" NUMBER NOT NULL ,
+"NOMBRE_COMUNA" VARCHAR2(255 BYTE) NOT NULL ,
+"COD_PROVINCIA" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of COMUNAS
+-- ----------------------------
+INSERT INTO "COMUNAS" VALUES ('1', 'Cerrillos', '46');
+INSERT INTO "COMUNAS" VALUES ('2', 'Cerro Navia', '46');
+INSERT INTO "COMUNAS" VALUES ('3', 'Conchali', '46');
+INSERT INTO "COMUNAS" VALUES ('4', 'El Bosque', '46');
+INSERT INTO "COMUNAS" VALUES ('5', 'Estacion Central', '46');
+INSERT INTO "COMUNAS" VALUES ('6', 'Huechuraba', '46');
+INSERT INTO "COMUNAS" VALUES ('7', 'Independencia', '46');
+INSERT INTO "COMUNAS" VALUES ('8', 'La Cisterna', '46');
+INSERT INTO "COMUNAS" VALUES ('9', 'La Florida', '46');
+INSERT INTO "COMUNAS" VALUES ('10', 'La Granja', '46');
+INSERT INTO "COMUNAS" VALUES ('11', 'La Pintana', '46');
+INSERT INTO "COMUNAS" VALUES ('12', 'La Reina', '46');
+INSERT INTO "COMUNAS" VALUES ('13', 'Las Condes', '46');
+INSERT INTO "COMUNAS" VALUES ('14', 'Lo Barnechea', '46');
+INSERT INTO "COMUNAS" VALUES ('15', 'Lo Espejo', '46');
+INSERT INTO "COMUNAS" VALUES ('16', 'Macul', '46');
+INSERT INTO "COMUNAS" VALUES ('17', 'Maipu', '46');
+INSERT INTO "COMUNAS" VALUES ('18', '��oa', '46');
+INSERT INTO "COMUNAS" VALUES ('19', 'Pedro Aguirre Cerda', '46');
+INSERT INTO "COMUNAS" VALUES ('20', 'Pe�alolen', '46');
+INSERT INTO "COMUNAS" VALUES ('21', 'Providencia', '46');
+INSERT INTO "COMUNAS" VALUES ('22', 'Pudahuel', '46');
+INSERT INTO "COMUNAS" VALUES ('23', 'Quilicura', '46');
+INSERT INTO "COMUNAS" VALUES ('24', 'Quinta Normal', '46');
+INSERT INTO "COMUNAS" VALUES ('25', 'Recoleta', '46');
+INSERT INTO "COMUNAS" VALUES ('26', 'Renca', '46');
+INSERT INTO "COMUNAS" VALUES ('27', 'San Joaquin', '46');
+INSERT INTO "COMUNAS" VALUES ('28', 'San Miguel', '46');
+INSERT INTO "COMUNAS" VALUES ('29', 'San Ramon', '46');
+INSERT INTO "COMUNAS" VALUES ('30', 'Santiago', '46');
+INSERT INTO "COMUNAS" VALUES ('31', 'Vitacura', '46');
+INSERT INTO "COMUNAS" VALUES ('100', 'COMUNA2', '46');
+
+-- ----------------------------
+-- Table structure for "ESTACIONAMIENTO_ESTADOS"
+-- ----------------------------
+DROP TABLE "ESTACIONAMIENTO_ESTADOS";
+CREATE TABLE "ESTACIONAMIENTO_ESTADOS" (
+"COD_ESTACIONAMIENTO_ESTADO" NUMBER NOT NULL ,
+"NOMBRE_ESTACIONAMIENTO_ESTADO" VARCHAR2(255 BYTE) NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of ESTACIONAMIENTO_ESTADOS
+-- ----------------------------
+INSERT INTO "ESTACIONAMIENTO_ESTADOS" VALUES ('1', 'No Disponible');
+INSERT INTO "ESTACIONAMIENTO_ESTADOS" VALUES ('2', 'Disponible');
+
+-- ----------------------------
+-- Table structure for "ESTACIONAMIENTOS"
+-- ----------------------------
+DROP TABLE "ESTACIONAMIENTOS";
+CREATE TABLE "ESTACIONAMIENTOS" (
+"COD_ESTACIONAMIENTO" NUMBER NOT NULL ,
+"DIRECCION" VARCHAR2(255 BYTE) NOT NULL ,
+"VALOR_HORA" NUMBER NOT NULL ,
+"LATITUD" VARCHAR2(255 BYTE) NULL ,
+"LONGITUD" VARCHAR2(255 BYTE) NULL ,
+"INICIO_DISPONIBILIDAD" DATE NULL ,
+"FIN_DISPONIBILIDAD" DATE NULL ,
+"CAPACIDAD" NUMBER NOT NULL ,
+"EXISTENCIAS" NUMBER NOT NULL ,
+"COD_USUARIO" NUMBER NOT NULL ,
+"COD_ESTACIONAMIENTO_ESTADO" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of ESTACIONAMIENTOS
+-- ----------------------------
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('1', 'dir', '1000', null, null, TO_DATE('2012-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '1', '2', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('2', 'dad', '1500', null, null, TO_DATE('2016-12-24 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2016-12-24 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '0', '3', '2');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('3', 'adad', '2000', null, null, TO_DATE('2012-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2018-12-15 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '3', '1', '3', '2');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('4', 'ejercito', '1000', null, null, TO_DATE('2016-10-21 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2016-12-21 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '0', '3', '2');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('5', 'Av Ejercito Libertador', '300', null, null, TO_DATE('2016-12-24 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2016-12-28 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '9', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('21', 'Ejercito 5220', '5000', null, null, TO_DATE('2016-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2016-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '0', '3', '2');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('23', 'Av del Valle', '660', null, null, TO_DATE('2016-10-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2016-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '3', '0', '3', '2');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('24', 'Condell 1559, Renca, Chile', '1000', '-33.4024804', '-70.7307133', TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '1', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('26', 'Antonio Varas 666 ', '5000', '-33.4488999', '-70.6692666', TO_DATE('2016-10-29 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2016-11-30 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '0', '3', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('27', 'Direccion General de Movilizacion Nacional - Vergara, Santiago, Chile', '1200', '-33.4504904', '-70.6618899', TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '3', '0', '1', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('28', 'Huelen 164, Providencia, Chile', '2000', '-33.4322941', '-70.6222279', TO_DATE('2000-01-01 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '30', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('29', 'Román Díaz 85, Providencia, Chile', '6200', '-33.4312149', '-70.6220847', TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 23:00:00', 'YYYY-MM-DD HH24:MI:SS'), '2', '0', '30', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('30', 'Avenida Salvador 95, Providencia, Chile', '5000', '-33.434844', '-70.6262947', TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '31', '2');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('31', 'Avenida Condell 1559, Renca, Chile', '5000', '-33.4024804', '-70.7307133', TO_DATE('2000-01-01 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 21:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '30', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('32', 'La Sierra 7815, Renca, Chile', '500', '-33.3989428', '-70.7484003', TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '30', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('33', 'Avenida Las Condes 7851, Las Condes, Chile', '3000', '-33.4000108', '-70.5531508', TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 23:59:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '30', '1');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('34', 'Los Piqueros 87, Cerro Navia, Chile', '1500', '-33.4157591', '-70.7640251', TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '31', '2');
+INSERT INTO "ESTACIONAMIENTOS" VALUES ('35', 'Antonio Varas 666, Providencia, Chile', '8000', '-33.4333211', '-70.6155947', TO_DATE('2000-01-01 18:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2000-01-01 22:00:00', 'YYYY-MM-DD HH24:MI:SS'), '1', '0', '31', '2');
+
+-- ----------------------------
+-- Table structure for "PROVINCIAS"
+-- ----------------------------
+DROP TABLE "PROVINCIAS";
+CREATE TABLE "PROVINCIAS" (
+"COD_PROVINCIA" NUMBER NOT NULL ,
+"NOMBRE_PROVINCIA" VARCHAR2(255 BYTE) NOT NULL ,
+"COD_REGION" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PROVINCIAS
+-- ----------------------------
+INSERT INTO "PROVINCIAS" VALUES ('1', 'Iquique', '1');
+INSERT INTO "PROVINCIAS" VALUES ('2', 'Tamarugal', '1');
+INSERT INTO "PROVINCIAS" VALUES ('3', 'Tocopilla', '2');
+INSERT INTO "PROVINCIAS" VALUES ('4', 'El Loa', '2');
+INSERT INTO "PROVINCIAS" VALUES ('5', 'Antofagasta', '2');
+INSERT INTO "PROVINCIAS" VALUES ('6', 'Cha�aral', '3');
+INSERT INTO "PROVINCIAS" VALUES ('7', 'Copiapo', '3');
+INSERT INTO "PROVINCIAS" VALUES ('8', 'Huasco', '3');
+INSERT INTO "PROVINCIAS" VALUES ('9', 'Elqui', '4');
+INSERT INTO "PROVINCIAS" VALUES ('10', 'Limari', '4');
+INSERT INTO "PROVINCIAS" VALUES ('11', 'Choapa', '4');
+INSERT INTO "PROVINCIAS" VALUES ('12', 'Petorca', '5');
+INSERT INTO "PROVINCIAS" VALUES ('13', 'Los Andes', '5');
+INSERT INTO "PROVINCIAS" VALUES ('14', 'San Felipe de Aconcagua', '5');
+INSERT INTO "PROVINCIAS" VALUES ('15', 'Quillota', '5');
+INSERT INTO "PROVINCIAS" VALUES ('16', 'Valparaiso', '5');
+INSERT INTO "PROVINCIAS" VALUES ('17', 'San Antonio', '5');
+INSERT INTO "PROVINCIAS" VALUES ('18', 'Isla de Pascua', '5');
+INSERT INTO "PROVINCIAS" VALUES ('19', 'Marga Marga', '5');
+INSERT INTO "PROVINCIAS" VALUES ('20', 'Cachapoal', '6');
+INSERT INTO "PROVINCIAS" VALUES ('21', 'Colchagua', '6');
+INSERT INTO "PROVINCIAS" VALUES ('22', 'Cardenal Caro', '6');
+INSERT INTO "PROVINCIAS" VALUES ('23', 'Curico', '7');
+INSERT INTO "PROVINCIAS" VALUES ('24', 'Talca', '7');
+INSERT INTO "PROVINCIAS" VALUES ('25', 'Linares', '7');
+INSERT INTO "PROVINCIAS" VALUES ('26', 'Cauquenes', '7');
+INSERT INTO "PROVINCIAS" VALUES ('27', '�ble', '8');
+INSERT INTO "PROVINCIAS" VALUES ('28', 'Biobio', '8');
+INSERT INTO "PROVINCIAS" VALUES ('29', 'Concepcion', '8');
+INSERT INTO "PROVINCIAS" VALUES ('30', 'Arauco', '8');
+INSERT INTO "PROVINCIAS" VALUES ('31', 'Malleco', '9');
+INSERT INTO "PROVINCIAS" VALUES ('32', 'Cautin', '9');
+INSERT INTO "PROVINCIAS" VALUES ('33', 'Osorno', '10');
+INSERT INTO "PROVINCIAS" VALUES ('34', 'Llanquihue', '10');
+INSERT INTO "PROVINCIAS" VALUES ('35', 'Chiloe', '10');
+INSERT INTO "PROVINCIAS" VALUES ('36', 'Palena', '10');
+INSERT INTO "PROVINCIAS" VALUES ('37', 'Coyhaique', '11');
+INSERT INTO "PROVINCIAS" VALUES ('38', 'Aysen', '11');
+INSERT INTO "PROVINCIAS" VALUES ('39', 'General Carrena', '11');
+INSERT INTO "PROVINCIAS" VALUES ('40', 'Capitan Prat', '11');
+INSERT INTO "PROVINCIAS" VALUES ('41', 'Ultima Esperanza', '12');
+INSERT INTO "PROVINCIAS" VALUES ('42', 'Magallanes', '12');
+INSERT INTO "PROVINCIAS" VALUES ('43', 'Tierra del Fuego', '12');
+INSERT INTO "PROVINCIAS" VALUES ('44', 'Antartica Chilena', '12');
+INSERT INTO "PROVINCIAS" VALUES ('45', 'Chacabuco', '13');
+INSERT INTO "PROVINCIAS" VALUES ('46', 'Santiago', '13');
+INSERT INTO "PROVINCIAS" VALUES ('47', 'Cordillera', '13');
+INSERT INTO "PROVINCIAS" VALUES ('48', 'Maipo', '13');
+INSERT INTO "PROVINCIAS" VALUES ('49', 'Melipilla', '13');
+INSERT INTO "PROVINCIAS" VALUES ('50', 'Talagante', '13');
+INSERT INTO "PROVINCIAS" VALUES ('51', 'Valdivia', '14');
+INSERT INTO "PROVINCIAS" VALUES ('52', 'Ranco', '14');
+INSERT INTO "PROVINCIAS" VALUES ('53', 'Arica', '15');
+INSERT INTO "PROVINCIAS" VALUES ('54', 'Parinacota', '15');
+
+-- ----------------------------
+-- Table structure for "REGIONES"
+-- ----------------------------
+DROP TABLE "REGIONES";
+CREATE TABLE "REGIONES" (
+"COD_REGION" NUMBER NOT NULL ,
+"NOMBRE_REGION" VARCHAR2(255 BYTE) NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of REGIONES
+-- ----------------------------
+INSERT INTO "REGIONES" VALUES ('1', 'Tarapaca');
+INSERT INTO "REGIONES" VALUES ('2', 'Antofagasta');
+INSERT INTO "REGIONES" VALUES ('3', 'Atacama');
+INSERT INTO "REGIONES" VALUES ('4', 'Coquimbo');
+INSERT INTO "REGIONES" VALUES ('5', 'Valparaiso');
+INSERT INTO "REGIONES" VALUES ('6', 'O�Higgins');
+INSERT INTO "REGIONES" VALUES ('7', 'Maule');
+INSERT INTO "REGIONES" VALUES ('8', 'Biobio');
+INSERT INTO "REGIONES" VALUES ('9', 'La Araucania');
+INSERT INTO "REGIONES" VALUES ('10', 'Los Lagos');
+INSERT INTO "REGIONES" VALUES ('11', 'Aysen');
+INSERT INTO "REGIONES" VALUES ('12', 'Magallanes');
+INSERT INTO "REGIONES" VALUES ('13', 'Metropolitana Santiago');
+INSERT INTO "REGIONES" VALUES ('14', 'Los Rios');
+INSERT INTO "REGIONES" VALUES ('15', 'Arica y Parinacota');
+
+-- ----------------------------
+-- Table structure for "TARJETA_TIPOS"
+-- ----------------------------
+DROP TABLE "TARJETA_TIPOS";
+CREATE TABLE "TARJETA_TIPOS" (
+"COD_TARJETA_TIPO" NUMBER NOT NULL ,
+"NOMBRE_TARJETA_TIPO" VARCHAR2(50 BYTE) NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of TARJETA_TIPOS
+-- ----------------------------
+INSERT INTO "TARJETA_TIPOS" VALUES ('1', 'Credito');
+INSERT INTO "TARJETA_TIPOS" VALUES ('2', 'Debito');
+
+-- ----------------------------
+-- Table structure for "TARJETAS"
+-- ----------------------------
+DROP TABLE "TARJETAS";
+CREATE TABLE "TARJETAS" (
+"COD_TARJETA" NUMBER NOT NULL ,
+"NUMERO_TARJETA" VARCHAR2(50 BYTE) NOT NULL ,
+"SALDO" NUMBER NOT NULL ,
+"COD_BANCO" NUMBER NOT NULL ,
+"COD_TARJETA_TIPO" NUMBER NOT NULL ,
+"COD_USUARIO" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of TARJETAS
+-- ----------------------------
+INSERT INTO "TARJETAS" VALUES ('1', '4082597533026645', '4500', '1', '2', '3');
+INSERT INTO "TARJETAS" VALUES ('2', '4514681664059449', '1200000', '1', '2', '2');
+INSERT INTO "TARJETAS" VALUES ('0', '4514681664059449', '5000', '1', '1', '4');
+INSERT INTO "TARJETAS" VALUES ('40', '4172756387581581', '125000', '3', '1', '30');
+INSERT INTO "TARJETAS" VALUES ('41', '4064532279694829', '75000', '5', '2', '31');
+
+-- ----------------------------
+-- Table structure for "TRANSACCIONES"
+-- ----------------------------
+DROP TABLE "TRANSACCIONES";
+CREATE TABLE "TRANSACCIONES" (
+"COD_TRANSACCION" NUMBER NOT NULL ,
+"MONTO" FLOAT(126) NOT NULL ,
+"COD_ARRIENDO" NUMBER NOT NULL ,
+"NUMERO_TARJETA_ORIGEN" NUMBER NOT NULL ,
+"NUMERO_TARJETA_DESTINO" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of TRANSACCIONES
+-- ----------------------------
+INSERT INTO "TRANSACCIONES" VALUES ('37', '1000', '58', '41', '40');
+
+-- ----------------------------
+-- Table structure for "USUARIO_TIPOS"
+-- ----------------------------
+DROP TABLE "USUARIO_TIPOS";
+CREATE TABLE "USUARIO_TIPOS" (
+"COD_USUARIO_TIPO" NUMBER NOT NULL ,
+"NOMBRE_USUARIO_TIPO" VARCHAR2(50 BYTE) NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of USUARIO_TIPOS
+-- ----------------------------
+INSERT INTO "USUARIO_TIPOS" VALUES ('1', 'Admin');
+INSERT INTO "USUARIO_TIPOS" VALUES ('2', 'Due�o');
+INSERT INTO "USUARIO_TIPOS" VALUES ('3', 'Cliente');
+INSERT INTO "USUARIO_TIPOS" VALUES ('4', 'Consultor');
+
+-- ----------------------------
+-- Table structure for "USUARIOS"
+-- ----------------------------
+DROP TABLE "USUARIOS";
+CREATE TABLE "USUARIOS" (
+"COD_USUARIO" NUMBER NOT NULL ,
+"RUT" NUMBER NOT NULL ,
+"DV" CHAR(1 BYTE) NOT NULL ,
+"NOMBRES" VARCHAR2(80 BYTE) NOT NULL ,
+"APELLIDO_PAT" VARCHAR2(80 BYTE) NOT NULL ,
+"APELLIDO_MAT" VARCHAR2(80 BYTE) NULL ,
+"FECHA_NACIMIENTO" DATE NOT NULL ,
+"SEXO" CHAR(1 BYTE) NOT NULL ,
+"PASSWORD" VARCHAR2(255 BYTE) NOT NULL ,
+"DIRECCION" VARCHAR2(255 BYTE) NOT NULL ,
+"TELEFONO" VARCHAR2(20 BYTE) NOT NULL ,
+"EMAIL" VARCHAR2(80 BYTE) NOT NULL ,
+"ESTADO" NUMBER NULL ,
+"COD_USUARIO_TIPO" NUMBER NOT NULL ,
+"COD_COMUNA" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of USUARIOS
+-- ----------------------------
+INSERT INTO "USUARIOS" VALUES ('1', '15805729', '8', 'Admin', 'Admin', 'Admin', TO_DATE('2016-10-24 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', '736007832d2167baaae763fd3a3f3cf1', 'num212', '32123', '@sas', '1', '1', '19');
+INSERT INTO "USUARIOS" VALUES ('2', '222', '8', 'cliente', 'cliente', 'cliente', TO_DATE('2012-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', 'bcbe3365e6ac95ea2c0343a2395834dd
+', 'dir', 'tel', '@', '1', '3', '1');
+INSERT INTO "USUARIOS" VALUES ('3', '111', '1', 'Due�o', 'due', '�o', TO_DATE('2012-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', '698d51a19d8a121ce581499d7b701668', 'dr', 'tel', '@', '1', '2', '1');
+INSERT INTO "USUARIOS" VALUES ('4', '333', '5', 'Cliente2', 'cliente', 'cliente', TO_DATE('2016-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', '310dcbbf4cce62f762a2aaa148d556bd', 'dir', 'tel', '@', '0', '3', '1');
+INSERT INTO "USUARIOS" VALUES ('5', '55', '5', 'Due�o', 'due', '�o', TO_DATE('2006-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'm', 'b53b3a3d6ab90ce0268229151c9bde11', 'casa', '1212', '@', '0', '2', '2');
+INSERT INTO "USUARIOS" VALUES ('6', '158057295', '5', 'Bruno', 'Bruno', 'bruno', TO_DATE('2016-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', '698d51a19d8a121ce581499d7b701668', 'dir', 'tel', '@', '0', '2', '1');
+INSERT INTO "USUARIOS" VALUES ('7', '999', '9', 'Bruno', 'Aguilera', 'Silva', TO_DATE('2012-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'F', 'b706835de79a2b4e80506f582af3676a', 'dir', '123213', '@', '0', '2', '1');
+INSERT INTO "USUARIOS" VALUES ('8', '888', '8', 'bruno', 'bruno', 'bruno', TO_DATE('2016-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'F', '0a113ef6b61820daa5611c870ed8d5ee', 'aasaas', '556556556', 'zxz5656565', '0', '2', '2');
+INSERT INTO "USUARIOS" VALUES ('9', '777', '7', 'Bruno Ivan', 'Aguilera', 'Silva', TO_DATE('1984-07-14 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', 'f1c1592588411002af340cbaedd6fc33', 'Av Ejercito Libertador 520', '+56997463277', 'correo@correo.cl', '0', '2', '27');
+INSERT INTO "USUARIOS" VALUES ('21', '555', '5', 'a', 'a', 'a', TO_DATE('1984-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', '0cc175b9c0f1b6a831c399e269772661', 'Ejercito Libertador', 'telasasadad', '@asdsadasd', '0', '3', '30');
+INSERT INTO "USUARIOS" VALUES ('22', '19629839', '8', 'a', 'a', 'a', TO_DATE('2016-10-18 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', '0cc175b9c0f1b6a831c399e269772661', 'a', '1', '1', '1', '1', '7');
+INSERT INTO "USUARIOS" VALUES ('25', '555', '5', 'a', 'a', 'a', TO_DATE('1984-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', '0cc175b9c0f1b6a831c399e269772661', 'SDASASDSAD', '6546546564', 'sasdda@mail.com', '0', '3', '2');
+INSERT INTO "USUARIOS" VALUES ('28', '1111', '1', 'due�o', 'Due�o', 'due�o', TO_DATE('1984-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'F', 'b59c67bf196a4758191e42f76670ceba', 'asdsadasd 2121', '32112311212', '1232213321', '0', '2', '2');
+INSERT INTO "USUARIOS" VALUES ('29', '11', '1', 'due�o', 'sadasd', 'asdasa', TO_DATE('1980-12-12 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'F', 'c4ca4238a0b923820dcc509a6f75849b', '21332132121', '32123321231', '321213321321', '0', '2', '2');
+INSERT INTO "USUARIOS" VALUES ('30', '23599579', '4', 'Lucero', 'Quijano', 'Pulido', TO_DATE('2016-11-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'F', '202cb962ac59075b964b07152d234b70', 'mi casa', '1231321', 'lolo@asdas.cl', '1', '2', '26');
+INSERT INTO "USUARIOS" VALUES ('31', '18610420', 'k', 'Cesar', 'gomez', 'betancur', TO_DATE('1993-07-24 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'M', '202cb962ac59075b964b07152d234b70', 'asdasdasads', '1231312', 'lolo@asdas.cl', '1', '3', '16');
+
+-- ----------------------------
+-- Table structure for "VEHICULO_MARCAS"
+-- ----------------------------
+DROP TABLE "VEHICULO_MARCAS";
+CREATE TABLE "VEHICULO_MARCAS" (
+"COD_VEHICULO_MARCA" NUMBER NOT NULL ,
+"NOMBRE_VEHICULO_MARCA" VARCHAR2(255 BYTE) NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of VEHICULO_MARCAS
+-- ----------------------------
+INSERT INTO "VEHICULO_MARCAS" VALUES ('1', 'Citroen');
+INSERT INTO "VEHICULO_MARCAS" VALUES ('2', 'Toyota');
+INSERT INTO "VEHICULO_MARCAS" VALUES ('3', 'Chevrolet');
+INSERT INTO "VEHICULO_MARCAS" VALUES ('4', 'Ford');
+INSERT INTO "VEHICULO_MARCAS" VALUES ('5', 'Nissan');
+INSERT INTO "VEHICULO_MARCAS" VALUES ('6', 'Mercedes Benz');
+INSERT INTO "VEHICULO_MARCAS" VALUES ('7', 'Ford');
+INSERT INTO "VEHICULO_MARCAS" VALUES ('8', 'BMW');
+
+-- ----------------------------
+-- Table structure for "VEHICULOS"
+-- ----------------------------
+DROP TABLE "VEHICULOS";
+CREATE TABLE "VEHICULOS" (
+"COD_VEHICULO" NUMBER NOT NULL ,
+"PATENTE" VARCHAR2(6 BYTE) NOT NULL ,
+"MODELO" VARCHAR2(80 BYTE) NOT NULL ,
+"ESTADO" NUMBER NOT NULL ,
+"COD_USUARIO" NUMBER NOT NULL ,
+"COD_VEHICULO_MARCA" NUMBER NOT NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of VEHICULOS
+-- ----------------------------
+INSERT INTO "VEHICULOS" VALUES ('1', 'AABBCC', 'C3', '1', '2', '5');
+INSERT INTO "VEHICULOS" VALUES ('2', 'WWSS', 'C3', '1', '4', '1');
+INSERT INTO "VEHICULOS" VALUES ('11', 'XXDD55', 'Z1', '1', '4', '8');
+INSERT INTO "VEHICULOS" VALUES ('30', '1233', 'v16', '1', '1', '1');
+INSERT INTO "VEHICULOS" VALUES ('50', '123', 'aaa', '1', '3', '1');
+INSERT INTO "VEHICULOS" VALUES ('70', '1315', 'aaa', '1', '22', '7');
+INSERT INTO "VEHICULOS" VALUES ('93', 'ABCD89', 'c4', '1', '31', '1');
+INSERT INTO "VEHICULOS" VALUES ('91', 'AABB11', 'Elantra', '1', '30', '7');
+INSERT INTO "VEHICULOS" VALUES ('92', 'CCHH98', 'SAIL 2', '1', '31', '3');
+INSERT INTO "VEHICULOS" VALUES ('94', 'LTGP89', 'yaris', '1', '31', '2');
+
+-- ----------------------------
+-- Sequence structure for "ARRIENDOS_COD_ARRIENDO_SEQ"
+-- ----------------------------
+DROP SEQUENCE "ARRIENDOS_COD_ARRIENDO_SEQ";
+CREATE SEQUENCE "ARRIENDOS_COD_ARRIENDO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "ARRIENDOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "ARRIENDOS_SEQ";
+CREATE SEQUENCE "ARRIENDOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 59
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "AUDITORIA_SEQ"
+-- ----------------------------
+DROP SEQUENCE "AUDITORIA_SEQ";
+CREATE SEQUENCE "AUDITORIA_SEQ"
+ INCREMENT BY 20
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 210
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "BANCOS_COD_BANCO_SEQ"
+-- ----------------------------
+DROP SEQUENCE "BANCOS_COD_BANCO_SEQ";
+CREATE SEQUENCE "BANCOS_COD_BANCO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "BANCOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "BANCOS_SEQ";
+CREATE SEQUENCE "BANCOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 20
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "CALIFICACIONES_COD_CALIFICACIO"
+-- ----------------------------
+DROP SEQUENCE "CALIFICACIONES_COD_CALIFICACIO";
+CREATE SEQUENCE "CALIFICACIONES_COD_CALIFICACIO"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 8
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "CALIFICACIONES_SEQ"
+-- ----------------------------
+DROP SEQUENCE "CALIFICACIONES_SEQ";
+CREATE SEQUENCE "CALIFICACIONES_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 35
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "CALIFICACIONES_TIPOS_COD_CALIF"
+-- ----------------------------
+DROP SEQUENCE "CALIFICACIONES_TIPOS_COD_CALIF";
+CREATE SEQUENCE "CALIFICACIONES_TIPOS_COD_CALIF"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "CALIFICACIONES_TIPOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "CALIFICACIONES_TIPOS_SEQ";
+CREATE SEQUENCE "CALIFICACIONES_TIPOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 20
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "COMUNAS_COD_COMUNA_SEQ"
+-- ----------------------------
+DROP SEQUENCE "COMUNAS_COD_COMUNA_SEQ";
+CREATE SEQUENCE "COMUNAS_COD_COMUNA_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "COMUNAS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "COMUNAS_SEQ";
+CREATE SEQUENCE "COMUNAS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 101
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "ESTACIONAMIENTO_ESTADOS_COD_ES"
+-- ----------------------------
+DROP SEQUENCE "ESTACIONAMIENTO_ESTADOS_COD_ES";
+CREATE SEQUENCE "ESTACIONAMIENTO_ESTADOS_COD_ES"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "ESTACIONAMIENTO_ESTADOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "ESTACIONAMIENTO_ESTADOS_SEQ";
+CREATE SEQUENCE "ESTACIONAMIENTO_ESTADOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 20
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "ESTACIONAMIENTOS_COD_ESTACIONA"
+-- ----------------------------
+DROP SEQUENCE "ESTACIONAMIENTOS_COD_ESTACIONA";
+CREATE SEQUENCE "ESTACIONAMIENTOS_COD_ESTACIONA"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "ESTACIONAMIENTOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "ESTACIONAMIENTOS_SEQ";
+CREATE SEQUENCE "ESTACIONAMIENTOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 36
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "PROVINCIAS_COD_PROVINCIA_SEQ"
+-- ----------------------------
+DROP SEQUENCE "PROVINCIAS_COD_PROVINCIA_SEQ";
+CREATE SEQUENCE "PROVINCIAS_COD_PROVINCIA_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "PROVINCIAS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "PROVINCIAS_SEQ";
+CREATE SEQUENCE "PROVINCIAS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 100
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "REGIONES_COD_REGION_SEQ"
+-- ----------------------------
+DROP SEQUENCE "REGIONES_COD_REGION_SEQ";
+CREATE SEQUENCE "REGIONES_COD_REGION_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "REGIONES_SEQ"
+-- ----------------------------
+DROP SEQUENCE "REGIONES_SEQ";
+CREATE SEQUENCE "REGIONES_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 20
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "TARJETA_TIPOS_COD_TARJETA_TIPO"
+-- ----------------------------
+DROP SEQUENCE "TARJETA_TIPOS_COD_TARJETA_TIPO";
+CREATE SEQUENCE "TARJETA_TIPOS_COD_TARJETA_TIPO"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "TARJETA_TIPOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "TARJETA_TIPOS_SEQ";
+CREATE SEQUENCE "TARJETA_TIPOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 20
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "TARJETAS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "TARJETAS_SEQ";
+CREATE SEQUENCE "TARJETAS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 0
+ MAXVALUE 9999999999999999999
+ START WITH 60
+ CACHE 20;
+
+-- ----------------------------
+-- Sequence structure for "TRANSACCIONES_COD_TRANSACCION"
+-- ----------------------------
+DROP SEQUENCE "TRANSACCIONES_COD_TRANSACCION";
+CREATE SEQUENCE "TRANSACCIONES_COD_TRANSACCION"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "TRANSACCIONES_SEQ"
+-- ----------------------------
+DROP SEQUENCE "TRANSACCIONES_SEQ";
+CREATE SEQUENCE "TRANSACCIONES_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 38
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "USUARIO_TIPOS_COD_USUARIO_TIPO"
+-- ----------------------------
+DROP SEQUENCE "USUARIO_TIPOS_COD_USUARIO_TIPO";
+CREATE SEQUENCE "USUARIO_TIPOS_COD_USUARIO_TIPO"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "USUARIO_TIPOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "USUARIO_TIPOS_SEQ";
+CREATE SEQUENCE "USUARIO_TIPOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 10
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "USUARIOS_COD_USUARIO_SEQ"
+-- ----------------------------
+DROP SEQUENCE "USUARIOS_COD_USUARIO_SEQ";
+CREATE SEQUENCE "USUARIOS_COD_USUARIO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "USUARIOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "USUARIOS_SEQ";
+CREATE SEQUENCE "USUARIOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 33
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "VEHICULOS_COD_VEHICULO_SEQ"
+-- ----------------------------
+DROP SEQUENCE "VEHICULOS_COD_VEHICULO_SEQ";
+CREATE SEQUENCE "VEHICULOS_COD_VEHICULO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Sequence structure for "VEHICULOS_SEQ"
+-- ----------------------------
+DROP SEQUENCE "VEHICULOS_SEQ";
+CREATE SEQUENCE "VEHICULOS_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 95
+ NOCACHE 
+ ORDER ;
+
+-- ----------------------------
+-- Indexes structure for table ARRIENDOS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "ARRIENDOS"
+-- ----------------------------
+ALTER TABLE "ARRIENDOS" ADD CHECK ("COD_VEHICULO" IS NOT NULL);
+ALTER TABLE "ARRIENDOS" ADD CHECK ("COD_ESTACIONAMIENTO" IS NOT NULL);
+ALTER TABLE "ARRIENDOS" ADD CHECK ("INICIO_ARRIENDO" IS NOT NULL);
+ALTER TABLE "ARRIENDOS" ADD CHECK ("COD_ARRIENDO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "ARRIENDOS"
+-- ----------------------------
+ALTER TABLE "ARRIENDOS" ADD PRIMARY KEY ("COD_ARRIENDO");
+
+-- ----------------------------
+-- Indexes structure for table AUDITORIA
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "AUDITORIA"
+-- ----------------------------
+ALTER TABLE "AUDITORIA" ADD CHECK ("ID" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "AUDITORIA"
+-- ----------------------------
+ALTER TABLE "AUDITORIA" ADD PRIMARY KEY ("ID");
+
+-- ----------------------------
+-- Indexes structure for table BANCOS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "BANCOS"
+-- ----------------------------
+ALTER TABLE "BANCOS" ADD CHECK ("NOMBRE_BANCO" IS NOT NULL);
+ALTER TABLE "BANCOS" ADD CHECK ("COD_BANCO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "BANCOS"
+-- ----------------------------
+ALTER TABLE "BANCOS" ADD PRIMARY KEY ("COD_BANCO");
+
+-- ----------------------------
+-- Indexes structure for table CALIFICACIONES
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "CALIFICACIONES"
+-- ----------------------------
+ALTER TABLE "CALIFICACIONES" ADD CHECK ("COD_ARRIENDO" IS NOT NULL);
+ALTER TABLE "CALIFICACIONES" ADD CHECK ("COD_USUARIO_CALIFICADO" IS NOT NULL);
+ALTER TABLE "CALIFICACIONES" ADD CHECK ("COD_USUARIO_CALIFICADOR" IS NOT NULL);
+ALTER TABLE "CALIFICACIONES" ADD CHECK ("COD_CALIFICACION_TIPO" IS NOT NULL);
+ALTER TABLE "CALIFICACIONES" ADD CHECK ("NOTA" IS NOT NULL);
+ALTER TABLE "CALIFICACIONES" ADD CHECK ("COD_CALIFICACION" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "CALIFICACIONES"
+-- ----------------------------
+ALTER TABLE "CALIFICACIONES" ADD PRIMARY KEY ("COD_CALIFICACION");
+
+-- ----------------------------
+-- Indexes structure for table CALIFICACIONES_TIPOS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "CALIFICACIONES_TIPOS"
+-- ----------------------------
+ALTER TABLE "CALIFICACIONES_TIPOS" ADD CHECK ("NOMBRE_CALIFICACION_TIPO" IS NOT NULL);
+ALTER TABLE "CALIFICACIONES_TIPOS" ADD CHECK ("COD_CALIFICACION_TIPO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "CALIFICACIONES_TIPOS"
+-- ----------------------------
+ALTER TABLE "CALIFICACIONES_TIPOS" ADD PRIMARY KEY ("COD_CALIFICACION_TIPO");
+
+-- ----------------------------
+-- Indexes structure for table COMUNAS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "COMUNAS"
+-- ----------------------------
+ALTER TABLE "COMUNAS" ADD CHECK ("COD_PROVINCIA" IS NOT NULL);
+ALTER TABLE "COMUNAS" ADD CHECK ("NOMBRE_COMUNA" IS NOT NULL);
+ALTER TABLE "COMUNAS" ADD CHECK ("COD_COMUNA" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "COMUNAS"
+-- ----------------------------
+ALTER TABLE "COMUNAS" ADD PRIMARY KEY ("COD_COMUNA");
+
+-- ----------------------------
+-- Indexes structure for table ESTACIONAMIENTO_ESTADOS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "ESTACIONAMIENTO_ESTADOS"
+-- ----------------------------
+ALTER TABLE "ESTACIONAMIENTO_ESTADOS" ADD CHECK ("NOMBRE_ESTACIONAMIENTO_ESTADO" IS NOT NULL);
+ALTER TABLE "ESTACIONAMIENTO_ESTADOS" ADD CHECK ("COD_ESTACIONAMIENTO_ESTADO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "ESTACIONAMIENTO_ESTADOS"
+-- ----------------------------
+ALTER TABLE "ESTACIONAMIENTO_ESTADOS" ADD PRIMARY KEY ("COD_ESTACIONAMIENTO_ESTADO");
+
+-- ----------------------------
+-- Indexes structure for table ESTACIONAMIENTOS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "ESTACIONAMIENTOS"
+-- ----------------------------
+ALTER TABLE "ESTACIONAMIENTOS" ADD CHECK ("VALOR_HORA" IS NOT NULL);
+ALTER TABLE "ESTACIONAMIENTOS" ADD CHECK ("COD_ESTACIONAMIENTO_ESTADO" IS NOT NULL);
+ALTER TABLE "ESTACIONAMIENTOS" ADD CHECK ("COD_USUARIO" IS NOT NULL);
+ALTER TABLE "ESTACIONAMIENTOS" ADD CHECK ("EXISTENCIAS" IS NOT NULL);
+ALTER TABLE "ESTACIONAMIENTOS" ADD CHECK ("CAPACIDAD" IS NOT NULL);
+ALTER TABLE "ESTACIONAMIENTOS" ADD CHECK ("DIRECCION" IS NOT NULL);
+ALTER TABLE "ESTACIONAMIENTOS" ADD CHECK ("COD_ESTACIONAMIENTO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "ESTACIONAMIENTOS"
+-- ----------------------------
+ALTER TABLE "ESTACIONAMIENTOS" ADD PRIMARY KEY ("COD_ESTACIONAMIENTO");
+
+-- ----------------------------
+-- Indexes structure for table PROVINCIAS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "PROVINCIAS"
+-- ----------------------------
+ALTER TABLE "PROVINCIAS" ADD CHECK ("COD_REGION" IS NOT NULL);
+ALTER TABLE "PROVINCIAS" ADD CHECK ("NOMBRE_PROVINCIA" IS NOT NULL);
+ALTER TABLE "PROVINCIAS" ADD CHECK ("COD_PROVINCIA" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "PROVINCIAS"
+-- ----------------------------
+ALTER TABLE "PROVINCIAS" ADD PRIMARY KEY ("COD_PROVINCIA");
+
+-- ----------------------------
+-- Indexes structure for table REGIONES
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "REGIONES"
+-- ----------------------------
+ALTER TABLE "REGIONES" ADD CHECK ("NOMBRE_REGION" IS NOT NULL);
+ALTER TABLE "REGIONES" ADD CHECK ("COD_REGION" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "REGIONES"
+-- ----------------------------
+ALTER TABLE "REGIONES" ADD PRIMARY KEY ("COD_REGION");
+
+-- ----------------------------
+-- Indexes structure for table TARJETA_TIPOS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "TARJETA_TIPOS"
+-- ----------------------------
+ALTER TABLE "TARJETA_TIPOS" ADD CHECK ("NOMBRE_TARJETA_TIPO" IS NOT NULL);
+ALTER TABLE "TARJETA_TIPOS" ADD CHECK ("COD_TARJETA_TIPO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "TARJETA_TIPOS"
+-- ----------------------------
+ALTER TABLE "TARJETA_TIPOS" ADD PRIMARY KEY ("COD_TARJETA_TIPO");
+
+-- ----------------------------
+-- Indexes structure for table TARJETAS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "TARJETAS"
+-- ----------------------------
+ALTER TABLE "TARJETAS" ADD CHECK ("COD_USUARIO" IS NOT NULL);
+ALTER TABLE "TARJETAS" ADD CHECK ("COD_TARJETA_TIPO" IS NOT NULL);
+ALTER TABLE "TARJETAS" ADD CHECK ("COD_BANCO" IS NOT NULL);
+ALTER TABLE "TARJETAS" ADD CHECK ("SALDO" IS NOT NULL);
+ALTER TABLE "TARJETAS" ADD CHECK ("NUMERO_TARJETA" IS NOT NULL);
+ALTER TABLE "TARJETAS" ADD CHECK ("COD_TARJETA" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "TARJETAS"
+-- ----------------------------
+ALTER TABLE "TARJETAS" ADD PRIMARY KEY ("COD_TARJETA");
+
+-- ----------------------------
+-- Indexes structure for table TRANSACCIONES
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "TRANSACCIONES"
+-- ----------------------------
+ALTER TABLE "TRANSACCIONES" ADD CHECK ("NUMERO_TARJETA_DESTINO" IS NOT NULL);
+ALTER TABLE "TRANSACCIONES" ADD CHECK ("NUMERO_TARJETA_ORIGEN" IS NOT NULL);
+ALTER TABLE "TRANSACCIONES" ADD CHECK ("COD_ARRIENDO" IS NOT NULL);
+ALTER TABLE "TRANSACCIONES" ADD CHECK ("MONTO" IS NOT NULL);
+ALTER TABLE "TRANSACCIONES" ADD CHECK ("COD_TRANSACCION" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "TRANSACCIONES"
+-- ----------------------------
+ALTER TABLE "TRANSACCIONES" ADD PRIMARY KEY ("COD_TRANSACCION");
+
+-- ----------------------------
+-- Indexes structure for table USUARIO_TIPOS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "USUARIO_TIPOS"
+-- ----------------------------
+ALTER TABLE "USUARIO_TIPOS" ADD CHECK ("NOMBRE_USUARIO_TIPO" IS NOT NULL);
+ALTER TABLE "USUARIO_TIPOS" ADD CHECK ("COD_USUARIO_TIPO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "USUARIO_TIPOS"
+-- ----------------------------
+ALTER TABLE "USUARIO_TIPOS" ADD PRIMARY KEY ("COD_USUARIO_TIPO");
+
+-- ----------------------------
+-- Indexes structure for table USUARIOS
+-- ----------------------------
+
+-- ----------------------------
+-- Triggers structure for table "USUARIOS"
+-- ----------------------------
+CREATE OR REPLACE TRIGGER "TRIGGER_UPDATE_PASS" BEFORE UPDATE OF "NOMBRES","PASSWORD","RUT" ON "USUARIOS" REFERENCING OLD AS "OLD" NEW AS "NEW" FOR EACH ROW ENABLE
+BEGIN
+    INSERT INTO AUDITORIA  ( ID, RUT , RUT_VIEJO , NOMBRE , NOMBRE_VIEJO , IP , FECHA )
+    VALUES (AUDITORIA_SEQ.NEXTVAL, :NEW.RUT , :OLD.RUT, :NEW.NOMBRES, :OLD.NOMBRES, (SELECT SYS_CONTEXT('USERENV','IP_ADDRESS') FROM dual), SYSDATE);
+  
+END;
+;
+
+-- ----------------------------
+-- Checks structure for table "USUARIOS"
+-- ----------------------------
+ALTER TABLE "USUARIOS" ADD CHECK ("COD_COMUNA" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("COD_USUARIO_TIPO" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("EMAIL" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("TELEFONO" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("DIRECCION" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("PASSWORD" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("SEXO" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("FECHA_NACIMIENTO" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("APELLIDO_PAT" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("NOMBRES" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("DV" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("RUT" IS NOT NULL);
+ALTER TABLE "USUARIOS" ADD CHECK ("COD_USUARIO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "USUARIOS"
+-- ----------------------------
+ALTER TABLE "USUARIOS" ADD PRIMARY KEY ("COD_USUARIO");
+
+-- ----------------------------
+-- Indexes structure for table VEHICULO_MARCAS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "VEHICULO_MARCAS"
+-- ----------------------------
+ALTER TABLE "VEHICULO_MARCAS" ADD CHECK ("NOMBRE_VEHICULO_MARCA" IS NOT NULL);
+ALTER TABLE "VEHICULO_MARCAS" ADD CHECK ("COD_VEHICULO_MARCA" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "VEHICULO_MARCAS"
+-- ----------------------------
+ALTER TABLE "VEHICULO_MARCAS" ADD PRIMARY KEY ("COD_VEHICULO_MARCA");
+
+-- ----------------------------
+-- Indexes structure for table VEHICULOS
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table "VEHICULOS"
+-- ----------------------------
+ALTER TABLE "VEHICULOS" ADD CHECK ("COD_VEHICULO_MARCA" IS NOT NULL);
+ALTER TABLE "VEHICULOS" ADD CHECK ("COD_USUARIO" IS NOT NULL);
+ALTER TABLE "VEHICULOS" ADD CHECK ("ESTADO" IS NOT NULL);
+ALTER TABLE "VEHICULOS" ADD CHECK ("MODELO" IS NOT NULL);
+ALTER TABLE "VEHICULOS" ADD CHECK ("PATENTE" IS NOT NULL);
+ALTER TABLE "VEHICULOS" ADD CHECK ("COD_VEHICULO" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table "VEHICULOS"
+-- ----------------------------
+ALTER TABLE "VEHICULOS" ADD PRIMARY KEY ("COD_VEHICULO");
+
+-- ----------------------------
+-- Foreign Key structure for table "ARRIENDOS"
+-- ----------------------------
+ALTER TABLE "ARRIENDOS" ADD FOREIGN KEY ("COD_ESTACIONAMIENTO") REFERENCES "ESTACIONAMIENTOS" ("COD_ESTACIONAMIENTO");
+ALTER TABLE "ARRIENDOS" ADD FOREIGN KEY ("COD_VEHICULO") REFERENCES "VEHICULOS" ("COD_VEHICULO");
+
+-- ----------------------------
+-- Foreign Key structure for table "CALIFICACIONES"
+-- ----------------------------
+ALTER TABLE "CALIFICACIONES" ADD FOREIGN KEY ("COD_ARRIENDO") REFERENCES "ARRIENDOS" ("COD_ARRIENDO");
+ALTER TABLE "CALIFICACIONES" ADD FOREIGN KEY ("COD_CALIFICACION_TIPO") REFERENCES "CALIFICACIONES_TIPOS" ("COD_CALIFICACION_TIPO");
+ALTER TABLE "CALIFICACIONES" ADD FOREIGN KEY ("COD_USUARIO_CALIFICADO") REFERENCES "USUARIOS" ("COD_USUARIO");
+ALTER TABLE "CALIFICACIONES" ADD FOREIGN KEY ("COD_USUARIO_CALIFICADOR") REFERENCES "USUARIOS" ("COD_USUARIO");
+
+-- ----------------------------
+-- Foreign Key structure for table "COMUNAS"
+-- ----------------------------
+ALTER TABLE "COMUNAS" ADD FOREIGN KEY ("COD_PROVINCIA") REFERENCES "PROVINCIAS" ("COD_PROVINCIA");
+
+-- ----------------------------
+-- Foreign Key structure for table "ESTACIONAMIENTOS"
+-- ----------------------------
+ALTER TABLE "ESTACIONAMIENTOS" ADD FOREIGN KEY ("COD_ESTACIONAMIENTO_ESTADO") REFERENCES "ESTACIONAMIENTO_ESTADOS" ("COD_ESTACIONAMIENTO_ESTADO");
+ALTER TABLE "ESTACIONAMIENTOS" ADD FOREIGN KEY ("COD_USUARIO") REFERENCES "USUARIOS" ("COD_USUARIO");
+
+-- ----------------------------
+-- Foreign Key structure for table "PROVINCIAS"
+-- ----------------------------
+ALTER TABLE "PROVINCIAS" ADD FOREIGN KEY ("COD_REGION") REFERENCES "REGIONES" ("COD_REGION");
+
+-- ----------------------------
+-- Foreign Key structure for table "TARJETAS"
+-- ----------------------------
+ALTER TABLE "TARJETAS" ADD FOREIGN KEY ("COD_BANCO") REFERENCES "BANCOS" ("COD_BANCO");
+ALTER TABLE "TARJETAS" ADD FOREIGN KEY ("COD_TARJETA_TIPO") REFERENCES "TARJETA_TIPOS" ("COD_TARJETA_TIPO");
+ALTER TABLE "TARJETAS" ADD FOREIGN KEY ("COD_USUARIO") REFERENCES "USUARIOS" ("COD_USUARIO");
+
+-- ----------------------------
+-- Foreign Key structure for table "TRANSACCIONES"
+-- ----------------------------
+ALTER TABLE "TRANSACCIONES" ADD FOREIGN KEY ("COD_ARRIENDO") REFERENCES "ARRIENDOS" ("COD_ARRIENDO");
+ALTER TABLE "TRANSACCIONES" ADD FOREIGN KEY ("NUMERO_TARJETA_ORIGEN") REFERENCES "TARJETAS" ("COD_TARJETA");
+ALTER TABLE "TRANSACCIONES" ADD FOREIGN KEY ("NUMERO_TARJETA_DESTINO") REFERENCES "TARJETAS" ("COD_TARJETA");
+
+-- ----------------------------
+-- Foreign Key structure for table "USUARIOS"
+-- ----------------------------
+ALTER TABLE "USUARIOS" ADD FOREIGN KEY ("COD_COMUNA") REFERENCES "COMUNAS" ("COD_COMUNA");
+ALTER TABLE "USUARIOS" ADD FOREIGN KEY ("COD_USUARIO_TIPO") REFERENCES "USUARIO_TIPOS" ("COD_USUARIO_TIPO");
+
+-- ----------------------------
+-- Foreign Key structure for table "VEHICULOS"
+-- ----------------------------
+ALTER TABLE "VEHICULOS" ADD FOREIGN KEY ("COD_USUARIO") REFERENCES "USUARIOS" ("COD_USUARIO");
+ALTER TABLE "VEHICULOS" ADD FOREIGN KEY ("COD_VEHICULO_MARCA") REFERENCES "VEHICULO_MARCAS" ("COD_VEHICULO_MARCA");
