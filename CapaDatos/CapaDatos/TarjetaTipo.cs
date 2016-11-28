@@ -13,7 +13,13 @@ namespace CapaDatos
         public string nombre_tarjeta_tipo { get; set; }
         public List<Tarjeta> tarjetas { get; set; }
 
-        //public TarjetaTipo() { }
+        private TarjetaTipo llenarObjeto(OracleDataReader dr)
+        {
+            TarjetaTipo tarjetaTipo = new TarjetaTipo();
+            tarjetaTipo.cod_tarjeta_tipo = Int32.Parse(dr["cod_tarjeta_tipo"].ToString());
+            tarjetaTipo.nombre_tarjeta_tipo = dr["nombre_tarjeta_tipo"].ToString();
+            return tarjetaTipo;
+        }
 
         public List<TarjetaTipo> buscarTodos(bool llenaSelect = false)
         { 
@@ -22,18 +28,31 @@ namespace CapaDatos
             string query = "select * from TARJETA_TIPOS";
             OracleDataReader dr = conexion.consultar(query);
             while(dr.Read()){
-                TarjetaTipo tarjetaTipo = new TarjetaTipo();
-                tarjetaTipo.cod_tarjeta_tipo = Int32.Parse(dr["cod_tarjeta_tipo"].ToString());
-                tarjetaTipo.nombre_tarjeta_tipo = dr["nombre_tarjeta_tipo"].ToString();
+                TarjetaTipo tarjetaTipo = this.llenarObjeto(dr);
                 tipoTarjetas.Add(tarjetaTipo);
             }
-            conexion.cerrarConexion();
+            dr.Close();
 
             if (llenaSelect)
             {
                 tipoTarjetas.Insert(0, new TarjetaTipo { cod_tarjeta_tipo=0, nombre_tarjeta_tipo="Seleccione"});
             }
             return tipoTarjetas;
+        }
+
+        public TarjetaTipo buscarPorPk(int tarjetaTipoId)
+        {
+            TarjetaTipo tipo = new TarjetaTipo();
+            Conexion conexion = new Conexion();
+            string query = "select * from TARJETA_TIPOS where cod_tarjeta_tipo = " + tarjetaTipoId;
+
+            OracleDataReader dr = conexion.consultar(query);
+            if (dr.Read())
+            {
+                tipo = this.llenarObjeto(dr);
+            }
+            dr.Close();
+            return tipo;
         }
     }
 }

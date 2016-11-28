@@ -12,6 +12,14 @@ namespace CapaDatos
         public int cod_usuario_tipo { get; set; }
         public string nombre_usuario_tipo { get; set; }
 
+        private UsuarioTipo llenarObjeto(OracleDataReader dr)
+        {
+            UsuarioTipo tipo = new UsuarioTipo();
+            tipo.cod_usuario_tipo = Int32.Parse(dr["cod_usuario_tipo"].ToString());
+            tipo.nombre_usuario_tipo = dr["nombre_usuario_tipo"].ToString();
+            return tipo;
+        }
+
         public List<UsuarioTipo> buscarTodos(Boolean llenarCombo = false)
         {
             List<UsuarioTipo> tipos = new List<UsuarioTipo>();
@@ -20,12 +28,10 @@ namespace CapaDatos
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
-                UsuarioTipo tipo = new UsuarioTipo();
-                tipo.cod_usuario_tipo = Int32.Parse(dr["cod_usuario_tipo"].ToString());
-                tipo.nombre_usuario_tipo = dr["nombre_usuario_tipo"].ToString();
+                UsuarioTipo tipo = this.llenarObjeto(dr);
                 tipos.Add(tipo);
             }
-            conexion.cerrarConexion();
+            dr.Close();
             if (llenarCombo)
             {
                 tipos.Insert(0, new UsuarioTipo { cod_usuario_tipo = 0, nombre_usuario_tipo = "Seleccione"});

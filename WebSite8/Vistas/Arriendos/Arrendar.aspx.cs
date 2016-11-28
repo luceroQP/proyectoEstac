@@ -22,19 +22,11 @@ public partial class Arrendar : System.Web.UI.Page
             Usuario usuario = (Usuario)Session["usuario"];
             if (!IsPostBack)
             {
-                this.llenarEstacionamientos(usuario.cod_usuario);
+                Session["estacionamientos"] = new Estacionamiento().estacionamientosDisponibles(codUsuarioExcluir: usuario.cod_usuario, soloActivos: true, llenaCombo: false, incluirAsocc: true);
                 this.llenarVehiculos(usuario.cod_usuario);
                 this.llenarHorasMinutos();
             }
         }
-    }
-
-    private void llenarEstacionamientos(int codUsuario = 0)
-    {
-        dpd_estacionamiento.DataSource = new Estacionamiento().estacionamientosDisponibles(codUsuario, true, true);
-        dpd_estacionamiento.DataTextField = "direccion";
-        dpd_estacionamiento.DataValueField = "cod_estacionamiento";
-        dpd_estacionamiento.DataBind();
     }
 
     private void llenarVehiculos(int codUsuario = 0)
@@ -66,58 +58,54 @@ public partial class Arrendar : System.Web.UI.Page
         dpd_minuto_inicio.DataBind();
         dpd_minuto_fin.DataBind();
     }
-
-    protected void dpd_tipo_disponibilidad_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        switch (dpd_tipo_disponibilidad.SelectedValue)
-        {
-            case "0":
-                divInicioArriendo.Visible = false;
-                divFinArriendo.Visible = false;
-                break;
-            case "1":
-                divInicioArriendo.Visible = false;
-                divFinArriendo.Visible = false;
-                break;
-            case "2":
-                divInicioArriendo.Visible = true;
-                divFinArriendo.Visible = true;
-                break;
-            default: 
-                break;
-        }
-    }
-    protected void dpd_estacionamiento_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        string estacionamientoSeleccionado = dpd_estacionamiento.SelectedValue;
-        if (!estacionamientoSeleccionado.Equals("") || !estacionamientoSeleccionado.Equals("0"))
-        {
-            divDatosEstacionamiento.Visible = true;
-            Session["estacionamiento"] = new Estacionamiento().buscarPorPk(Int32.Parse(estacionamientoSeleccionado), true);
-        }
-        else
-        {
-            divDatosEstacionamiento.Visible = false;
-            Session["estacionamiento"] = null;
-        }
-    }
+    
     protected void Button1_Click(object sender, EventArgs e)
     {
         Arriendo arriendo = new Arriendo();
-        Estacionamiento estacionamiento = (Estacionamiento)Session["estacionamiento"];
 
-        arriendo.cod_estacionamiento = Int32.Parse(dpd_estacionamiento.SelectedValue);
+        arriendo.cod_estacionamiento = Int32.Parse(txt_estacionamiento_id.Text);
         arriendo.cod_vehiculo = Int32.Parse(dpd_vehiculo.SelectedValue);
         arriendo.horas_usadas = Int32.Parse(txt_horas_usadas.Text);
 
-        string hora_inicio = dpd_hora_inicio.SelectedValue + ":" + dpd_minuto_inicio.SelectedValue + ":00";
-        string hora_fin = dpd_hora_fin.SelectedValue + ":" + dpd_minuto_fin.SelectedValue + ":00";
+        string horaInicio = this.normalizeTimeFormat(dpd_hora_inicio.SelectedValue);
+        string minutoInicio = this.normalizeTimeFormat(dpd_minuto_inicio.SelectedValue);
+        string horaFin = this.normalizeTimeFormat(dpd_hora_fin.SelectedValue);
+        string minutoFin = this.normalizeTimeFormat(dpd_minuto_fin.SelectedValue);
 
-        arriendo.inicio_arriendo = Convert.ToDateTime("2000-01-01 " + hora_inicio);
-        arriendo.fin_arriendo = Convert.ToDateTime("2000-01-01 " + hora_fin);
+        string fecha_inicio = Request.Form[fecha_inicio_arriendo.UniqueID] + " " + horaInicio + ":" + minutoInicio + ":00";
+        string fecha_fin = Request.Form[fecha_termino_arriendo.UniqueID] + " " + horaFin + ":" + minutoFin + ":00";
 
-        if (arriendo.guardar(arriendo) > 0)
+        arriendo.inicio_arriendo = DateTime.ParseExact(fecha_inicio, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        arriendo.fin_arriendo = DateTime.ParseExact(fecha_fin, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+        int codArriendoGuardado = arriendo.guardar(arriendo);
+        if (codArriendoGuardado > 0)
         {
+            Estacionamiento estacionamiento = new Estacionamiento();
+            estacionamiento.cod_estacionamiento = arriendo.cod_estacionamiento;
+            estacionamiento.cod_estacionamiento_estado = 1;
+            estacionamiento.actualizar(estacionamiento);
+
+            Arriendo arriendoGuardado = new Arriendo().datosPagar(codArriendoGuardado);
+
+            /** Transacción por defecto **/
+            Transaccion transaccion = new Transaccion();
+            transaccion.cod_arriendo = codArriendoGuardado;
+            transaccion.monto = (arriendoGuardado.Estacionamiento.valor_hora * arriendoGuardado.horas_usadas);
+            transaccion.numero_tarjeta_origen = arriendoGuardado.Vehiculo.Usuario.tarjeta.cod_tarjeta;
+            transaccion.numero_tarjeta_destino = arriendoGuardado.Estacionamiento.Usuario.tarjeta.cod_tarjeta;
+            transaccion.guardar(transaccion);
+
+            /** Calificación por defecto **/
+            Calificacion calificacion = new Calificacion();
+            calificacion.cod_arriendo = codArriendoGuardado;
+            calificacion.cod_usuario_calificado = arriendoGuardado.Estacionamiento.Usuario.cod_usuario;
+            calificacion.cod_usuario_calificador = arriendoGuardado.Vehiculo.Usuario.cod_usuario;
+            calificacion.nota = 0;
+            calificacion.observacion = "";
+            calificacion.cod_calificacion_tipo = 1;
+            calificacion.guardar(calificacion);
+
             Session["mensaje"] = new Dictionary<string, string>() { 
                 {"texto", "Arriendo ingresado correctamente."},
                 {"clase","alert-success"}
@@ -131,5 +119,14 @@ public partial class Arrendar : System.Web.UI.Page
                 {"clase","alert-danger"}
             };
         }
+    }
+
+    private string normalizeTimeFormat(string time)
+    {
+        if (Int32.Parse(time) < 10)
+        {
+            time = "0" + time;
+        }
+        return time;
     }
 }

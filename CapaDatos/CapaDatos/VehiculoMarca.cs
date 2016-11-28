@@ -12,6 +12,14 @@ namespace CapaDatos
         public int cod_vehiculo_marca { get; set; }
         public string nombre_vehiculo_marca { get; set; }
 
+        private VehiculoMarca llenarObjeto(OracleDataReader dr)
+        {
+            VehiculoMarca marca = new VehiculoMarca();
+            marca.cod_vehiculo_marca = Int32.Parse(dr["cod_vehiculo_marca"].ToString());
+            marca.nombre_vehiculo_marca = dr["nombre_vehiculo_marca"].ToString();
+            return marca;
+        }
+
         public List<VehiculoMarca> buscarTodos(bool llenarCombo = false)
         {
             List<VehiculoMarca> marcas = new List<VehiculoMarca>();
@@ -21,12 +29,10 @@ namespace CapaDatos
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
-                VehiculoMarca marca = new VehiculoMarca();
-                marca.cod_vehiculo_marca = Int32.Parse(dr["cod_vehiculo_marca"].ToString());
-                marca.nombre_vehiculo_marca = dr["nombre_vehiculo_marca"].ToString();
+                VehiculoMarca marca = this.llenarObjeto(dr);
                 marcas.Add(marca);
             }
-            conexion.cerrarConexion();
+            dr.Close();
 
             if (llenarCombo)
             {

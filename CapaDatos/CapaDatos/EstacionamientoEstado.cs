@@ -13,6 +13,14 @@ namespace CapaDatos
         public string nombre_estacionamiento_estado { get; set; }
         //public List<Estacionamiento> estacionamientos { get; set; }
 
+        private EstacionamientoEstado llenarObjeto(OracleDataReader dr)
+        {
+            EstacionamientoEstado estado = new EstacionamientoEstado();
+            estado.cod_estacionamiento_estado = Int32.Parse(dr["cod_estacionamiento_estado"].ToString());
+            estado.nombre_estacionamiento_estado = dr["nombre_estacionamiento_estado"].ToString();
+            return estado;
+        }
+
         public EstacionamientoEstado buscarPorPk(int cod)
         {
             EstacionamientoEstado estacionamientoEstado = new EstacionamientoEstado();
@@ -21,10 +29,9 @@ namespace CapaDatos
             OracleDataReader dr = conexion.consultar(query);
             if (dr.Read())
             {
-                estacionamientoEstado.cod_estacionamiento_estado = Int32.Parse(dr["cod_estacionamiento_estado"].ToString());
-                estacionamientoEstado.nombre_estacionamiento_estado = dr["nombre_estacionamiento_estado"].ToString();
+                estacionamientoEstado = this.llenarObjeto(dr);
             }
-            conexion.cerrarConexion();
+            dr.Close();
             return estacionamientoEstado;
         }
 
@@ -36,12 +43,10 @@ namespace CapaDatos
 
             OracleDataReader dr = conexion.consultar(query);
             while(dr.Read()){
-                EstacionamientoEstado estado = new EstacionamientoEstado();
-                estado.cod_estacionamiento_estado = Int32.Parse(dr["cod_estacionamiento_estado"].ToString());
-                estado.nombre_estacionamiento_estado = dr["nombre_estacionamiento_estado"].ToString();
+                EstacionamientoEstado estado = this.llenarObjeto(dr);
                 estados.Add(estado);
             }
-            conexion.cerrarConexion();
+            dr.Close();
             if (llenarCombo)
             {
                 estados.Insert(0, new EstacionamientoEstado { cod_estacionamiento_estado=0,nombre_estacionamiento_estado="Seleccione"});

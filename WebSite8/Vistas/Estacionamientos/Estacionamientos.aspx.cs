@@ -17,7 +17,7 @@ public partial class Estacionamientos : System.Web.UI.Page
         if (!IsPostBack)
         {
             Usuario usuario = (Usuario)Session["usuario"];
-            gv_estacionamientos.DataSource = new Estacionamiento().buscarTodos(usuario.cod_usuario, true);
+            gv_estacionamientos.DataSource = new Estacionamiento().buscarTodos(usuario.cod_usuario, true, true);
             gv_estacionamientos.DataBind();
         }
     }
@@ -40,5 +40,25 @@ public partial class Estacionamientos : System.Web.UI.Page
                 //Response.Redirect("~/Vistas/Estacionamientos/EstacionamientoEliminar.aspx");
                 break;
         }
+    }
+
+    protected Boolean mostrarBtnHabilitado(Arriendo arriendo)
+    {
+        Boolean tieneArriendoActivo = false;
+        if (arriendo.cod_arriendo == 0)
+        {
+            tieneArriendoActivo = true;
+        }
+        return tieneArriendoActivo;
+    }
+
+    protected Boolean mostrarBtnDeshabilitado(Arriendo arriendo)
+    {
+        Boolean tieneArriendoActivo = false;
+        if (arriendo.cod_arriendo != 0)
+        {
+            tieneArriendoActivo = true;
+        }
+        return tieneArriendoActivo;
     }
 }

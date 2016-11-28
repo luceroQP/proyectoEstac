@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CapaDatos;
+using System.Globalization;
 
 public partial class EstacionamientoEditar : System.Web.UI.Page
 {
@@ -34,6 +35,8 @@ public partial class EstacionamientoEditar : System.Web.UI.Page
         estacionamiento.direccion = txt_direccion.Text;
         estacionamiento.valor_hora = Int32.Parse(txt_valor_hora.Text);
         estacionamiento.capacidad = Int32.Parse(txt_capacidad.Text);
+        estacionamiento.latitud = Double.Parse(txt_latitud.Text, CultureInfo.InvariantCulture);
+        estacionamiento.longitud = Double.Parse(txt_longitud.Text, CultureInfo.InvariantCulture);
 
         if (estacionamiento.actualizar(estacionamiento))
         {

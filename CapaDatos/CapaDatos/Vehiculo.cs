@@ -16,12 +16,24 @@ namespace CapaDatos
         public int cod_usuario { get; set; }
         public int cod_vehiculo_marca { get; set; }
         public VehiculoMarca vehiculoMarca { get; set; }
+        public Usuario Usuario { get; set; }
+
+        private Vehiculo llenarObjeto(OracleDataReader dr)
+        {
+            Vehiculo vehiculo = new Vehiculo();
+            vehiculo.cod_vehiculo = Int32.Parse(dr["cod_vehiculo"].ToString());
+            vehiculo.patente = dr["patente"].ToString();
+            vehiculo.modelo = dr["modelo"].ToString();
+            vehiculo.estado = Int32.Parse(dr["estado"].ToString());
+            vehiculo.cod_usuario = Int32.Parse(dr["cod_usuario"].ToString());
+            vehiculo.cod_vehiculo_marca = Int32.Parse(dr["cod_vehiculo_marca"].ToString());
+            return vehiculo;
+        }
 
         public int guardar(Vehiculo vehiculo)
         {
             Conexion conexion = new Conexion();
             int id = conexion.getSequenceValor("VEHICULOS_SEQ", 1);
-            conexion.cerrarConexion();
 
             string query = "insert into VEHICULOS (cod_vehiculo, patente, modelo, estado,cod_usuario,cod_vehiculo_marca) values (";
             query += id + ",";
@@ -32,7 +44,6 @@ namespace CapaDatos
             query += vehiculo.cod_vehiculo_marca + ")";
 
             int filasIngresadas = conexion.ingresar(query);
-            conexion.cerrarConexion();
             if (filasIngresadas > 0)
             {
                 return id;
@@ -53,17 +64,10 @@ namespace CapaDatos
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
-                Vehiculo vehiculo = new Vehiculo();
-                vehiculo.cod_vehiculo = Int32.Parse(dr["cod_vehiculo"].ToString());
-                vehiculo.patente = dr["patente"].ToString();
-                vehiculo.modelo = dr["modelo"].ToString();
-                vehiculo.estado = Int32.Parse(dr["estado"].ToString());
-                vehiculo.cod_usuario = Int32.Parse(dr["cod_usuario"].ToString());
-                vehiculo.cod_vehiculo_marca = Int32.Parse(dr["cod_vehiculo_marca"].ToString());
-
+                Vehiculo vehiculo = this.llenarObjeto(dr);
                 vehiculos.Add(vehiculo);
             }
-            conexion.cerrarConexion();
+            dr.Close();
             return vehiculos;
         }
 
@@ -76,16 +80,10 @@ namespace CapaDatos
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
-                Vehiculo vehiculo = new Vehiculo();
-                vehiculo.cod_vehiculo = Int32.Parse(dr["cod_vehiculo"].ToString());
-                vehiculo.patente = dr["patente"].ToString();
-                vehiculo.modelo = dr["modelo"].ToString();
-                vehiculo.estado = Int32.Parse(dr["estado"].ToString());
-                vehiculo.cod_usuario = Int32.Parse(dr["cod_usuario"].ToString());
-                vehiculo.cod_vehiculo_marca = Int32.Parse(dr["cod_vehiculo_marca"].ToString());
+                Vehiculo vehiculo = this.llenarObjeto(dr);
                 vehiculos.Add(vehiculo);
             }
-            conexion.cerrarConexion();
+            dr.Close();
 
             if (llenaCombo)
             {
@@ -94,7 +92,7 @@ namespace CapaDatos
             return vehiculos;
         }
 
-        public Vehiculo buscarPorPK(int codVehiculo)
+        public Vehiculo buscarPorPK(int codVehiculo, Boolean incluirAsoc = false)
         {
             Vehiculo vehiculo = new Vehiculo();
             Conexion conexion = new Conexion();
@@ -103,13 +101,13 @@ namespace CapaDatos
             OracleDataReader dr = conexion.consultar(query);
             if (dr.Read())
             {
-                vehiculo.cod_vehiculo = Int32.Parse(dr["cod_vehiculo"].ToString());
-                vehiculo.patente = dr["patente"].ToString();
-                vehiculo.modelo = dr["modelo"].ToString();
-                vehiculo.estado = Int32.Parse(dr["estado"].ToString());
-                vehiculo.cod_usuario = Int32.Parse(dr["cod_usuario"].ToString());
-                vehiculo.cod_vehiculo_marca = Int32.Parse(dr["cod_vehiculo_marca"].ToString());
+                vehiculo = this.llenarObjeto(dr);
+
+                if (incluirAsoc){
+                    vehiculo.Usuario = new Usuario().buscarPorPK(vehiculo.cod_usuario, true);
+                }
             }
+            dr.Close();
             return vehiculo;
         }
         public Boolean actualizar(Vehiculo vehiculo)
@@ -124,7 +122,6 @@ namespace CapaDatos
             query += " where COD_VEHICULO = '" + vehiculo.cod_vehiculo + "'";
 
             int filasActualizadas = conexion.ingresar(query);
-            conexion.cerrarConexion();
             if (filasActualizadas > 0)
             {
                 guarda = true;

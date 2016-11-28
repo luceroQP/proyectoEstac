@@ -9,7 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link href="/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="/css/normalize.4.1.1.css" rel="stylesheet"/>
+        <link href="/css/jquery-ui.css" rel="stylesheet"/>
         <link href="/css/estiloGeneral.css" rel="stylesheet"/>
+        
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -18,6 +20,8 @@
         <![endif]-->
         <script src="/js/jquery.1.12.4.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery-ui.1.12.1.js"></script>
+        
         <style type="text/css">
             v\:* {
                 behavior:url(#default#VML);
@@ -45,8 +49,9 @@
                                     if (Session["usuario"] != null){
                                         usuario = (Usuario)Session["usuario"];
                                         %>
-                                            Bienvenido! <% Response.Write(usuario.nombres + " " + usuario.apellido_pat); %> |
+                                            Bienvenido! <%=(usuario.nombres + " " + usuario.apellido_pat)%> |
                                             <asp:HyperLink class="hiperlinks" ID="HyperLink7" runat="server" NavigateUrl="~/Vistas/Usuarios/CerrarSesion.aspx">Cerrar Sesión</asp:HyperLink>
+                                            <asp:HyperLink class="hiperlinks" ID="HyperLink11" runat="server" NavigateUrl="~/Vistas/Usuarios/MiPerfil.aspx">Mi perfil</asp:HyperLink>
                                         <%
                                     }else{
                                         %>
@@ -66,12 +71,36 @@
                             <%
                                 if (Session["usuario"] != null)
                                 {
-                                    %>
-                                        <asp:HyperLink class="hiperlinks" ID="HyperLink3" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">Tarjetas</asp:HyperLink>
-                                        <asp:HyperLink class="hiperlinks" ID="HyperLink4" runat="server" NavigateUrl="~/Vistas/Vehiculos/Vehiculos.aspx">Vehículos</asp:HyperLink>
-                                        <asp:HyperLink class="hiperlinks" ID="HyperLink5" runat="server" NavigateUrl="~/Vistas/Estacionamientos/Estacionamientos.aspx">Estacionamientos</asp:HyperLink>
-                                        <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arriendos.aspx">Arriendos</asp:HyperLink>
-                                    <%
+                                    usuario = (Usuario)Session["usuario"];
+
+                                    switch (usuario.cod_usuario_tipo){
+                                        case 1:
+                                            //Administrador
+                                            %>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink10" runat="server" NavigateUrl="~/Vistas/Usuarios/ListadoUsuarios.aspx">Usuarios</asp:HyperLink>
+                                            <%
+                                            break;
+                                        case 2:
+                                            //Dueño
+                                            %>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink3" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">Tarjetas</asp:HyperLink>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink5" runat="server" NavigateUrl="~/Vistas/Estacionamientos/Estacionamientos.aspx">Estacionamientos</asp:HyperLink>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink16" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">Transacciones</asp:HyperLink>
+                                            <%
+                                            break;
+                                        case 3: 
+                                            //Cliente
+                                            %>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink14" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">Tarjetas</asp:HyperLink>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink4" runat="server" NavigateUrl="~/Vistas/Vehiculos/Vehiculos.aspx">Vehículos</asp:HyperLink>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arriendos.aspx">Arriendos Activos</asp:HyperLink>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink13" runat="server" NavigateUrl="~/Vistas/Arriendos/HistorialArriendos.aspx">Historial Arriendos</asp:HyperLink>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink15" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">Transacciones</asp:HyperLink>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink9" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoPendientes.aspx">Calificaciones Pendientes</asp:HyperLink>
+                                                <asp:HyperLink class="hiperlinks" ID="HyperLink12" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoRealizadas.aspx">Calificaciones Realizadas</asp:HyperLink>
+                                            <%
+                                            break;
+                                    }
                                 }
                             %>
                         </div>

@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <h4 class="form-signin-heading">Por Favor, ingrese sus datos</h4>
+        <h4 class="form-signin-heading">Ingrese sus datos</h4>
         <div class="form-group">
             <asp:Label ID="Label1" runat="server" Text="Rut"></asp:Label>
             <asp:TextBox 

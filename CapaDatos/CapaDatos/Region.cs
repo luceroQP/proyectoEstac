@@ -13,6 +13,14 @@ namespace CapaDatos
         public string nombre_region { get; set; }
         public List<Provincia> provincias { get; set; }
 
+        private CapaDatos.Region llenarObjeto(OracleDataReader dr)
+        {
+            CapaDatos.Region region = new CapaDatos.Region();
+            region.cod_region = Int32.Parse(dr["cod_region"].ToString());
+            region.nombre_region = dr["nombre_region"].ToString();
+            return region;
+        }
+
         public List<CapaDatos.Region> buscarTodos(bool llenarCombo = false)
         {
             List<CapaDatos.Region> regiones = new List<CapaDatos.Region>();
@@ -22,18 +30,31 @@ namespace CapaDatos
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
-                CapaDatos.Region region = new CapaDatos.Region();
-                region.cod_region = Int32.Parse(dr["cod_region"].ToString());
-                region.nombre_region = dr["nombre_region"].ToString();
+                CapaDatos.Region region = this.llenarObjeto(dr);
                 regiones.Add(region);
             }
-            conexion.cerrarConexion();
+            dr.Close();
 
             if (llenarCombo)
             {
                 regiones.Insert(0, new CapaDatos.Region { cod_region = 0, nombre_region = "Seleccione" });
             }
             return regiones;
+        }
+
+        public CapaDatos.Region buscarPorPK(int codRegion)
+        {
+            CapaDatos.Region region = new CapaDatos.Region();
+            Conexion conexion = new Conexion();
+            string query = "select * from REGIONES where COD_REGION =" + codRegion;
+
+            OracleDataReader dr = conexion.consultar(query);
+            if (dr.Read())
+            {
+                region = this.llenarObjeto(dr);
+            }
+            dr.Close();
+            return region;
         }
     }
 }

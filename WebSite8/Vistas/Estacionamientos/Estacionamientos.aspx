@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Estacionamientos.aspx.cs" Inherits="Estacionamientos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <script>
+        $("body").on("click", ".disabled", function (e) {
+            return false;
+        })
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Vistas/Estacionamientos/EstacionamientoAgregar.aspx">Agregar Estacionamiento</asp:HyperLink>
@@ -12,27 +17,60 @@
             <asp:BoundField AccessibleHeaderText="ColCapacidad" DataField="capacidad" HeaderText="Capacidad" />
             <asp:BoundField AccessibleHeaderText="ColExistencias" DataField="existencias" HeaderText="Existencias" />
             <asp:BoundField AccessibleHeaderText="ColEstado" DataField="EstacionamientoEstado.nombre_estacionamiento_estado" HeaderText="Estado" />
-            <asp:ButtonField 
-                AccessibleHeaderText="ColBtnCambiarEstado" 
-                ButtonType="Button" 
-                CommandName="CambiarEstado" 
-                Text="Cambiar Estado"
-                ControlStyle-CssClass="btn btn-xs btn-success"
-            />
-            <asp:ButtonField 
-                AccessibleHeaderText="ColBtnEditar" 
-                ButtonType="Button" 
-                CommandName="Editar" 
-                Text="Editar" 
-                ControlStyle-CssClass="btn btn-xs btn-primary"
-            />
-            <asp:ButtonField 
-                AccessibleHeaderText="ColBtnEliminar" 
-                ButtonType="Button" 
-                CommandName="Eliminar" 
-                Text="Eliminar" 
-                ControlStyle-CssClass="btn btn-xs btn-danger"
-            />
+            <asp:TemplateField>
+                <ItemTemplate>
+                        <asp:Button 
+                            runat="server"
+                            Text="Cambiar Disp."
+                            CssClass="btn btn-xs btn-success disabled"
+                            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                            Visible='<%# mostrarBtnDeshabilitado((Arriendo)Eval("Arriendo")) %>' 
+                            onClientclick="return false;"/>
+                    <asp:Button 
+                            runat="server"
+                            Text="Cambiar Disp."
+                            CssClass="btn btn-xs btn-success"
+                            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                            Visible='<%# mostrarBtnHabilitado((Arriendo)Eval("Arriendo")) %>' 
+                            CommandName="CambiarEstado"/>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField>
+                <ItemTemplate>
+                        <asp:Button 
+                            runat="server"
+                            Text="Editar"
+                            CssClass="btn btn-xs btn-primary disabled"
+                            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                            Visible='<%# mostrarBtnDeshabilitado((Arriendo)Eval("Arriendo")) %>' 
+                            onClientclick="return false;"/>
+                    <asp:Button 
+                            runat="server"
+                            Text="Editar"
+                            CssClass="btn btn-xs btn-primary"
+                            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                            Visible='<%# mostrarBtnHabilitado((Arriendo)Eval("Arriendo")) %>' 
+                            CommandName="Editar"/>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField>
+                <ItemTemplate>
+                        <asp:Button 
+                            runat="server"
+                            Text="Eliminar"
+                            CssClass="btn btn-xs btn-danger disabled"
+                            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                            Visible='<%# mostrarBtnDeshabilitado((Arriendo)Eval("Arriendo")) %>' 
+                            onClientclick="return false;"/>
+                    <asp:Button 
+                            runat="server"
+                            Text="Eliminar"
+                            CssClass="btn btn-xs btn-danger"
+                            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
+                            Visible='<%# mostrarBtnHabilitado((Arriendo)Eval("Arriendo")) %>' 
+                            CommandName="Eliminar"/>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
 </asp:Content>

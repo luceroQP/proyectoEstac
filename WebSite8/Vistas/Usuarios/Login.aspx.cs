@@ -28,9 +28,6 @@ public partial class _Default : System.Web.UI.Page
                 {"texto", "<strong>Atención!</strong> Usuario y/o contraseña erróneos"},
                 {"clase","alert-danger"}
             };
-            //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Usuario y/o contraseña erróneos');", true);
-            //txtUsuario.Text = "";
-            //txtPassword.Text = "";
         }
     }
 }
