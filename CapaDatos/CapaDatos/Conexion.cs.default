@@ -32,7 +32,7 @@ namespace CapaDatos
             cmd.Connection = this.conexion;
             cmd.CommandText = query;
             cmd.CommandType = CommandType.Text;
-            OracleDataReader dr = cmd.ExecuteReader();
+            OracleDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             return dr;
         }
 
@@ -45,6 +45,7 @@ namespace CapaDatos
             cmd.CommandText = query;
             cmd.CommandType = CommandType.Text;
             lineasAfectadas = cmd.ExecuteNonQuery();
+			this.conexion.Close();
             return lineasAfectadas;
         }
 
@@ -69,25 +70,13 @@ namespace CapaDatos
             {
                 valor = Int32.Parse(dr[0].ToString());
             }
+			dr.Close();
             return valor;
         }
 
         public void cerrarConexion()
         {
             this.conexion.Close();
-        }
-
-        public Object buscarPorId(string tabla, string campoId, string valorId)
-        {
-            Object resultado = new Object();
-            string query = "select * from " + tabla + " where " + campoId + "=" + valorId;
-            OracleDataReader dr = this.consultar(query);
-            if (dr.Read())
-            {
-                resultado = dr;
-            }
-            this.cerrarConexion();
-            return resultado;
         }
     }
 }
