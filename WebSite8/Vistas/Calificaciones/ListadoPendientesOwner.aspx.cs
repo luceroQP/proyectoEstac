@@ -6,10 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using CapaDatos;
 
-public partial class Vistas_Calificaciones_ListadoPendientes : System.Web.UI.Page
+public partial class Vistas_Calificaciones_ListadoPendienteOwner : System.Web.UI.Page
 {
-    protected string urlBack = "~/Vistas/Calificaciones/ListadoPendientes.aspx";
-    
+    protected string urlBack = "~/Vistas/Calificaciones/ListadoPendientesOwner.aspx";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["usuario"] == null)
@@ -19,11 +19,10 @@ public partial class Vistas_Calificaciones_ListadoPendientes : System.Web.UI.Pag
         else
         {
             Usuario usuario = (Usuario)Session["usuario"];
-            gv_calificacionesPendientes.DataSource = new Calificacion().calificacionesPendientes(usuario.cod_usuario);
+            gv_calificacionesPendientes.DataSource = new Calificacion().calificacionesPendientes(usuario.cod_usuario, "Dueño");
             gv_calificacionesPendientes.DataBind();
         }
     }
-
     protected void gv_calificacionesPendientes_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         int rowIndex = Convert.ToInt32(e.CommandArgument);
@@ -71,7 +70,9 @@ public partial class Vistas_Calificaciones_ListadoPendientes : System.Web.UI.Pag
                     {"texto", "Calificación realizada correctamente."},
                     {"clase","alert-success"}
             };
-        }else{
+        }
+        else
+        {
             Session["mensaje"] = new Dictionary<string, string>() { 
                     {"texto", "Error al registrar la Calificación."},
                     {"clase","alert-danger"}

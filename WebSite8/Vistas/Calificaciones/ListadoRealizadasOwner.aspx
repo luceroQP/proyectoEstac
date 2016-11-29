@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ListadoRealizadas.aspx.cs" Inherits="Vistas_Calificaciones_ListadoRealizadas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ListadoRealizadasOwner.aspx.cs" Inherits="Vistas_Calificaciones_ListadoRealizadasOwner" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script>
@@ -10,19 +10,19 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-     <asp:GridView ID="gv_calificacionesRealizadas" runat="server" OnRowCommand="gv_calificacionesRealizadas_RowCommand"  AutoGenerateColumns="False" CssClass="table table-hover table-bordered" DataKeyNames="cod_calificacion">
+    <asp:GridView ID="gv_calificacionesRealizadas" runat="server" OnRowCommand="gv_calificacionesRealizadas_RowCommand"  AutoGenerateColumns="False" CssClass="table table-hover table-bordered" DataKeyNames="cod_calificacion">
         <Columns>
             <asp:BoundField AccessibleHeaderText="ColCodCalificacion" DataField="cod_calificacion" HeaderText="CodArriendo" Visible="false"/>
             <asp:BoundField AccessibleHeaderText="ColEstacionamiento" DataField="Arriendo.Estacionamiento.direccion" HeaderText="Estacionamiento" />
-            <asp:BoundField AccessibleHeaderText="ColUsuario" DataField="Arriendo.Estacionamiento.Usuario.nombre_completo" HeaderText="Dueño" />
-            <asp:BoundField AccessibleHeaderText="ColVehiculo" DataField="Arriendo.Vehiculo.patente" HeaderText="Vehiculo" />
+            <asp:BoundField AccessibleHeaderText="ColVehiculo" DataField="Arriendo.Vehiculo.patente" HeaderText="Vehículo" />
+            <asp:BoundField AccessibleHeaderText="ColUsuario" DataField="Arriendo.Vehiculo.Usuario.nombre_completo" HeaderText="Dueño Vehículo" />
             <asp:BoundField AccessibleHeaderText="ColHorasUsadas" DataField="Arriendo.horas_usadas" HeaderText="Horas" />
             <asp:ButtonField 
                 AccessibleHeaderText="colBtnVer" 
                 ButtonType="Button" 
                 CommandName="Ver"
                 ControlStyle-CssClass="btn btn-xs btn-primary"
-                Text="Ver" />
+                Text="Ver Calificación" />
         </Columns>
     </asp:GridView>
     <%
@@ -99,4 +99,3 @@
             }
         %>
 </asp:Content>
-

@@ -142,5 +142,24 @@ namespace CapaDatos
             dr.Close();
             return tarjeta;
         }
+
+        public Boolean validarSaldoTarjeta(int codUsuario)
+        {
+            Boolean tieneSaldo = false;
+            Tarjeta tarjeta = new Tarjeta();
+            Conexion conexion = new Conexion();
+            string query = "select * from TARJETAS where COD_USUARIO = " + codUsuario;
+
+            OracleDataReader dr = conexion.consultar(query);
+            if (dr.Read())
+            {
+                tarjeta = this.llenarObjeto(dr);
+            }
+            dr.Close();
+            if (tarjeta.saldo > 0){
+                tieneSaldo = true;
+            }
+            return tieneSaldo;
+        }
     }
 }

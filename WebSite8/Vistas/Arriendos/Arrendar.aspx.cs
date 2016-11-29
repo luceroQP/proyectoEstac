@@ -11,6 +11,8 @@ public partial class Arrendar : System.Web.UI.Page
     private List<int> horas = new List<int>();
     private List<int> minutos = new List<int>();
 
+    protected string urlBack = "~/Vistas/Arriendos/Arriendos.aspx";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["usuario"] == null)
@@ -25,8 +27,23 @@ public partial class Arrendar : System.Web.UI.Page
                 Session["estacionamientos"] = new Estacionamiento().estacionamientosDisponibles(codUsuarioExcluir: usuario.cod_usuario, soloActivos: true, llenaCombo: false, incluirAsocc: true);
                 this.llenarVehiculos(usuario.cod_usuario);
                 this.llenarHorasMinutos();
+            }else{
+                fecha_inicio_arriendo.Text = Request.Form[fecha_inicio_arriendo.UniqueID];
+                fecha_termino_arriendo.Text = Request.Form[fecha_termino_arriendo.UniqueID];
+            }
+
+            Boolean saldoDisponibleTarjeta = new Tarjeta().validarSaldoTarjeta(usuario.cod_usuario);
+            if (!saldoDisponibleTarjeta)
+            {
+                Session["mensaje"] = new Dictionary<string, string>() { 
+                    {"texto", "¡Atención! Su tarjeta no registra saldo suficiente."},
+                    {"clase","alert-danger"}
+                };
+                btn_arrendar.Visible = false;
+                btn_arrendar.Enabled = false;
             }
         }
+        
     }
 
     private void llenarVehiculos(int codUsuario = 0)
@@ -62,6 +79,19 @@ public partial class Arrendar : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
         Arriendo arriendo = new Arriendo();
+        Usuario usuario = (Usuario)Session["usuario"];
+        Boolean saldoDisponibleTarjeta = new Tarjeta().validarSaldoTarjeta(usuario.cod_usuario);
+
+        if (!saldoDisponibleTarjeta)
+        {
+            Session["mensaje"] = new Dictionary<string, string>() { 
+                    {"texto", "¡Atención! Su tarjeta no registra saldo suficiente."},
+                    {"clase","alert-danger"}
+                };
+            btn_arrendar.Visible = false;
+            btn_arrendar.Enabled = false;
+            return;
+        }
 
         arriendo.cod_estacionamiento = Int32.Parse(txt_estacionamiento_id.Text);
         arriendo.cod_vehiculo = Int32.Parse(dpd_vehiculo.SelectedValue);
@@ -96,7 +126,7 @@ public partial class Arrendar : System.Web.UI.Page
             transaccion.numero_tarjeta_destino = arriendoGuardado.Estacionamiento.Usuario.tarjeta.cod_tarjeta;
             transaccion.guardar(transaccion);
 
-            /** Calificación por defecto **/
+            /** Calificación por defecto, primera **/
             Calificacion calificacion = new Calificacion();
             calificacion.cod_arriendo = codArriendoGuardado;
             calificacion.cod_usuario_calificado = arriendoGuardado.Estacionamiento.Usuario.cod_usuario;
@@ -106,11 +136,21 @@ public partial class Arrendar : System.Web.UI.Page
             calificacion.cod_calificacion_tipo = 1;
             calificacion.guardar(calificacion);
 
+            /** Calificación por defecto, segunda **/
+            calificacion = new Calificacion();
+            calificacion.cod_arriendo = codArriendoGuardado;
+            calificacion.cod_usuario_calificado = arriendoGuardado.Vehiculo.Usuario.cod_usuario;
+            calificacion.cod_usuario_calificador = arriendoGuardado.Estacionamiento.Usuario.cod_usuario; 
+            calificacion.nota = 0;
+            calificacion.observacion = "";
+            calificacion.cod_calificacion_tipo = 1;
+            calificacion.guardar(calificacion);
+
             Session["mensaje"] = new Dictionary<string, string>() { 
                 {"texto", "Arriendo ingresado correctamente."},
                 {"clase","alert-success"}
             };
-            Response.Redirect("~/Vistas/Arriendos/Arriendos.aspx");
+            Response.Redirect(this.urlBack);
         }
         else
         {

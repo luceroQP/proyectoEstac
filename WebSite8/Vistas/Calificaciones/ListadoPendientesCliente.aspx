@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ListadoPendientes.aspx.cs" Inherits="Vistas_Calificaciones_ListadoPendientes" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ListadoPendientesCliente.aspx.cs" Inherits="Vistas_Calificaciones_ListadoPendientes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
      <script>
@@ -14,8 +14,8 @@
         <Columns>
             <asp:BoundField AccessibleHeaderText="ColCodCalificacion" DataField="cod_calificacion" HeaderText="CodArriendo" Visible="false"/>
             <asp:BoundField AccessibleHeaderText="ColEstacionamiento" DataField="Arriendo.Estacionamiento.direccion" HeaderText="Estacionamiento" />
-            <asp:BoundField AccessibleHeaderText="ColUsuario" DataField="Arriendo.Estacionamiento.Usuario.nombre_completo" HeaderText="Dueño" />
             <asp:BoundField AccessibleHeaderText="ColVehiculo" DataField="Arriendo.Vehiculo.patente" HeaderText="Vehiculo" />
+            <asp:BoundField AccessibleHeaderText="ColUsuario" DataField="Arriendo.Estacionamiento.Usuario.nombre_completo" HeaderText="Dueño Estacionamiento" />
             <asp:BoundField AccessibleHeaderText="ColHorasUsadas" DataField="Arriendo.horas_usadas" HeaderText="Horas" />
             <asp:ButtonField 
                 AccessibleHeaderText="colBtnVer" 

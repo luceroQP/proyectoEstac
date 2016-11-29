@@ -10,65 +10,67 @@
 .texto_inicio
 {
     transition-property: opacity, left, top, height;
-  transition-duration: 3s, 5s;
-  color:#045FB4;
-  font-size:120%;
-   text-align:center;
-    }
+    transition-duration: 3s, 5s;
+    color:#045FB4;
+    font-size:120%;
+    text-align:center;
+}
     
-   .texto_inicio_par
-   {
-       color:#045FB4;
-  font-size:110%; 
-  text-align:center;
-   }
+.texto_inicio_par
+{
+    color:#045FB4;
+    font-size:110%; 
+    text-align:center;
+}
        
-    .centrarTabla
-    {
-        text-align: center;
-        margin: 0 auto;
-        text-align: left;
-    }   
+.centrarTabla
+{
+    text-align: center;
+    margin: 0 auto;
+    text-align: left;
+}   
      
 .content{
     min-height: 580px;
 }
+
 footer{
     position: absolute;
     bottom: 0px;
     margin: auto;
 }
+
 header{
     min-height: 120px;
     background-color: #04B404;
 }
+
 img.logo{
     width:200px;
 }
+
 .contenido{
     padding-top: 20px;
 }
+
 .titulo_estac
 {
     color: #FFFFFF;
-    
     font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
     font-weight:bolder;
     font-size: 350%;
     float: inherit;
     margin: .5em 0 0 0;
-    
-    
  }
     
  .hiperlinks
  {
      color:#FFFFFF;
      font-size: medium;
-     /*font-family:Helvetica,Futura,Arial,Verdana,sans-serif;*/
-     float: right;
-     width : 25%;
-        }
+     font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
+     /*float: right;*/
+     /*width : 25%;*/
+}
 
 .hiperlinksAcceder {
     color: #08088A;
@@ -76,7 +78,6 @@ img.logo{
     /*font-family:Helvetica,Futura,Arial,Verdana,sans-serif;*/
     float: inherit;
     width: 26%;
-    
 }
 
 .ui-draggable, .ui-droppable {
@@ -114,4 +115,49 @@ img.logo{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.top-links{
+     padding-left: 15px;
+     padding-right: 15px;
+}
+
+.barraMenu{
+    margin-top:20px !important;
+    margin-bottom:0px !important;
+    border-radius: 0px !important;
+    /*background-color: red;*/
+    /*border: 1px solid blue;*/
+}
+
+ul.items-menu > li > a{
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    vertical-align:middle;
+    height: 50px;
+    display: block;
+}
+
+ul.items-menu > li > a:hover{
+   background-color: #444444 !important;
+}
+
+.notificacion{
+    background-color: red;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 11px;
+    height: 18px;
+    padding: 0 0 5px;
+    position: absolute;
+    right: -5px;
+    top: -10px;
+    width: 29px;
+    z-index: 80;
+}
+
+table > tbody > tr > th {
+    background-color: #222222;
+    color: #cbcbcb;
 }

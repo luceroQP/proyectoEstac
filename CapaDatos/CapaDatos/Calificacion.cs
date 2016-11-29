@@ -114,40 +114,79 @@ namespace CapaDatos
             return calificacion;
         }
 
-        public List<Calificacion> calificacionesPendientes(int codUsuario)
+        public List<Calificacion> calificacionesPendientes(int codUsuario, string tipo, Boolean count = false)
         {
             List<Calificacion> calificacionesPendientes = new List<Calificacion>();
             Conexion conexion = new Conexion();
-            string query = "select * from CALIFICACIONES CA";
+            string query = "";
+
+            if (count){
+                query = "select count(*) as cantidad from CALIFICACIONES CA";
+            }else{
+                query = "select * from CALIFICACIONES CA";
+            }
+
             query += " inner join ARRIENDOS AR on Ar.COD_ARRIENDO = CA.COD_ARRIENDO";
-            query += " where CA.NOTA = 0 and AR.FIN_ARRIENDO < SYSDATE and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
+            query += " where CA.NOTA = 0";
+            //query += " and AR.FIN_ARRIENDO < SYSDATE";
+            query += " and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
 
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
-                Calificacion calificacion = this.llenarObjeto(dr);
-                calificacion.Arriendo = new Arriendo().buscarPorPk(calificacion.cod_arriendo);
-                calificacion.Arriendo.Estacionamiento.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Estacionamiento.cod_usuario);
-                calificacionesPendientes.Add(calificacion);
+                Calificacion calificacion = new Calificacion();
+                if (count)
+                {
+                    int cantidad = Int32.Parse(dr["cantidad"].ToString());
+                    if (cantidad > 0){
+                        calificacion.cod_calificacion = cantidad;
+                        calificacionesPendientes.Add(calificacion);
+                    }
+                }
+                else
+                {
+                    calificacion = this.llenarObjeto(dr);
+                    calificacion.Arriendo = new Arriendo().buscarPorPk(calificacion.cod_arriendo);
+                    switch (tipo)
+                    {
+                        case "Dueño":
+                            calificacion.Arriendo.Vehiculo.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Vehiculo.cod_usuario);
+                            break;
+                        case "Cliente":
+                            calificacion.Arriendo.Estacionamiento.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Estacionamiento.cod_usuario);
+                            break;
+                    }
+                    calificacionesPendientes.Add(calificacion);
+                }
             }
             dr.Close();
             return calificacionesPendientes;
         }
 
-        public List<Calificacion> calificacionesRealizadas(int codUsuario)
+        public List<Calificacion> calificacionesRealizadas(int codUsuario, string tipo)
         {
             List<Calificacion> calificacionesPendientes = new List<Calificacion>();
             Conexion conexion = new Conexion();
             string query = "select * from CALIFICACIONES CA";
             query += " inner join ARRIENDOS AR on Ar.COD_ARRIENDO = CA.COD_ARRIENDO";
-            query += " where CA.NOTA <> 0 and AR.FIN_ARRIENDO < SYSDATE and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
+            query += " where CA.NOTA <> 0";
+            //query += " and AR.FIN_ARRIENDO < SYSDATE";
+            query += " and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
 
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
                 Calificacion calificacion = this.llenarObjeto(dr);
                 calificacion.Arriendo = new Arriendo().buscarPorPk(calificacion.cod_arriendo);
-                calificacion.Arriendo.Estacionamiento.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Estacionamiento.cod_usuario);
+                switch (tipo)
+                {
+                    case "Dueño":
+                        calificacion.Arriendo.Vehiculo.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Vehiculo.cod_usuario);
+                        break;
+                    case "Cliente":
+                        calificacion.Arriendo.Estacionamiento.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Estacionamiento.cod_usuario);
+                        break;
+                }
                 calificacionesPendientes.Add(calificacion);
             }
             dr.Close();

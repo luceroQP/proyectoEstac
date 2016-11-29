@@ -49,14 +49,24 @@
                                     if (Session["usuario"] != null){
                                         usuario = (Usuario)Session["usuario"];
                                         %>
-                                            Bienvenido! <%=(usuario.nombres + " " + usuario.apellido_pat)%> |
-                                            <asp:HyperLink class="hiperlinks" ID="HyperLink7" runat="server" NavigateUrl="~/Vistas/Usuarios/CerrarSesion.aspx">Cerrar Sesión</asp:HyperLink>
-                                            <asp:HyperLink class="hiperlinks" ID="HyperLink11" runat="server" NavigateUrl="~/Vistas/Usuarios/MiPerfil.aspx">Mi perfil</asp:HyperLink>
+                                            Bienvenido! <%=(usuario.nombre_completo)%> |
+                                            <asp:HyperLink class="hiperlinks top-links padding-15" ID="HyperLink11" runat="server" NavigateUrl="~/Vistas/Usuarios/MiPerfil.aspx">
+                                                Mi perfil
+                                            </asp:HyperLink>
+                                            |
+                                            <asp:HyperLink class="hiperlinks top-links" ID="HyperLink7" runat="server" NavigateUrl="~/Vistas/Usuarios/CerrarSesion.aspx">
+                                                Cerrar Sesión
+                                            </asp:HyperLink>
                                         <%
                                     }else{
                                         %>
-                                            <asp:HyperLink class ="hiperlinks" ID="HyperLink2" runat="server" NavigateUrl="~/Vistas/Usuarios/RegistroUsuario.aspx">Registrarse</asp:HyperLink>
-                                            <asp:HyperLink class ="hiperlinks" ID="HyperLink1" runat="server" NavigateUrl="~/Vistas/Usuarios/Login.aspx">Login</asp:HyperLink>
+                                            <asp:HyperLink class ="hiperlinks top-links" ID="HyperLink1" runat="server" NavigateUrl="~/Vistas/Usuarios/Login.aspx">
+                                                Login
+                                            </asp:HyperLink>
+                                            |
+                                            <asp:HyperLink class ="hiperlinks top-links" ID="HyperLink2" runat="server" NavigateUrl="~/Vistas/Usuarios/RegistroUsuario.aspx">
+                                                Registrarse
+                                            </asp:HyperLink>
                                         <%
                                     }
                                 %>
@@ -67,40 +77,138 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12">       
                             <%
                                 if (Session["usuario"] != null)
                                 {
-                                    usuario = (Usuario)Session["usuario"];
-
-                                    switch (usuario.cod_usuario_tipo){
-                                        case 1:
-                                            //Administrador
-                                            %>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink10" runat="server" NavigateUrl="~/Vistas/Usuarios/ListadoUsuarios.aspx">Usuarios</asp:HyperLink>
-                                            <%
-                                            break;
-                                        case 2:
-                                            //Dueño
-                                            %>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink3" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">Tarjetas</asp:HyperLink>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink5" runat="server" NavigateUrl="~/Vistas/Estacionamientos/Estacionamientos.aspx">Estacionamientos</asp:HyperLink>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink16" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">Transacciones</asp:HyperLink>
-                                            <%
-                                            break;
-                                        case 3: 
-                                            //Cliente
-                                            %>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink14" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">Tarjetas</asp:HyperLink>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink4" runat="server" NavigateUrl="~/Vistas/Vehiculos/Vehiculos.aspx">Vehículos</asp:HyperLink>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arriendos.aspx">Arriendos Activos</asp:HyperLink>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink13" runat="server" NavigateUrl="~/Vistas/Arriendos/HistorialArriendos.aspx">Historial Arriendos</asp:HyperLink>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink15" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">Transacciones</asp:HyperLink>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink9" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoPendientes.aspx">Calificaciones Pendientes</asp:HyperLink>
-                                                <asp:HyperLink class="hiperlinks" ID="HyperLink12" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoRealizadas.aspx">Calificaciones Realizadas</asp:HyperLink>
-                                            <%
-                                            break;
-                                    }
+                                    %>
+                                        <nav class="navbar navbar-inverse barraMenu">
+                                            <div class="container-fluid">
+                                                <div id="bs-example-navbar-collapse-1">
+                                                    <ul class="nav navbar-nav items-menu">
+                                                        <%
+                                                        usuario = (Usuario)Session["usuario"];
+                                                        switch (usuario.cod_usuario_tipo){
+                                                            case 1:
+                                                                //Administrador
+                                                                %>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink10" runat="server" NavigateUrl="~/Vistas/Usuarios/ListadoUsuarios.aspx">
+                                                                            Usuarios
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                <%
+                                                                break;
+                                                            case 2:
+                                                                //Dueño
+                                                               
+                                                                %>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink3" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">
+                                                                            Tarjetas
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink5" runat="server" NavigateUrl="~/Vistas/Estacionamientos/Estacionamientos.aspx">
+                                                                            Estacionamientos
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink16" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">
+                                                                            Transacciones
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink8" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoPendientesOwner.aspx">
+                                                                            Calificaciones<br />Pendientes
+                                                                            <%
+                                                                                Usuario usuario = (Usuario)Session["usuario"];
+                                                                                Calificacion calificacion = new Calificacion();
+                                                                                List<Calificacion> calificacionesPendientes = new List<Calificacion>();
+                                                                                int numeroPendiente = 0;
+                                                                                calificacionesPendientes = new Calificacion().calificacionesPendientes(usuario.cod_usuario, "Dueño", true);
+                                                                                if (calificacionesPendientes.Count != 0){
+                                                                                    numeroPendiente = calificacionesPendientes.First<Calificacion>().cod_calificacion;
+                                                                                }
+                                                                                if (!numeroPendiente.Equals(0))
+                                                                                {
+                                                                                    %>
+                                                                                    <span class="notificacion"><%=numeroPendiente%></span>
+                                                                                    <%
+                                                                                }
+                                                                            %>
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink17" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoRealizadasOwner.aspx">
+                                                                            Calificaciones<br />Realizadas
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                <%
+                                                                break;
+                                                            case 3: 
+                                                                //Cliente
+                                                                %>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink14" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">
+                                                                            Tarjetas
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink4" runat="server" NavigateUrl="~/Vistas/Vehiculos/Vehiculos.aspx">
+                                                                            Vehículos
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arriendos.aspx">
+                                                                            Arriendos<br />Activos
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink13" runat="server" NavigateUrl="~/Vistas/Arriendos/HistorialArriendos.aspx">
+                                                                            Historial<br />Arriendos
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink15" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">
+                                                                            Transacciones
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink9" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoPendientesCliente.aspx">
+                                                                            Calificaciones<br />Pendientes
+                                                                            <%
+                                                                                Usuario usuario = (Usuario)Session["usuario"];
+                                                                                Calificacion calificacion = new Calificacion();
+                                                                                List<Calificacion> calificacionesPendientes = new List<Calificacion>();
+                                                                                int numeroPendiente = 0;
+                                                                                calificacionesPendientes = new Calificacion().calificacionesPendientes(usuario.cod_usuario, "Cliente", true);
+                                                                                if (calificacionesPendientes.Count != 0){
+                                                                                    numeroPendiente = calificacionesPendientes.First<Calificacion>().cod_calificacion;
+                                                                                }
+                                                                                if (!numeroPendiente.Equals(0))
+                                                                                {
+                                                                                    %>
+                                                                                    <span class="notificacion"><%=numeroPendiente%></span>
+                                                                                    <%
+                                                                                }
+                                                                            %>
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink12" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoRealizadasCliente.aspx">
+                                                                            Calificaciones<br />Realizadas
+                                                                        </asp:HyperLink>
+                                                                     </li>
+                                                                <%
+                                                                break;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                <%
                                 }
                             %>
                         </div>

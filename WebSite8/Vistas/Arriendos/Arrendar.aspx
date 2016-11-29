@@ -307,10 +307,11 @@
         <hr />
         <div class="col-md-2">
         <asp:Button
-                ID="Button1" 
+                ID="btn_arrendar" 
                 runat="server" 
                 Text="Arrendar" 
-                CssClass="btn btn-sm btn-primary btn-block" OnClick="Button1_Click"
+                CssClass="btn btn-sm btn-primary btn-block"
+                 OnClick="Button1_Click"
                 />
         </div>
     </div>
