@@ -31,7 +31,7 @@
     </head>
     <body>
         <form id="form1" runat="server">
-        <div class="container">
+        <div class="container" style="min-height:580px !important;">
             <div class="col-md-1">
             </div>
             <div class="col-md-10 wrap container">
@@ -101,21 +101,10 @@
                                                                 break;
                                                             case 2:
                                                                 //Dueño
-                                                               
                                                                 %>
-                                                                    <li>
-                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink3" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">
-                                                                            Tarjetas
-                                                                        </asp:HyperLink>
-                                                                    </li>
                                                                     <li>
                                                                         <asp:HyperLink class="hiperlinks" ID="HyperLink5" runat="server" NavigateUrl="~/Vistas/Estacionamientos/Estacionamientos.aspx">
                                                                             Estacionamientos
-                                                                        </asp:HyperLink>
-                                                                    </li>
-                                                                    <li>
-                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink16" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">
-                                                                            Transacciones
                                                                         </asp:HyperLink>
                                                                     </li>
                                                                     <li>
@@ -144,14 +133,24 @@
                                                                             Calificaciones<br />Realizadas
                                                                         </asp:HyperLink>
                                                                     </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink3" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">
+                                                                            Tarjetas
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink16" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">
+                                                                            Transacciones
+                                                                        </asp:HyperLink>
+                                                                    </li>
                                                                 <%
                                                                 break;
                                                             case 3: 
                                                                 //Cliente
                                                                 %>
                                                                     <li>
-                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink14" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">
-                                                                            Tarjetas
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arriendos.aspx">
+                                                                            Arriendos
                                                                         </asp:HyperLink>
                                                                     </li>
                                                                     <li>
@@ -160,18 +159,8 @@
                                                                         </asp:HyperLink>
                                                                     </li>
                                                                     <li>
-                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink6" runat="server" NavigateUrl="~/Vistas/Arriendos/Arriendos.aspx">
-                                                                            Arriendos<br />Activos
-                                                                        </asp:HyperLink>
-                                                                    </li>
-                                                                    <li>
                                                                         <asp:HyperLink class="hiperlinks" ID="HyperLink13" runat="server" NavigateUrl="~/Vistas/Arriendos/HistorialArriendos.aspx">
                                                                             Historial<br />Arriendos
-                                                                        </asp:HyperLink>
-                                                                    </li>
-                                                                    <li>
-                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink15" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">
-                                                                            Transacciones
                                                                         </asp:HyperLink>
                                                                     </li>
                                                                     <li>
@@ -199,7 +188,17 @@
                                                                         <asp:HyperLink class="hiperlinks" ID="HyperLink12" runat="server" NavigateUrl="~/Vistas/Calificaciones/ListadoRealizadasCliente.aspx">
                                                                             Calificaciones<br />Realizadas
                                                                         </asp:HyperLink>
-                                                                     </li>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink14" runat="server" NavigateUrl="~/Vistas/Tarjetas/Tarjetas.aspx">
+                                                                            Tarjetas
+                                                                        </asp:HyperLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <asp:HyperLink class="hiperlinks" ID="HyperLink15" runat="server" NavigateUrl="~/Vistas/Transacciones/Transacciones.aspx">
+                                                                            Transacciones
+                                                                        </asp:HyperLink>
+                                                                    </li>
                                                                 <%
                                                                 break;
                                                         }
@@ -242,9 +241,10 @@
             <div class="col-md-1">
             </div>
         </div>
-        <footer>
+        </form>
+        <div class="row" style="height:40px;display:inline-block;"></div>
+         <footer class="col-md-12 text-center">
             2016
         </footer>
-        </form>
     </body>
 </html>

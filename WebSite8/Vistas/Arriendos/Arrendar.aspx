@@ -23,6 +23,11 @@
                         lng: position.coords.longitude
                     };
                     map.setCenter(pos);
+                    var markerDefault = new google.maps.Marker({
+                        position: { lat: pos.lat, lng: pos.lng },
+                        map: map,
+                        icon: "/images/my_location.png"
+                    });
                 }, function () {
                     handleLocationError(true, map, map.getCenter());
                 });
@@ -144,6 +149,16 @@
             $(".horaInicio, .minutoInicio, .horaFin, .minutoFin").change(function (e) {
                 escribirValores();
             });
+
+            $("body").on("change", ".selectMinutos", function(){
+                var valorSeleccionado = $(this).val();
+                $(".selectMinutos").val(valorSeleccionado);
+                escribirValores();
+            });
+
+            //$("body").on("click", ".selectMinutos", function(){
+            //    alert("hola");
+            //});
         });
 
         var seleccionEstacionamiento = function(btn, e){
@@ -157,7 +172,9 @@
 
             $(".valorHora").html(valorHora);
             calcularPrecio();
-        }
+        };
+
+       
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -229,7 +246,7 @@
                 <div class="col-md-5 row ml-less-8">
                     <asp:DropDownList 
                         ID="dpd_minuto_inicio"
-                        CssClass="form-control input-sm minutoInicio" 
+                        CssClass="form-control input-sm minutoInicio selectMinutos" 
                         runat="server">
                     </asp:DropDownList>
                 </div>
@@ -268,7 +285,7 @@
                 <div class="col-md-5 row ml-less-8">
                     <asp:DropDownList 
                         ID="dpd_minuto_fin"
-                        CssClass="form-control input-sm minutoFin" 
+                        CssClass="form-control input-sm minutoFin selectMinutos" 
                         runat="server">
                         </asp:DropDownList>
                 </div>

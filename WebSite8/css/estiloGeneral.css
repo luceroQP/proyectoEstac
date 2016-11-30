@@ -144,7 +144,6 @@ ul.items-menu > li > a:hover{
 }
 
 .notificacion{
-    background-color: red;
     border-radius: 6px;
     color: #fff;
     font-size: 11px;
@@ -155,9 +154,23 @@ ul.items-menu > li > a:hover{
     top: -10px;
     width: 29px;
     z-index: 80;
+    background: #C73C30; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#FB7064, #C73C30); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FB7064, #C73C30); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FB7064, #C73C30); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FB7064, #C73C30); /* Standard syntax (must be last) */
 }
 
 table > tbody > tr > th {
     background-color: #222222;
     color: #cbcbcb;
+}
+
+footer{
+    margin-top: 15px;
+    background-color: rgba(1, 135, 1, 0.91);
+    height: 30px;
+    line-height:30px;
+    position: fixed !important;
+    bottom: 0;
 }
