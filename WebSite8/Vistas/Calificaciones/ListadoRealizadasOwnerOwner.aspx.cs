@@ -6,9 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using CapaDatos;
 
-public partial class Vistas_Calificaciones_ListadoRealizadasOwner : System.Web.UI.Page
+public partial class Vistas_Calificaciones_ListadoRealizadasOwnerOwner : System.Web.UI.Page
 {
-    protected string urlBack = "~/Vistas/Calificaciones/ListadoRealizadasOwner.aspx";
+    protected string urlBack = "~/Vistas/Calificaciones/ListadoRealizadasOwnerOwner.aspx";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["usuario"] == null)
@@ -18,7 +18,7 @@ public partial class Vistas_Calificaciones_ListadoRealizadasOwner : System.Web.U
         else
         {
             Usuario usuario = (Usuario)Session["usuario"];
-            gv_calificacionesRealizadas.DataSource = new Calificacion().calificacionesRealizadas(usuario.cod_usuario, "Dueño", "Cliente");
+            gv_calificacionesRealizadas.DataSource = new Calificacion().calificacionesRealizadas(usuario.cod_usuario, "Dueño", "Dueño");
             gv_calificacionesRealizadas.DataBind();
         }
     }

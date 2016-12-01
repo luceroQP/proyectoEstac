@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <%
-        List<Estacionamiento> estacionamientos = (List<Estacionamiento>)Session["estacionamientos"];
+        
     %>
     <link rel="stylesheet" href="/css/google_maps.css"/>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3mh16ySlzaS1hVXfzyrRE33l3UbcqfU&callback=initMap" defer></script>
@@ -38,46 +38,49 @@
 
             var infoWindow = new google.maps.InfoWindow({});
             <%
-                int index = 10;
-                foreach (Estacionamiento estacionamiento in estacionamientos)
-                {
-                    string latitud = estacionamiento.latitud.ToString().Replace(",", ".");
-                    string longitud = estacionamiento.longitud.ToString().Replace(",", ".");
-                    string horario = estacionamiento.inicio_disponibilidad.ToString("HH:mm") + "-" + estacionamiento.fin_disponibilidad.ToString("HH:mm");
-                    string descripcion = "<div id='content' style='max-width:300px !important;'>";
-                    descripcion += "<h5 id='firstHeading' class='firstHeading col-md-12'>" + estacionamiento.direccion + "</h5>";
-                        descripcion += "<div id='bodyContent' class='col-md-12 form-group row'>";
-                            descripcion += "<div class='col-md-4'>Valor Hora</div>";
-                            descripcion += "<div class='col-md-8'>:" + estacionamiento.valor_hora + "</div>";
-                            descripcion += "<div class='col-md-4'>Disponibilidad</div>";
-                            descripcion += "<div class='col-md-8'>:" + estacionamiento.EstacionamientoEstado.nombre_estacionamiento_estado + "</div>";
-                            descripcion += "<div class='col-md-4'>Cupos</div>";
-                            descripcion += "<div class='col-md-8'>:" + (estacionamiento.capacidad - estacionamiento.existencias) + "</div>";
-                            descripcion += "<div class='col-md-4'>Horario</div>";
-                            descripcion += "<div class='col-md-8'>:" + horario + "</div>";
-                            descripcion += "<div class='row form-group col-md-12'></div>";
-                            descripcion += "<div class='col-md-12'>";
-                                descripcion += "<a href='#' onclick='seleccionEstacionamiento(this, event);' class='btn btn-success btn-sm btnSeleccionar' estacionamiento='" + estacionamiento.cod_estacionamiento + "' valor='" + estacionamiento.valor_hora + "'>";
-                                    descripcion += "Seleccionar";
-                                descripcion += "</a>";
+                if (Session["estacionamientos"] != null) { 
+                    List<Estacionamiento> estacionamientos = (List<Estacionamiento>)Session["estacionamientos"];
+                    int index = 10;
+                    foreach (Estacionamiento estacionamiento in estacionamientos)
+                    {
+                        string latitud = estacionamiento.latitud.ToString().Replace(",", ".");
+                        string longitud = estacionamiento.longitud.ToString().Replace(",", ".");
+                        string horario = estacionamiento.inicio_disponibilidad.ToString("HH:mm") + "-" + estacionamiento.fin_disponibilidad.ToString("HH:mm");
+                        string descripcion = "<div id='content' style='max-width:300px !important;'>";
+                        descripcion += "<h5 id='firstHeading' class='firstHeading col-md-12'>" + estacionamiento.direccion + "</h5>";
+                            descripcion += "<div id='bodyContent' class='col-md-12 form-group row'>";
+                                descripcion += "<div class='col-md-4'>Valor Hora</div>";
+                                descripcion += "<div class='col-md-8'>:" + estacionamiento.valor_hora + "</div>";
+                                descripcion += "<div class='col-md-4'>Disponibilidad</div>";
+                                descripcion += "<div class='col-md-8'>:" + estacionamiento.EstacionamientoEstado.nombre_estacionamiento_estado + "</div>";
+                                descripcion += "<div class='col-md-4'>Cupos</div>";
+                                descripcion += "<div class='col-md-8'>:" + (estacionamiento.capacidad - estacionamiento.existencias) + "</div>";
+                                descripcion += "<div class='col-md-4'>Horario</div>";
+                                descripcion += "<div class='col-md-8'>:" + horario + "</div>";
+                                descripcion += "<div class='row form-group col-md-12'></div>";
+                                descripcion += "<div class='col-md-12'>";
+                                    descripcion += "<a href='#' onclick='seleccionEstacionamiento(this, event);' class='btn btn-success btn-sm btnSeleccionar' estacionamiento='" + estacionamiento.cod_estacionamiento + "' valor='" + estacionamiento.valor_hora + "'>";
+                                        descripcion += "Seleccionar";
+                                    descripcion += "</a>";
+                                descripcion += "</div>";
                             descripcion += "</div>";
                         descripcion += "</div>";
-                    descripcion += "</div>";
                                             
-                    %>
-                    var marker<%=index%> = new google.maps.Marker({
-                        position: { lat: <%=latitud%>, lng: <%=longitud%> },
-                        map: map,
-                        title: "<%=estacionamiento.direccion%>",
-                        descripcion: "<%=descripcion%>"
-                    });
+                        %>
+                        var marker<%=index%> = new google.maps.Marker({
+                            position: { lat: <%=latitud%>, lng: <%=longitud%> },
+                            map: map,
+                            title: "<%=estacionamiento.direccion%>",
+                            descripcion: "<%=descripcion%>"
+                        });
 
-                    marker<%=index%>.addListener('click', function (e) {
-                        infoWindow.setContent(this.descripcion);
-                        infoWindow.open(map, marker<%=index%>);
-                    });
-                    <%
-                    index++;
+                        marker<%=index%>.addListener('click', function (e) {
+                            infoWindow.setContent(this.descripcion);
+                            infoWindow.open(map, marker<%=index%>);
+                        });
+                        <%
+                        index++;
+                    }
                 }
             %>
         }
@@ -171,7 +174,7 @@
             $(".txtEstacionamientoId").attr("value", estacionamientoId);
 
             $(".valorHora").html(valorHora);
-            calcularPrecio();
+            escribirValores();
         };
 
        
@@ -180,27 +183,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="col-md-12 text-center">
         <h4 class="form-signin-heading">Datos Arriendo</h4>
-    </div>
-    <div class="col-md-12">
-        <asp:Label ID="Label1" runat="server" Text="Ubicación"></asp:Label>
-        <div id="map">
-            <div class="loader-div"><div></div></div>
-        </div>
-        <asp:TextBox 
-            ID="txt_estacionamiento_id" 
-            runat="server"
-            CssClass="txtEstacionamientoId hide">
-            </asp:TextBox>
-        <div class="col-md-12 row">
-            <asp:RequiredFieldValidator 
-                ID="RequiredFieldValidator2" 
-                runat="server" 
-                Display="Dynamic"
-                ControlToValidate="txt_estacionamiento_id"
-                CssClass="error-message" 
-                ErrorMessage="Debe seleccionar estacionamiento">
-            </asp:RequiredFieldValidator>
-        </div>
     </div>
     <div class="col-md-4"></div>
     <div class="col-md-4">
@@ -219,6 +201,7 @@
                     InitialValue="0"
                     ControlToValidate="dpd_vehiculo"
                     CssClass="error-message" 
+                    ValidationGroup="validacionFiltro"
                     ErrorMessage="Debe seleccionar vehiculo">
                 </asp:RequiredFieldValidator>
             </div>
@@ -257,6 +240,7 @@
                         Display="Dynamic"
                         ControlToValidate="fecha_inicio_arriendo"
                         CssClass="error-message" 
+                        ValidationGroup="validacionFiltro"
                         ErrorMessage="Indique fecha inicio arriendo">
                     </asp:RequiredFieldValidator>
                 </div>
@@ -296,16 +280,56 @@
                         Display="Dynamic"
                         ControlToValidate="fecha_termino_arriendo"
                         CssClass="error-message" 
+                        ValidationGroup="validacionFiltro"
                         ErrorMessage="Indique fecha fin arriendo">
                     </asp:RequiredFieldValidator>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 row form-group">
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-12 row">
+        <div class="col-md-3">
+        <asp:Button
+                ID="btn_buscarDisponibilidad" 
+                runat="server" 
+                Text="Buscar Disponibilidad" 
+                CssClass="btn btn-sm btn-primary btn-block"
+                ValidationGroup="validacionFiltro"
+                OnClick="btn_buscarDisponibilidad_Click"
+                />
+        </div>
+    </div>
+    <div class="col-md-12 row form-group"></div>
+    <div class="col-md-12">
+        <asp:Label ID="Label1" runat="server" Text="Ubicación"></asp:Label>
+        <div id="map">
+            <div class="loader-div"><div></div></div>
+        </div>
+        <asp:TextBox 
+            ID="txt_estacionamiento_id" 
+            runat="server"
+            CssClass="txtEstacionamientoId hide">
+            </asp:TextBox>
+        <div class="col-md-12 row">
+            <asp:RequiredFieldValidator 
+                ID="RequiredFieldValidator2" 
+                runat="server" 
+                Display="Dynamic"
+                ControlToValidate="txt_estacionamiento_id"
+                CssClass="error-message" 
+                ValidationGroup="validacionArriendo"
+                ErrorMessage="Debe seleccionar estacionamiento">
+            </asp:RequiredFieldValidator>
+        </div>
+    </div>
+    <div class="form-group col-md-12"></div>
+    <div class="form-group col-md-12">
+        <div class="col-md-4 row form-group">
             <asp:Label ID="Label4" runat="server" Text="Valor Hora"></asp:Label>
             <div class="col-md-12 valorHora">0</div>
         </div>
-        <div class="col-md-12 row form-group">
+        <div class="col-md-4 row form-group">
             <asp:Label ID="Label3" runat="server" Text="Total Horas Usadas"></asp:Label>
             <asp:TextBox 
                 ID="txt_horas_usadas" 
@@ -314,13 +338,12 @@
             </asp:TextBox>
             <div class="col-md-12 divHorasUsadas">0</div>
         </div>
-        <div class="col-md-12 row form-group">
+        <div class="col-md-4 row form-group">
             <asp:Label ID="Label2" runat="server" Text="Total a Pagar"></asp:Label>
             <div class="col-md-12 totalPagar">0</div>
         </div>
     </div>
-    <div class="col-md-4"></div>
-    <div class="col-md-12 row">
+    <div class="col-md-12 row" id="divBtnGuardar" runat="server">
         <hr />
         <div class="col-md-2">
         <asp:Button
@@ -328,7 +351,8 @@
                 runat="server" 
                 Text="Arrendar" 
                 CssClass="btn btn-sm btn-primary btn-block"
-                 OnClick="Button1_Click"
+                ValidationGroup="validacionArriendo"
+                OnClick="Button1_Click"
                 />
         </div>
     </div>

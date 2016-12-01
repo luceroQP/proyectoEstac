@@ -24,12 +24,6 @@
                 CommandName="Editar"
                 ControlStyle-CssClass="btn btn-xs btn-primary"
                 Text="Editar"/>
-            <asp:ButtonField 
-                AccessibleHeaderText="colBtnVer" 
-                ButtonType="Button" 
-                CommandName="Bloquear"
-                ControlStyle-CssClass="btn btn-xs"
-                Text="Bloquear"/>
              <asp:ButtonField 
                 AccessibleHeaderText="colBtnVer" 
                 ButtonType="Button" 

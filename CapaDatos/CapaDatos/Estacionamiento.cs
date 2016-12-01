@@ -69,12 +69,12 @@ namespace CapaDatos
                     estacionamiento.EstacionamientoEstado = new EstacionamientoEstado().buscarPorPk(estacionamiento.cod_estacionamiento_estado);
                 }
 
-                if (arriendoActivo){
-                    estacionamiento.Arriendo = new Arriendo().arriendoActivoEstacionamiento(estacionamiento.cod_estacionamiento);
-                    if (!estacionamiento.Arriendo.cod_arriendo.Equals(0)){
-                        estacionamiento.EstacionamientoEstado.nombre_estacionamiento_estado = "Arrendado";
-                    }
-                }
+                //if (arriendoActivo){
+                //    estacionamiento.Arriendo = new Arriendo().arriendoActivoEstacionamiento(estacionamiento.cod_estacionamiento);
+                //    if (!estacionamiento.Arriendo.cod_arriendo.Equals(0)){
+                //        estacionamiento.EstacionamientoEstado.nombre_estacionamiento_estado = "Arrendado";
+                //    }
+                //}
                 estacionamientos.Add(estacionamiento);
             }
             dr.Close();
@@ -169,22 +169,23 @@ namespace CapaDatos
             return guarda;
         }
 
-        public List<Estacionamiento> estacionamientosDisponibles(int codUsuarioExcluir = 0, Boolean soloActivos = false, Boolean llenaCombo = false, Boolean incluirAsocc = false)
+        public List<Estacionamiento> estacionamientosDisponibles(DateTime inicio, DateTime fin, int codUsuarioExcluir = 0, Boolean incluirAsocc = false)
         {
             List<Estacionamiento> estacionamientos = new List<Estacionamiento>();
             Conexion conexion = new Conexion();
-            string query = "select * from ESTACIONAMIENTOS";
-            Boolean tieneFitros = false;
 
-            if (soloActivos){
-                tieneFitros = true;
-                query += " Where COD_ESTACIONAMIENTO_ESTADO=2";
-            }
+            string query = "select * from ESTACIONAMIENTOS";
+            query += " where COD_ESTACIONAMIENTO not in (";
+	            query += "select DISTINCT(EST.COD_ESTACIONAMIENTO) from ESTACIONAMIENTOS EST";
+	            query += " inner join ARRIENDOS ARR on ARR.COD_ESTACIONAMIENTO = EST.COD_ESTACIONAMIENTO";
+	            query += " where ";
+                query += " ARR.INICIO_ARRIENDO BETWEEN to_date('" + inicio.ToString("dd-MM-yyyy H:mm:ss") + "','dd/MM/yyyy hh24:mi:ss') and to_date('" + fin.ToString("dd-MM-yyyy H:mm:ss") + "','dd/MM/yyyy hh24:mi:ss')";
+	            query += " or";
+                query += " ARR.FIN_ARRIENDO BETWEEN to_date('" + inicio.ToString("dd-MM-yyyy H:mm:ss") + "','dd/MM/yyyy hh24:mi:ss') and to_date('" + fin.ToString("dd-MM-yyyy H:mm:ss") + "','dd/MM/yyyy hh24:mi:ss')";
+            query += ")  and COD_ESTACIONAMIENTO_ESTADO = 2";
 
             if (!codUsuarioExcluir.Equals(0)){
-                if (tieneFitros) { query += " and ";}
-                else{ query += " Where "; }
-                query += "COD_USUARIO <> " + codUsuarioExcluir;
+                query += " and COD_USUARIO <> " + codUsuarioExcluir;
             }
 
             OracleDataReader dr = conexion.consultar(query);
@@ -197,11 +198,6 @@ namespace CapaDatos
                 estacionamientos.Add(estacionamiento);
             }
             dr.Close();
-
-            if (llenaCombo)
-            {
-                estacionamientos.Insert(0, new Estacionamiento { cod_estacionamiento = 0, direccion = "Seleccione"});
-            }
             return estacionamientos;
         }
     }

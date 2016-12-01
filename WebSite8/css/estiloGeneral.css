@@ -144,15 +144,14 @@ ul.items-menu > li > a:hover{
 }
 
 .notificacion{
-    border-radius: 6px;
+    border-radius: 13px;
     color: #fff;
     font-size: 11px;
-    height: 18px;
-    padding: 0 0 5px;
+    left: 0;
+    padding: 2px 0 2px 8px;
     position: absolute;
-    right: -5px;
-    top: -10px;
-    width: 29px;
+    top: 9px;
+    width: 20px;
     z-index: 80;
     background: #C73C30; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#FB7064, #C73C30); /* For Safari 5.1 to 6.0 */
@@ -173,4 +172,9 @@ footer{
     line-height:30px;
     position: fixed !important;
     bottom: 0;
+}
+
+.subMenu{
+    position: absolute !important;
+    top:25px;
 }

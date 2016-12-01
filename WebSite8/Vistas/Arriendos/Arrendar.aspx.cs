@@ -21,10 +21,11 @@ public partial class Arrendar : System.Web.UI.Page
         }
         else
         {
+            divBtnGuardar.Visible = false;
             Usuario usuario = (Usuario)Session["usuario"];
             if (!IsPostBack)
             {
-                Session["estacionamientos"] = new Estacionamiento().estacionamientosDisponibles(codUsuarioExcluir: usuario.cod_usuario, soloActivos: true, llenaCombo: false, incluirAsocc: true);
+                Session["estacionamientos"] = null;
                 this.llenarVehiculos(usuario.cod_usuario);
                 this.llenarHorasMinutos();
             }else{
@@ -111,10 +112,10 @@ public partial class Arrendar : System.Web.UI.Page
         int codArriendoGuardado = arriendo.guardar(arriendo);
         if (codArriendoGuardado > 0)
         {
-            Estacionamiento estacionamiento = new Estacionamiento();
-            estacionamiento.cod_estacionamiento = arriendo.cod_estacionamiento;
-            estacionamiento.cod_estacionamiento_estado = 1;
-            estacionamiento.actualizar(estacionamiento);
+            //Estacionamiento estacionamiento = new Estacionamiento();
+            //estacionamiento.cod_estacionamiento = arriendo.cod_estacionamiento;
+            //estacionamiento.cod_estacionamiento_estado = 1;
+            //estacionamiento.actualizar(estacionamiento);
 
             Arriendo arriendoGuardado = new Arriendo().datosPagar(codArriendoGuardado);
 
@@ -168,5 +169,27 @@ public partial class Arrendar : System.Web.UI.Page
             time = "0" + time;
         }
         return time;
+    }
+
+    protected void btn_buscarDisponibilidad_Click(object sender, EventArgs e)
+    {
+        Usuario usuario = (Usuario)Session["usuario"];
+        DateTime inicioArriendo = new DateTime();
+        DateTime finArriendo = new DateTime();
+
+        string horaInicio = this.normalizeTimeFormat(dpd_hora_inicio.SelectedValue);
+        string minutoInicio = this.normalizeTimeFormat(dpd_minuto_inicio.SelectedValue);
+        string horaFin = this.normalizeTimeFormat(dpd_hora_fin.SelectedValue);
+        string minutoFin = this.normalizeTimeFormat(dpd_minuto_fin.SelectedValue);
+
+        string fecha_inicio = Request.Form[fecha_inicio_arriendo.UniqueID] + " " + horaInicio + ":" + minutoInicio + ":00";
+        string fecha_fin = Request.Form[fecha_termino_arriendo.UniqueID] + " " + horaFin + ":" + minutoFin + ":00";
+
+        inicioArriendo = DateTime.ParseExact(fecha_inicio, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        finArriendo = DateTime.ParseExact(fecha_fin, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+        Session["estacionamientos"] = new Estacionamiento().estacionamientosDisponibles(inicioArriendo, finArriendo, usuario.cod_usuario, true);
+        divBtnGuardar.Visible = true;
+
     }
 }

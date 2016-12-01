@@ -44,21 +44,25 @@ public partial class Estacionamientos : System.Web.UI.Page
 
     protected Boolean mostrarBtnHabilitado(Arriendo arriendo)
     {
-        Boolean tieneArriendoActivo = false;
-        if (arriendo.cod_arriendo == 0)
-        {
-            tieneArriendoActivo = true;
-        }
-        return tieneArriendoActivo;
+        //Boolean tieneArriendoActivo = false;
+        //if (arriendo.cod_arriendo == 0)
+        //{
+        //    tieneArriendoActivo = true;
+        //}
+        //return tieneArriendoActivo;
+        return false;
     }
 
     protected Boolean mostrarBtnDeshabilitado(Arriendo arriendo)
     {
+        /*
         Boolean tieneArriendoActivo = false;
         if (arriendo.cod_arriendo != 0)
         {
             tieneArriendoActivo = true;
         }
         return tieneArriendoActivo;
+         */
+        return false;
     }
 }

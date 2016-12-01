@@ -19,7 +19,7 @@ public partial class Vistas_Calificaciones_ListadoPendientes : System.Web.UI.Pag
         else
         {
             Usuario usuario = (Usuario)Session["usuario"];
-            gv_calificacionesPendientes.DataSource = new Calificacion().calificacionesPendientes(usuario.cod_usuario, "Cliente");
+            gv_calificacionesPendientes.DataSource = new Calificacion().calificacionesPendientes(usuario.cod_usuario, "Cliente", "Dueño");
             gv_calificacionesPendientes.DataBind();
         }
     }

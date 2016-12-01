@@ -114,7 +114,7 @@ namespace CapaDatos
             return calificacion;
         }
 
-        public List<Calificacion> calificacionesPendientes(int codUsuario, string tipo, Boolean count = false)
+        public List<Calificacion> calificacionesPendientes(int codUsuario, string tipoUsuarioLogeado, string tipoClasificacion, Boolean count = false)
         {
             List<Calificacion> calificacionesPendientes = new List<Calificacion>();
             Conexion conexion = new Conexion();
@@ -126,10 +126,36 @@ namespace CapaDatos
                 query = "select * from CALIFICACIONES CA";
             }
 
-            query += " inner join ARRIENDOS AR on Ar.COD_ARRIENDO = CA.COD_ARRIENDO";
+            string extraConditions = "";
+            //Usuario Dueño calificando a sus clientes
+            if (tipoUsuarioLogeado.Equals("Dueño") && tipoClasificacion.Equals("Cliente"))
+            {
+                query += " INNER JOIN ARRIENDOS ar on ar.cod_arriendo = CA.cod_arriendo";
+                query += " INNER JOIN ESTACIONAMIENTOS EST on EST.cod_estacionamiento = ar.cod_estacionamiento";
+                extraConditions += " and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
+                extraConditions += " and EST.cod_usuario = " + codUsuario;
+            }
+
+            //Usuario dueño calificando a otros dueños
+            if (tipoUsuarioLogeado.Equals("Dueño") && tipoClasificacion.Equals("Dueño"))
+            {
+                query += " INNER JOIN ARRIENDOS ar on ar.cod_arriendo = CA.cod_arriendo";
+                query += " INNER JOIN ESTACIONAMIENTOS EST on EST.cod_estacionamiento = ar.cod_estacionamiento";
+                extraConditions += " and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
+                extraConditions += " and EST.cod_usuario <> " + codUsuario;
+            }
+
+            if (tipoUsuarioLogeado.Equals("Cliente") && tipoClasificacion.Equals("Dueño"))
+            {
+                query += " INNER JOIN ARRIENDOS ar on ar.cod_arriendo = CA.cod_arriendo";
+                query += " INNER JOIN VEHICULOS VE on VE.cod_vehiculo = ar.cod_vehiculo";
+                extraConditions += " and CA.COD_USUARIO_CALIFICADO = " + codUsuario;
+                extraConditions += " and VE.cod_usuario =" + codUsuario;
+            }
+            
             query += " where CA.NOTA = 0";
             //query += " and AR.FIN_ARRIENDO < SYSDATE";
-            query += " and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
+            query += extraConditions;
 
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
@@ -147,12 +173,12 @@ namespace CapaDatos
                 {
                     calificacion = this.llenarObjeto(dr);
                     calificacion.Arriendo = new Arriendo().buscarPorPk(calificacion.cod_arriendo);
-                    switch (tipo)
+                    switch (tipoClasificacion)
                     {
-                        case "Dueño":
+                        case "Cliente":
                             calificacion.Arriendo.Vehiculo.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Vehiculo.cod_usuario);
                             break;
-                        case "Cliente":
+                        case "Dueño":
                             calificacion.Arriendo.Estacionamiento.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Estacionamiento.cod_usuario);
                             break;
                     }
@@ -163,27 +189,54 @@ namespace CapaDatos
             return calificacionesPendientes;
         }
 
-        public List<Calificacion> calificacionesRealizadas(int codUsuario, string tipo)
+        public List<Calificacion> calificacionesRealizadas(int codUsuario, string tipoUsuarioLogeado, string tipoClasificacion)
         {
             List<Calificacion> calificacionesPendientes = new List<Calificacion>();
             Conexion conexion = new Conexion();
             string query = "select * from CALIFICACIONES CA";
-            query += " inner join ARRIENDOS AR on Ar.COD_ARRIENDO = CA.COD_ARRIENDO";
+
+            string extraConditions = "";
+            //Usuario Dueño calificando a sus clientes
+            if (tipoUsuarioLogeado.Equals("Dueño") && tipoClasificacion.Equals("Cliente"))
+            {
+                query += " INNER JOIN ARRIENDOS ar on ar.cod_arriendo = CA.cod_arriendo";
+                query += " INNER JOIN ESTACIONAMIENTOS EST on EST.cod_estacionamiento = ar.cod_estacionamiento";
+                extraConditions += " and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
+                extraConditions += " and EST.cod_usuario = " + codUsuario;
+            }
+
+            //Usuario dueño calificando a otros dueños
+            if (tipoUsuarioLogeado.Equals("Dueño") && tipoClasificacion.Equals("Dueño"))
+            {
+                query += " INNER JOIN ARRIENDOS ar on ar.cod_arriendo = CA.cod_arriendo";
+                query += " INNER JOIN ESTACIONAMIENTOS EST on EST.cod_estacionamiento = ar.cod_estacionamiento";
+                extraConditions += " and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
+                extraConditions += " and EST.cod_usuario <> " + codUsuario;
+            }
+
+            if (tipoUsuarioLogeado.Equals("Cliente") && tipoClasificacion.Equals("Dueño"))
+            {
+                query += " INNER JOIN ARRIENDOS ar on ar.cod_arriendo = CA.cod_arriendo";
+                query += " INNER JOIN VEHICULOS VE on VE.cod_vehiculo = ar.cod_vehiculo";
+                extraConditions += " and CA.COD_USUARIO_CALIFICADO = " + codUsuario;
+                extraConditions += " and VE.cod_usuario =" + codUsuario;
+            }
+
             query += " where CA.NOTA <> 0";
             //query += " and AR.FIN_ARRIENDO < SYSDATE";
-            query += " and CA.COD_USUARIO_CALIFICADOR = " + codUsuario;
+            query += extraConditions;
 
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
                 Calificacion calificacion = this.llenarObjeto(dr);
                 calificacion.Arriendo = new Arriendo().buscarPorPk(calificacion.cod_arriendo);
-                switch (tipo)
+                switch (tipoClasificacion)
                 {
-                    case "Dueño":
+                    case "Cliente":
                         calificacion.Arriendo.Vehiculo.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Vehiculo.cod_usuario);
                         break;
-                    case "Cliente":
+                    case "Dueño":
                         calificacion.Arriendo.Estacionamiento.Usuario = new Usuario().buscarPorPK(calificacion.Arriendo.Estacionamiento.cod_usuario);
                         break;
                 }

@@ -19,7 +19,7 @@ public partial class Vistas_Calificaciones_ListadoRealizadas : System.Web.UI.Pag
         else
         {
             Usuario usuario = (Usuario)Session["usuario"];
-            gv_calificacionesRealizadas.DataSource = new Calificacion().calificacionesRealizadas(usuario.cod_usuario, "Cliente");
+            gv_calificacionesRealizadas.DataSource = new Calificacion().calificacionesRealizadas(usuario.cod_usuario, "Cliente", "Dueño");
             gv_calificacionesRealizadas.DataBind();
         }
     }

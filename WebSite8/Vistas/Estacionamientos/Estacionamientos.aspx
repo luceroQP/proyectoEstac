@@ -31,7 +31,6 @@
                             Text="Cambiar Disp."
                             CssClass="btn btn-xs btn-success"
                             CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
-                            Visible='<%# mostrarBtnHabilitado((Arriendo)Eval("Arriendo")) %>' 
                             CommandName="CambiarEstado"/>
                 </ItemTemplate>
             </asp:TemplateField>
@@ -49,7 +48,6 @@
                             Text="Editar"
                             CssClass="btn btn-xs btn-primary"
                             CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
-                            Visible='<%# mostrarBtnHabilitado((Arriendo)Eval("Arriendo")) %>' 
                             CommandName="Editar"/>
                 </ItemTemplate>
             </asp:TemplateField>
@@ -67,7 +65,6 @@
                             Text="Eliminar"
                             CssClass="btn btn-xs btn-danger"
                             CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"
-                            Visible='<%# mostrarBtnHabilitado((Arriendo)Eval("Arriendo")) %>' 
                             CommandName="Eliminar"/>
                 </ItemTemplate>
             </asp:TemplateField>
