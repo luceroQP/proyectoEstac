@@ -1,6 +1,57 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="MiPerfil.aspx.cs" Inherits="Vistas_Usuarios_MiPerfil" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+        <script>
+        $(document).on("ready", function () {
+            $(".calendario").datepicker({
+                firstDay: 1,
+                dateFormat: "dd/mm/yy",
+                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+                changeYear: true,
+                changeMonth: true,
+                yearRange: "1912:" + new Date().getFullYear(),
+                maxDate: new Date(),
+                onSelect: function (fechaText, obj) {
+                    var input = $("#" + obj.id);
+                    input.val(fechaText);
+                    input.attr("value", fechaText);
+                }
+            });
+            <%
+                if (Session["autoFocus"] != null)
+                {
+                    string elemento = (string)Session["autoFocus"];
+                    Response.Write("$('." + elemento + "').focus();");        
+                }
+            %>
+
+            forzarFormatoFecha();
+        });
+
+        var forzarFormatoFecha = function () {
+            var fechaInput = $(".calendario").val();
+            if (fechaInput.indexOf("-") > 0) {
+                fechaSplit = fechaInput.split("-");
+                var dia;
+                var mes;
+                var anno;
+                if (fechaSplit[2].length == 2) {
+                    dia = fechaSplit[2];
+                    mes = fechaSplit[1];
+                    anno = fechaSplit[0];
+                } else {
+                    dia = fechaSplit[0];
+                    mes = fechaSplit[1];
+                    anno = fechaSplit[2];
+                }
+                var nuevaFecha = dia + "/" + mes + "/" + anno;
+                $(".calendario").val(nuevaFecha);
+                $(".calendario").attr("value", nuevaFecha);
+            }
+        };
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
         <div class="col-md-12 text-left">
